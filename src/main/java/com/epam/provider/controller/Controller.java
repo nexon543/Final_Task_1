@@ -1,0 +1,40 @@
+package com.epam.provider.controller;
+
+import com.epam.provider.controller.command.ActionCommand;
+import com.epam.provider.controller.command.ActionFactory;
+import com.epam.provider.controller.command.Constants;
+import com.epam.provider.util.SessionRequestContent;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * Created by HP on 26.03.2018.
+ */
+
+@WebServlet("/Controller")
+public class Controller extends HttpServlet{
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req,resp);
+    }
+
+    private void processRequest (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ActionFactory client=new ActionFactory();
+        String commandStr=req.getParameter(Constants.PARAM_NAME_COMMAND);
+        ActionCommand command=client.defineCommand(commandStr);
+        String page=command.execute(req);
+        req.getRequestDispatcher(page).forward(req,resp);
+    }
+}
