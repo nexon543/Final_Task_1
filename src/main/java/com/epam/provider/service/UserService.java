@@ -1,7 +1,7 @@
 package com.epam.provider.service;
 
 import com.epam.provider.controller.command.Constants;
-import com.epam.provider.dao.DAOManager;
+import com.epam.provider.dao.DAOFactory;
 import com.epam.provider.dao.DAOType;
 import com.epam.provider.dao.impl.UsersDAO;
 import com.epam.provider.model.User;
@@ -13,18 +13,22 @@ import java.sql.SQLException;
  */
 public class UserService extends Service {
 
-    UsersDAO usersDAO;
+    private UsersDAO usersDAO = (UsersDAO) DAOFactory.getDAO(DAOType.USERS);
 
-    public UserService(DAOManager daoManager) {
-        usersDAO = (UsersDAO) daoManager.getDAO(DAOType.USERS);
+    public UserService() {
     }
 
     public User findUser(String login, String pass) throws ServiceException {
         User user;
+        daoManager.openConnection();
+        daoManager.setDAOConnection(usersDAO);
         try {
-            user=usersDAO.findProfileByLoginPass(login, pass);
+            user = usersDAO.findProfileByLoginPass(login, pass);
         } catch (SQLException e) {
-            throw new ServiceException(); //"Can't execute serach user by login pass"
+            throw new ServiceException(ServiceException.MESS_SEARCH_USER_ERROR);
+        }
+        finally{
+            daoManager.closeConnection();
         }
         return user;
     }

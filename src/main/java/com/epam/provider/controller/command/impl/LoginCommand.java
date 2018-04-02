@@ -1,9 +1,9 @@
 package com.epam.provider.controller.command.impl;
 
 import com.epam.provider.controller.command.ActionCommand;
+import com.epam.provider.controller.command.ActionType;
+import com.epam.provider.controller.command.CommandResult;
 import com.epam.provider.controller.command.Constants;
-import com.epam.provider.dao.DAOManager;
-import com.epam.provider.dao.pool.ConnectorDB;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.User;
 import com.epam.provider.service.ProfileService;
@@ -30,34 +30,40 @@ public class LoginCommand implements ActionCommand {
     private ProfileService profileService;
 
     @Override
-    public String execute(HttpServletRequest req) {
+    public CommandResult execute(HttpServletRequest req) {
         String page;
         String login = req.getParameter(Constants.PARAM_NAME_LOGIN);
         String pass = req.getParameter(Constants.PARAM_NAME_PASSWORD);
-        DAOManager daoManager = new DAOManager();
-        userService = new UserService(daoManager);
-        profileService = new ProfileService((daoManager));
+        userService = new UserService();
+        profileService = new ProfileService();
+        CommandResult.ResponseType respType= CommandResult.ResponseType.REDIRECT;
         try {
             User user = userService.findUser(login, pass);
             page = getPageForUser(user);
             if (userService.isUserValid(user)) {
                 setSessionForUser(user, req);
+            } else{
+                req.setAttribute(Constants.PARAM_NAME_ERROR_LOGIN, "Invalid login or pass" );
+                respType= CommandResult.ResponseType.FORWARD;
             }
         } catch (Exception e) {
-            page = ConfigResourceManager.getPagePath(Constants.PAGE_NAME_ERROR);
+            page = ConfigResourceManager.getPagePath(ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ERROR));
             logger.log(Level.ERROR, MessageResourceManager.getProperty(ResourceConstants.MESSAGE_KEY_ERROR_LOGIN));
         }
-        return page;
+        req.getRequestDispatcher("/Controller?command="+ ActionType.GET_TARIFFS);
+        CommandResult commandResult = new CommandResult(respType, page);
+        return commandResult;
     }
 
     private String getPageForUser(User user) {
         if (userService.validateLoginAdmin(user)) {
-            return ConfigResourceManager.getPagePath(Constants.PAGE_NAME_ADMIN);
+            return "/Controller?command=get_tariffs";
+            //return ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_TARIFF);
         }
         if (userService.validateLoginUser(user)) {
-            return ConfigResourceManager.getPagePath(Constants.PAGE_NAME_CLIENT);
+            return ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_CLIENT);
         }
-        return ConfigResourceManager.getPagePath(Constants.PAGE_NAME_LOGIN);
+        return ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_LOGIN);
     }
 
     private void setSessionForUser(User user, HttpServletRequest req) throws ServiceException {

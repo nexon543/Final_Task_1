@@ -1,26 +1,26 @@
 package com.epam.provider.dao.impl;
 
 import com.epam.provider.dao.AbstractDAO;
-import com.epam.provider.model.Profile;
 import com.epam.provider.model.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by HP on 28.03.2018.
  */
 public class UsersDAO extends AbstractDAO<Integer, User> {
-    public UsersDAO(Connection connection) {
-        super(connection);
-    }
+    public UsersDAO(){}
 
     public User findProfileByLoginPass(String login, String pass) throws SQLException {
-        User user=new User();
-        PreparedStatement st=connection.prepareStatement("select * from Users where login=? and pass=?");
+        User user = new User();
+        PreparedStatement st = connection.prepareStatement("select * from Users where login=? and pass=?");
         st.setString(1, login);
         st.setString(2, pass);
-        ResultSet rs=st.executeQuery();
+        ResultSet rs = st.executeQuery();
         if (rs.next()) {
             user.setIdUsers(rs.getInt("id_users"));
             user.setIdProfiles(rs.getInt("id_profiles"));
@@ -30,6 +30,7 @@ public class UsersDAO extends AbstractDAO<Integer, User> {
         }
         return user;
     }
+
     @Override
     public List<User> findAll() throws SQLException {
         return null;

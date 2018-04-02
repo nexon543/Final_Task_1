@@ -1,25 +1,29 @@
 package com.epam.provider.dao;
 
-import com.epam.provider.dao.impl.ProfilesDAO;
-import com.epam.provider.dao.impl.TrafficDAO;
-import com.epam.provider.dao.impl.UsersDAO;
-
-import java.sql.Connection;
+import com.epam.provider.dao.impl.*;
 
 /**
  * Created by HP on 29.03.2018.
  */
 public class DAOFactory {
-    public static AbstractDAO getDAO(DAOType type, Connection conn) {
+    private final static ProfilesDAO profilesDAO = new ProfilesDAO();
+    private final static UsersDAO usersDAO = new UsersDAO();
+    private final static TrafficDAO trafficDAO = new TrafficDAO();
+    private final static TariffDAO tariffDAO = new TariffDAO();
+    private final static TransactionsDAO transactionsDAO = new TransactionsDAO();
+
+    public static AbstractDAO getDAO(DAOType type) {
         switch (type) {
             case PROFILES:
-                return new ProfilesDAO(conn);
+                return profilesDAO;
             case TRAFFIC:
-                return new TrafficDAO(conn);
+                return trafficDAO;
             case TRANSACTIONS:
-                return new TrafficDAO(conn);
+                return trafficDAO;
             case USERS:
-                return new UsersDAO(conn);
+                return usersDAO;
+            case TARIFF:
+                return tariffDAO;
         }
         return null;
     }

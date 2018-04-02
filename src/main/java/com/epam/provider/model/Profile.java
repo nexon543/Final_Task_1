@@ -1,6 +1,7 @@
 package com.epam.provider.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by HP on 26.03.2018.
@@ -71,4 +72,22 @@ public class Profile extends Entity {
         this.registerDate = registerDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile profile = (Profile) o;
+        return Objects.equals(idProfiles, profile.idProfiles) &&
+                Objects.equals(firstName, profile.firstName) &&
+                Objects.equals(secondName, profile.secondName) &&
+                Objects.equals(passport, profile.passport) &&
+                Objects.equals(tariff, profile.tariff) &&
+                Objects.equals(balance, profile.balance) &&
+                Objects.equals(registerDate, profile.registerDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProfiles, firstName, secondName, passport, tariff, balance, registerDate);
+    }
 }

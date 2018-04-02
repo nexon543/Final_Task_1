@@ -1,7 +1,5 @@
 package com.epam.provider.controller.command;
-import com.epam.provider.controller.command.impl.EmptyCommand;
-import com.epam.provider.controller.command.impl.LoginCommand;
-import com.epam.provider.controller.command.impl.LogoutCommand;
+import com.epam.provider.controller.command.impl.*;
 
 import java.util.EnumMap;
 
@@ -9,13 +7,16 @@ import java.util.EnumMap;
  * Created by HP on 27.03.2018.
  */
 public class ActionFactory {
-    private EnumMap<ActionType, ActionCommand> actions;
-    public ActionFactory(){
+    private static EnumMap<ActionType, ActionCommand> actions;
+    static {
         actions=new EnumMap<>(ActionType.class);
         actions.put(ActionType.LOGIN, new LoginCommand());
         actions.put(ActionType.LOGOUT, new LogoutCommand());
+        actions.put(ActionType.GET_TARIFFS, new GetTariffsCommand());
+        actions.put(ActionType.ADD_TARIFF, new AddTariffCommand());
+
     }
-    public ActionCommand defineCommand(String commandName) {
+    public static ActionCommand defineCommand(String commandName) {
         if(commandName == null){
             return new EmptyCommand();
         }

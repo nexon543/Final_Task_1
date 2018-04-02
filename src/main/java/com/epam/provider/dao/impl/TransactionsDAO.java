@@ -3,7 +3,6 @@ package com.epam.provider.dao.impl;
 import com.epam.provider.dao.AbstractDAO;
 import com.epam.provider.model.Transaction;
 
-import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -11,8 +10,7 @@ import java.util.List;
  */
 public class TransactionsDAO extends AbstractDAO<Integer, Transaction> {
 
-    public TransactionsDAO(Connection connection) {
-        super(connection);
+    public TransactionsDAO() {
     }
 
     @Override

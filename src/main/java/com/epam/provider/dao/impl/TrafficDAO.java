@@ -5,7 +5,10 @@ import com.epam.provider.model.Entity;
 import com.epam.provider.model.Traffic;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,14 +17,21 @@ import java.util.List;
 public class TrafficDAO extends AbstractDAO<Integer, Traffic>{
     private Integer id;
 
-    public TrafficDAO (Connection conn){
-        super(conn);
-    }
+    private static final String SQL_SELECT_ALL="select * from Traffic";
+    private static final String SQL_SELECT_BY_ID="select * from Traffic where id_traffic=?";
+    public TrafficDAO (){}
 
     @Override
     public List<Traffic> findAll() throws SQLException {
+        Statement st=connection.createStatement();
+        ResultSet rs=st.executeQuery(SQL_SELECT_ALL);
+        List<Traffic> trafficList=new ArrayList<>();
+        while(rs.next()){
+
+        }
         return null;
     }
+
 
     @Override
     public Traffic findEntityById(Integer id) throws SQLException {
