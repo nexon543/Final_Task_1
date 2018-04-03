@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Created by HP on 29.03.2018.
  */
-public class Traffic extends Entity {
+public class Traffic implements Entity {
 
     private Integer idTraffic;
     private Integer recieved;

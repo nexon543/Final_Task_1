@@ -1,13 +1,12 @@
 package com.epam.provider.model;
 
 import java.util.Objects;
-import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * Created by HP on 27.03.2018.
  */
-public class User extends Entity{
+public class User implements Entity {
+
     private Integer idUsers;
     private String login;
     private String password;

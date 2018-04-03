@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Created by HP on 27.03.2018.
  */
-public class Tariff extends Entity {
+public class Tariff implements Entity {
     private Integer idTarifs;
     private Integer price;
     private Integer recievingSpeed;

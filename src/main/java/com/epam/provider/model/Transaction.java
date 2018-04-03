@@ -8,7 +8,7 @@ import java.util.OptionalInt;
 /**
  * Created by HP on 27.03.2018.
  */
-public class Transaction extends Entity {
+public class Transaction implements Entity {
     private Integer idTransactions;
     private Integer amount;
     private Date date;

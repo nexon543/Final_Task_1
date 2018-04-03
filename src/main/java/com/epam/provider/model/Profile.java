@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Created by HP on 26.03.2018.
  */
-public class Profile extends Entity {
+public class Profile implements Entity {
     private Integer idProfiles;
     private String firstName;
     private String secondName;
