@@ -1,7 +1,8 @@
 package com.epam.provider.dao.impl;
 
+import com.epam.provider.dao.AbstractDao;
 import com.epam.provider.dao.DAOException;
-import com.epam.provider.dao.TariffDAO;
+import com.epam.provider.dao.TariffDao;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.Tariff;
 import org.apache.log4j.Logger;
@@ -10,27 +11,24 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by HP on 04.04.2018.
- */
-public class TariffDAOImpl implements TariffDAO {
+public class TariffDaoImpl extends AbstractDao<Integer, Tariff> implements TariffDao {
 
-    private static Logger logger = Logger.getLogger(TariffDAOImpl.class);
+    private static Logger logger = Logger.getLogger(TariffDaoImpl.class);
 
-    private static final String SQL_SP_GET_TARIFFS = "{call get_tariffs(?)}";
-    private static final String SQL_SP_GET_TARIFFS_LIMITED = "{call get_tariffs_limited(?, ?, ?)}";
-    private static final String SQL_SP_INSERT_TARIFFS = "{call insert_tariff(?,?,?,?,?,?,?)}";
-    private static final String SQL_INSERT_TEXT_TARIFFS = "INSERT INTO ttariffs (`lang`,`id_tariffs`,`name`,`description`)VALUES(?,?,?,?)";
-    private static final String SQL_SELECT_ALL = "select * from Tariffs";
-    private static final String SQL_LIMITED_SELECT = "select * from Tariffs ORDER BY id_tariffs LIMIT ?,?";
+    private static final String SQL_SP_SELECT_ALL = "{call get_tariffs(?)}";
+    private static final String SQL_SP_SELECT_LIMITED = "{call get_tariffs_limited(?, ?, ?)}";
+    private static final String SQL_SP_INSERT = "{call insert_tariff(?,?,?,?,?,?,?)}";
+    private static final String SQL_SP_UPDATE = "{call updatet_tariff(?,?,?,?,?,?,?)}";
     private static final String SQL_SELECT_BY_ID = "select * from Tariffs where id_tariffs=?";
     private static final String SQL_COUNT_RECORDS = "select count(*) from Tariffs";
+    private static final String SQL_DELETE_ID = "delete from Tariffs where id_tariffs=?";
+
 
     @Override
     public Integer countRecords() throws DAOException {
         Integer count = 0;
+        Connection connection = ConnectionPool.getInstance().getConnection();
         try {
-            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(SQL_COUNT_RECORDS);
             if (rs.next()) {
@@ -43,73 +41,20 @@ public class TariffDAOImpl implements TariffDAO {
     }
 
     @Override
-    public List findAll() throws DAOException {
-        List<Tariff> tariffs = new ArrayList<>();
-        Statement st = null;
-        CallableStatement cs;
-        Connection connection = ConnectionPool.getInstance().getConnection();
-        try {
-            cs = connection.prepareCall(SQL_SP_GET_TARIFFS);
-            cs.setString(1, "en");
-            st = connection.createStatement();
-            ResultSet rs = st.executeQuery(SQL_SELECT_ALL);
-            while (rs.next()) {
-                tariffs.add(getTariffObj(rs));
-            }
-        } catch (SQLException e) {
-            throw new DAOException(DAOException.MESS_FINDING_TARIFF_ERROR);
-        }
-        return tariffs;
-    }
-
-    @Override
-    public Tariff findEntityById(Integer id) throws DAOException {
-        return null;
-    }
-
-    @Override
-    public void delete(Integer id) throws DAOException {
-    }
-
-    @Override
-    public void delete(Tariff entity) throws DAOException {
-    }
-
-    @Override
     public List findLimited(Integer start, Integer end) throws DAOException {
         List<Tariff> tariffs = new ArrayList<>();
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
-            CallableStatement cs = connection.prepareCall(SQL_SP_GET_TARIFFS_LIMITED);
+            CallableStatement cs = connection.prepareCall(SQL_SP_SELECT_LIMITED);
             cs.setString(1, "en");
             cs.setInt(2, start);
             cs.setInt(3, end - start);
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
-                tariffs.add(getTariffObj(rs));
+                tariffs.add(getNewEntity(rs));
             }
         } catch (SQLException e) {
             throw new DAOException(DAOException.MESS_FINDING_TARIFF_ERROR);
-        }
-        return tariffs;
-    }
-
-    @Override
-    public void create(Tariff entity) throws DAOException {
-        Connection connection = ConnectionPool.getInstance().getConnection();
-        try {
-            CallableStatement insertTariffs = connection.prepareCall(SQL_SP_INSERT_TARIFFS);
-            insertTariffs.setInt(1, entity.getRecievingSpeed());
-            insertTariffs.setInt(2, entity.getTransferSpeed());
-            insertTariffs.setInt(3, entity.getPrice());
-            insertTariffs.setInt(4, 1);
-            insertTariffs.setString(5, entity.getLang());
-            insertTariffs.setString(6, entity.getName());
-            insertTariffs.setString(7, entity.getDescription());
-            insertTariffs.executeUpdate();
-
-        } catch (SQLException e) {
-           throw new DAOException(e.getMessage());
         } finally {
             try {
                 connection.close();
@@ -117,14 +62,65 @@ public class TariffDAOImpl implements TariffDAO {
                 throw new DAOException(e.getMessage());
             }
         }
+        return tariffs;
     }
 
     @Override
-    public Tariff update(Tariff entity) throws DAOException {
-        return null;
+    public void update(Tariff entity) throws DAOException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        delete(entity.getIdTarifs());
+        create(entity);
     }
 
-    private Tariff getTariffObj(ResultSet rs) throws SQLException {
+    @Override
+    protected void executeDelete(Connection connection, Integer id) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SQL_DELETE_ID);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+    }
+
+    @Override
+    protected ResultSet executeSelectAll(Connection connection) throws SQLException {
+        CallableStatement cs = connection.prepareCall(SQL_SP_SELECT_ALL);
+        cs.setString(1, "en");
+        return cs.executeQuery();
+    }
+
+    @Override
+    protected ResultSet executeSelectById(Connection connection, Integer id) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SQL_SELECT_BY_ID);
+        ps.setInt(1, id);
+        return ps.executeQuery();
+    }
+
+    @Override
+    protected void executeUpdate(Connection connection, Tariff entity) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SQL_SP_UPDATE);
+        ps.setInt(1, entity.getRecievingSpeed());
+        ps.setInt(2, entity.getTransferSpeed());
+        ps.setInt(3, entity.getPrice());
+        ps.setInt(4, 1);
+        ps.setString(5, entity.getLang());
+        ps.setString(6, entity.getName());
+        ps.setString(7, entity.getDescription());
+        ps.executeUpdate();
+    }
+
+    @Override
+    protected void executeCreate(Connection connection, Tariff entity) throws SQLException {
+        CallableStatement insertTariffs = connection.prepareCall(SQL_SP_INSERT);
+        insertTariffs.setInt(1, entity.getRecievingSpeed());
+        insertTariffs.setInt(2, entity.getTransferSpeed());
+        insertTariffs.setInt(3, entity.getPrice());
+        insertTariffs.setInt(4, 1);
+        insertTariffs.setString(5, entity.getLang());
+        insertTariffs.setString(6, entity.getName());
+        insertTariffs.setString(7, entity.getDescription());
+        insertTariffs.executeUpdate();
+    }
+
+    @Override
+    protected Tariff getNewEntity(ResultSet rs) throws SQLException {
         Tariff tariff = new Tariff();
         tariff.setIdTarifs(rs.getInt("id_tariffs"));
         tariff.setName(rs.getString("name"));
@@ -132,6 +128,7 @@ public class TariffDAOImpl implements TariffDAO {
         tariff.setRecievingSpeed(rs.getInt("recieving_speed"));
         tariff.setTransferSpeed(rs.getInt("transfering_speed"));
         tariff.setDescription(rs.getString("description"));
+        tariff.setLang(rs.getString("lang"));
         return tariff;
     }
 

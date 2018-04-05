@@ -2,29 +2,113 @@ package com.epam.provider.dao;
 
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.Entity;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by HP on 26.03.2018.
- */
-public interface AbstractDAO<K, T extends Entity> {
 
-    List<T> findAll() throws DAOException;
+public abstract class AbstractDao<K, T extends Entity> implements CrudDao<K, T> {
 
-    T findEntityById(K id) throws DAOException;
+    @Override
+    public List<T> findAll() throws DAOException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        List<T> entities = new ArrayList<>();
+        try {
+            ResultSet rs = executeSelectAll(connection);
+            if (rs.next()) {
+                T entity = getNewEntity(rs);
+                entities.add(entity);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DAOException(e.getMessage());
+            }
+        }
+        return entities;
+    }
 
-    void delete(K id) throws DAOException;
+    @Override
+    public T findById(K id) throws DAOException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            ResultSet rs = executeSelectById(connection, id);
+            rs.next();
+            return getNewEntity(rs);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DAOException(e.getMessage());
+            }
+        }
+    }
 
-    void delete(T entity) throws DAOException;
+    @Override
+    public void delete(K id) throws DAOException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            executeDelete(connection, id);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DAOException(e.getMessage());
+            }
+        }
+    }
 
-    void create(T entity) throws DAOException;
+    @Override
+    public void create(T entity) throws DAOException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            executeCreate(connection, entity);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DAOException(e.getMessage());
+            }
+        }
+    }
 
-    T update(T entity) throws DAOException;
+   @Override
+    public void update(T entity) throws DAOException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            executeUpdate(connection, entity);
+        } catch (SQLException e) {
+            throw new DAOException(e.getMessage());
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DAOException(e.getMessage());
+            }
+        }
+    }
 
+    protected abstract void executeDelete(Connection connection, K id) throws SQLException;
+
+    protected abstract ResultSet executeSelectAll(Connection connection) throws SQLException;
+
+    protected abstract ResultSet executeSelectById(Connection connection, K id) throws SQLException;
+
+    protected abstract void executeUpdate(Connection connection, T entity) throws SQLException;
+
+    protected abstract void executeCreate(Connection connection, T entity) throws SQLException;
+
+    protected abstract T getNewEntity(ResultSet rs) throws SQLException;
 }

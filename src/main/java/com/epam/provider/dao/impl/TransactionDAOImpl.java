@@ -1,43 +1,42 @@
 package com.epam.provider.dao.impl;
 
-import com.epam.provider.dao.DAOException;
-import com.epam.provider.dao.TransactionDAO;
+import com.epam.provider.dao.AbstractDao;
+import com.epam.provider.dao.TransactionDao;
 import com.epam.provider.model.Transaction;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/**
- * Created by HP on 04.04.2018.
- */
-public class TransactionDAOImpl implements TransactionDAO {
+
+public class TransactionDaoImpl extends AbstractDao<Integer, Transaction> implements TransactionDao {
 
     @Override
-    public List<Transaction> findAll() throws DAOException {
+    protected void executeDelete(Connection connection, Integer id) throws SQLException {
+    }
+
+    @Override
+    protected ResultSet executeSelectAll(Connection connection) throws SQLException {
         return null;
     }
 
     @Override
-    public Transaction findEntityById(Integer id) throws DAOException {
+    protected ResultSet executeSelectById(Connection connection, Integer id) throws SQLException {
         return null;
     }
 
     @Override
-    public void delete(Integer id) throws DAOException {
+    protected void executeUpdate(Connection connection, Transaction entity) throws SQLException {
 
     }
 
     @Override
-    public void delete(Transaction entity) throws DAOException {
+    protected void executeCreate(Connection connection, Transaction entity) throws SQLException {
 
     }
 
     @Override
-    public void create(Transaction entity) throws DAOException {
-
-    }
-
-    @Override
-    public Transaction update(Transaction entity) throws DAOException {
-       return null;
+    protected Transaction getNewEntity(ResultSet rs) throws SQLException {
+        return null;
     }
 }

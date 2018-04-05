@@ -5,6 +5,6 @@ import com.epam.provider.model.User;
 /**
  * Created by HP on 28.03.2018.
  */
-public interface UserDAO extends AbstractDAO<Integer, User> {
-    User findProfileByLoginPass(String login, String pass) throws DAOException;
+public interface UserDao extends CrudDao<Integer, User> {
+    User findByLoginPass(String login, String pass) throws DAOException;
 }

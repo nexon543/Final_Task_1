@@ -1,7 +1,5 @@
 package com.epam.provider.dao.pool;
 
-import com.epam.provider.util.resource.MessageResourceManager;
-
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;

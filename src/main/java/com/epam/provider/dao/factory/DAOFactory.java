@@ -3,27 +3,26 @@ package com.epam.provider.dao.factory;
 import com.epam.provider.dao.*;
 import com.epam.provider.dao.impl.*;
 
-/**
- * Created by HP on 29.03.2018.
- */
-public abstract class DAOFactory {
+public abstract class DaoFactory {
 
-    private final static ProfileDAO profilesDAO = new ProfileDAOImpl();
-    private final static UserDAO usersDAO = new UserDAOImpl();
-    private final static TariffDAO tariffDAO = new TariffDAOImpl();
-    private final static TransactionDAO transactionsDAO = new TransactionDAOImpl();
+    private final static ProfileDao profileDao = new ProfileDaoImpl();
+    private final static UserDao userDao = new UserDaoImpl();
+    private final static TariffDao tariffDao = new TariffDaoImpl();
+    private final static TransactionDao transactionsDao = new TransactionDaoImpl();
 
-    public static AbstractDAO getDAO(DAOType type) {
-        switch (type) {
-            case PROFILES:
-                return profilesDAO;
-            case TRANSACTIONS:
-                return transactionsDAO;
-            case USERS:
-                return usersDAO;
-            case TARIFF:
-                return tariffDAO;
-        }
-        return null;
+    public static ProfileDao getProfileDao(){
+        return profileDao;
+    }
+
+    public static UserDao getUserDao(){
+        return userDao;
+    }
+
+    public static TariffDao getTariffDao(){
+        return tariffDao;
+    }
+
+    public static TransactionDao getTransactionDao(){
+        return transactionsDao;
     }
 }

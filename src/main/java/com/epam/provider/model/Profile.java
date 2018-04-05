@@ -1,6 +1,6 @@
 package com.epam.provider.model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**

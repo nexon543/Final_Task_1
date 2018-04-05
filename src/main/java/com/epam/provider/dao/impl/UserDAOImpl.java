@@ -1,7 +1,7 @@
 package com.epam.provider.dao.impl;
 
 import com.epam.provider.dao.DAOException;
-import com.epam.provider.dao.UserDAO;
+import com.epam.provider.dao.UserDao;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.User;
 
@@ -11,13 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by HP on 04.04.2018.
- */
-public class UserDAOImpl implements UserDAO {
-    public UserDAOImpl(){}
 
-    public User findProfileByLoginPass(String login, String pass) throws DAOException {
+public class UserDaoImpl implements UserDao {
+    public UserDaoImpl(){}
+
+    public User findByLoginPass(String login, String pass) throws DAOException {
         User user = new User();
         Connection connection= ConnectionPool.getInstance().getConnection();
         try {
@@ -52,18 +50,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findEntityById(Integer id) {
+    public User findById(Integer id) throws DAOException {
         return null;
     }
+
 
     @Override
     public void delete(Integer id) {
 
     }
 
-    @Override
-    public void delete(User entity) {
-    }
 
     @Override
     public void create(User entity) {
@@ -71,7 +67,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User update(User entity) {
-        return null;
+    public void update(User entity) {
     }
 }

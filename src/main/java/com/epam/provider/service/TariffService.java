@@ -1,9 +1,8 @@
 package com.epam.provider.service;
 
 import com.epam.provider.dao.DAOException;
-import com.epam.provider.dao.factory.DAOFactory;
-import com.epam.provider.dao.DAOType;
-import com.epam.provider.dao.TariffDAO;
+import com.epam.provider.dao.factory.DaoFactory;
+import com.epam.provider.dao.TariffDao;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * Created by HP on 30.03.2018.
  */
 public class TariffService extends Service {
-    private TariffDAO tariffDAO = (TariffDAO) DAOFactory.getDAO(DAOType.TARIFF);
+    private TariffDao tariffDAO = DaoFactory.getTariffDao();
 
     public TariffService() {
     }
@@ -49,7 +48,7 @@ public class TariffService extends Service {
     public Tariff getTariffForUser(Profile profile) throws ServiceException {
         Tariff tariffs = new Tariff();
         try {
-            tariffDAO.findEntityById(profile.getTariff());
+            tariffDAO.findById(profile.getTariff());
         } catch (DAOException e) {
             throw new ServiceException("can't find tariff for profile");
         }

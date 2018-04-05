@@ -75,14 +75,6 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/jsp/login.jsp"><span
                             class="glyphicon glyphicon-log-in">
-                        <c:choose>
-                            <c:when test="${user != null}">
-                                Go to cabinet
-                            </c:when>
-                            <c:otherwise>
-                                Login
-                            </c:otherwise>
-                        </c:choose>
                         <ctg:login-tag/>
                             </span></a>
                 </li>

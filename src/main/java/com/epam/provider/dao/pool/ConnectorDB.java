@@ -7,9 +7,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Created by HP on 27.03.2018.
- */
 public class ConnectorDB {
 
     private static String url;

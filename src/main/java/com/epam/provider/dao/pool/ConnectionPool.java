@@ -16,9 +16,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * Created by HP on 26.03.2018.
- */
+
 public class ConnectionPool {
 
     private static Logger logger = LogManager.getLogger(ConnectionPool.class);
