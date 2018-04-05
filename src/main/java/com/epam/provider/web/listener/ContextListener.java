@@ -8,9 +8,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.io.File;
 
-/**
- * Created by HP on 26.03.2018.
- */
+
 @WebListener("applications context listener")
 public class ContextListener implements ServletContextListener {
     @Override

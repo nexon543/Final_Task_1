@@ -2,9 +2,7 @@ package com.epam.provider.model;
 
 import java.util.Objects;
 
-/**
- * Created by HP on 27.03.2018.
- */
+
 public class Tariff implements Entity {
     private Integer idTarifs;
     private Integer price;

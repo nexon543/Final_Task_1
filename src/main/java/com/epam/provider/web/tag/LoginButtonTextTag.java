@@ -1,8 +1,5 @@
 package com.epam.provider.web.tag;
 
-/**
- * Created by HP on 03.04.2018.
- */
 
 import com.epam.provider.model.User;
 import com.epam.provider.web.controller.command.Constants;

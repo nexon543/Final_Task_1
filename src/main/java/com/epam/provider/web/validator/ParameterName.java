@@ -1,8 +1,6 @@
 package com.epam.provider.web.validator;
 
-/**
- * Created by HP on 04.04.2018.
- */
+
 public enum ParameterName {
     USER_NAME("user_name", "regex");
 

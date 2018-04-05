@@ -3,9 +3,7 @@ package com.epam.provider.model;
 import java.sql.Date;
 import java.util.Objects;
 
-/**
- * Created by HP on 26.03.2018.
- */
+
 public class Profile implements Entity {
     private Integer idProfiles;
     private String firstName;

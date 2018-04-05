@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-/**
- * Created by HP on 03.04.2018.
- */
+
 @WebFilter(urlPatterns = "/jsp/login.jsp")
 public class LoginFilter implements Filter {
 

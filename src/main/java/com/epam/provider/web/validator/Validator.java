@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by HP on 04.04.2018.
- */
 public class Validator {
 
     private static Logger logger = LogManager.getLogger(Validator.class);
