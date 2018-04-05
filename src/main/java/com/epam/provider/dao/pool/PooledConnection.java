@@ -122,7 +122,12 @@ public class PooledConnection implements Connection {
      */
     @Override
     public void close() throws SQLException {
-        ConnectionPool.getInstance().releaseConnection(this);
+
+        try {
+            ConnectionPool.getInstance().releaseConnection(this);
+        } catch (ConnectionPoolException e) {
+            throw new SQLException(e.getMessage());
+        }
     }
 
     /**

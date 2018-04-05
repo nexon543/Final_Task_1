@@ -21,7 +21,7 @@ public class ConnectorDB {
         user = DatabaseResourceManager.getProperty(ResourceConstants.DB_KEY_USER);
         pass = DatabaseResourceManager.getProperty(ResourceConstants.DB_KEY_PASS);
         try {
-            Class.forName(DatabaseResourceManager.getProperty(ResourceConstants.DB_KEY_DRIVER_NAME)).newInstance();
+            Class.forName(DatabaseResourceManager.getProperty(ResourceConstants.DB_KEY_DRIVER_NAME));
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e);
         }

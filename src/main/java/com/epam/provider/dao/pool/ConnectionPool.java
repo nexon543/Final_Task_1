@@ -20,8 +20,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by HP on 26.03.2018.
  */
 public class ConnectionPool {
-    private static String PATH_TO_DATA = "database";
-
 
     private static Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static AtomicBoolean isAvailable = new AtomicBoolean(false);
@@ -99,7 +97,7 @@ public class ConnectionPool {
         }
     }
 
-    public void releaseConnection (Connection connection){
+    public void releaseConnection (Connection connection) throws ConnectionPoolException {
         try {
             if (connection.isClosed()) {
                 throw new SQLException("trying to close closed exception");
@@ -119,7 +117,7 @@ public class ConnectionPool {
                 throw new SQLException("Error allocating connection in the pool");
             }
         } catch (SQLException e) {
-            logger.log(Level.ERROR, "Error closing connection",e);
+            throw new ConnectionPoolException("Error closing connection", e);
         }
 
     }
