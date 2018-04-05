@@ -1,4 +1,4 @@
-package com.epam.provider.controller.command;
+package com.epam.provider.web.controller.command;
 
 import com.epam.provider.util.resource.ConfigResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;

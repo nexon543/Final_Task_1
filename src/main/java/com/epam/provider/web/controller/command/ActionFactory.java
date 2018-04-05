@@ -1,5 +1,5 @@
-package com.epam.provider.controller.command;
-import com.epam.provider.controller.command.impl.*;
+package com.epam.provider.web.controller.command;
+import com.epam.provider.web.controller.command.impl.*;
 
 import java.util.EnumMap;
 

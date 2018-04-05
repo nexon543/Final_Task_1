@@ -1,8 +1,8 @@
-package com.epam.provider.controller.command.impl;
+package com.epam.provider.web.controller.command.impl;
 
-import com.epam.provider.controller.command.ActionCommand;
-import com.epam.provider.controller.command.CommandResult;
-import com.epam.provider.controller.command.Constants;
+import com.epam.provider.web.controller.command.ActionCommand;
+import com.epam.provider.web.controller.command.CommandResult;
+import com.epam.provider.web.controller.command.Constants;
 import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.TariffService;
@@ -13,9 +13,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by HP on 30.03.2018.

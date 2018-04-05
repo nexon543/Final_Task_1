@@ -1,9 +1,9 @@
-package com.epam.provider.controller;
+package com.epam.provider.web.controller;
 
-import com.epam.provider.controller.command.ActionCommand;
-import com.epam.provider.controller.command.ActionFactory;
-import com.epam.provider.controller.command.CommandResult;
-import com.epam.provider.controller.command.Constants;
+import com.epam.provider.web.controller.command.ActionCommand;
+import com.epam.provider.web.controller.command.ActionFactory;
+import com.epam.provider.web.controller.command.CommandResult;
+import com.epam.provider.web.controller.command.Constants;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

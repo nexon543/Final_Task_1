@@ -1,12 +1,11 @@
-package com.epam.provider.controller.command.impl;
+package com.epam.provider.web.controller.command.impl;
 
-import com.epam.provider.controller.command.ActionCommand;
-import com.epam.provider.controller.command.CommandResult;
+import com.epam.provider.web.controller.command.ActionCommand;
+import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.util.resource.ConfigResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.Authenticator;
 
 /**
  * Created by HP on 27.03.2018.

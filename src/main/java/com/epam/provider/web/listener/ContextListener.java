@@ -1,4 +1,4 @@
-package com.epam.provider.listener;
+package com.epam.provider.web.listener;
 
 import org.apache.log4j.PropertyConfigurator;
 

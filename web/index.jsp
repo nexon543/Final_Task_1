@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ctg" uri="customtags"%>
 <html>
 
 <head>
@@ -15,7 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -37,7 +39,8 @@
             margin: auto;
             min-height: 200px;
         }
-        body{
+
+        body {
             background-color: #a2aec7;
         }
 
@@ -49,7 +52,6 @@
         }
     </style>
 </head>
-dd
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -71,17 +73,22 @@ dd
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
-                    <c:choose>
-                        <c:when test="${user != null}">
-                            <a href="${pageContext.request.contextPath}/jsp/${user.role}.jsp"><span class="glyphicon glyphicon-log-in"> Go to cabinet </span></a>
-                        </c:when>
-                        <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/jsp/login.jsp"><span class="glyphicon glyphicon-log-in"> Login</span></a>
-                        </c:otherwise>
-                    </c:choose>
+                    <a href="${pageContext.request.contextPath}/jsp/login.jsp"><span
+                            class="glyphicon glyphicon-log-in">
+                        <c:choose>
+                            <c:when test="${user != null}">
+                                Go to cabinet
+                            </c:when>
+                            <c:otherwise>
+                                Login
+                            </c:otherwise>
+                        </c:choose>
+                        <ctg:login-tag/>
+                            </span></a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Language <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Language
+                        <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">English</a></li>
                         <li class="divider"></li>
@@ -159,7 +166,7 @@ dd
 </footer>
 
 <script>
-    $(function(){
+    $(function () {
         $('.selectpicker').selectpicker();
     });
 </script>

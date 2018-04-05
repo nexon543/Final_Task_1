@@ -1,4 +1,4 @@
-package com.epam.provider.controller.command;
+package com.epam.provider.web.controller.command;
 
 /**
  * Created by HP on 27.03.2018.
