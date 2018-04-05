@@ -13,59 +13,18 @@ import java.util.List;
 /**
  * Created by HP on 26.03.2018.
  */
-public abstract class AbstractDAO<K, T extends Entity> {
-    private static Logger logger = Logger.getLogger(AbstractDAO.class);
+public interface AbstractDAO<K, T extends Entity> {
 
-    protected Connection connection;
+    List<T> findAll() throws DAOException;
 
-    public AbstractDAO() {
-    }
+    T findEntityById(K id) throws DAOException;
 
-    public abstract List<T> findAll() throws SQLException, DAOException;
+    void delete(K id) throws DAOException;
 
-    public abstract T findEntityById(K id) throws SQLException, DAOException;
+    void delete(T entity) throws DAOException;
 
-    public abstract boolean delete(K id);
+    void create(T entity) throws DAOException;
 
-    public abstract boolean delete(T entity);
+    T update(T entity) throws DAOException;
 
-    public abstract boolean create(T entity) throws DAOException;
-
-    public abstract T update(T entity);
-
-    public void close(Statement st) {
-        try {
-            if (st != null) {
-                st.close();
-            }
-        } catch (SQLException ex) {
-            logger.error(ex.getMessage());
-        }
-    }
-
-    public void close(Connection con) {
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                logger.error(ex.getMessage());
-            }
-        }
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-    public void openConnection() {
-        this.connection = ConnectionPool.getInstance().getConnection();
-    }
-
-    public void closeConnection() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            logger.log(Level.ERROR, DAOException.MESS_CLOSE_CONECTION_ERROR);
-        }
-    }
 }
