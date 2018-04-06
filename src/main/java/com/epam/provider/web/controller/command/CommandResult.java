@@ -3,9 +3,7 @@ package com.epam.provider.web.controller.command;
 import com.epam.provider.util.resource.ConfigResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;
 
-/**
- * Created by HP on 29.03.2018.
- */
+
 public class CommandResult {
     public enum ResponseType {
         FORWARD, REDIRECT

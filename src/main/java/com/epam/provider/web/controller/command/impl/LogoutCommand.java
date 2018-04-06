@@ -7,9 +7,7 @@ import com.epam.provider.util.resource.ResourceConstants;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by HP on 27.03.2018.
- */
+
 public class LogoutCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest req) {

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface TariffDao extends CrudDao<Integer, Tariff> {
 
-    Integer countRecords() throws DAOException;
+    Integer countRecords() throws DaoException;
 
-    List findLimited(Integer start, Integer end) throws DAOException;
+    List findLimited(Integer start, Integer end) throws DaoException;
 
 }

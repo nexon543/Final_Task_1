@@ -1,15 +1,9 @@
 package com.epam.provider.dao.impl;
 
-import com.epam.provider.dao.AbstractDao;
-import com.epam.provider.dao.DAOException;
 import com.epam.provider.dao.ProfileDao;
-import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.Profile;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class ProfileDaoImpl extends AbstractDao<Integer, Profile> implements ProfileDao {
 

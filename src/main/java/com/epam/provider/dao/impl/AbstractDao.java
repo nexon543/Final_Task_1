@@ -1,5 +1,7 @@
-package com.epam.provider.dao;
+package com.epam.provider.dao.impl;
 
+import com.epam.provider.dao.CrudDao;
+import com.epam.provider.dao.DaoException;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.Entity;
 
@@ -13,7 +15,7 @@ import java.util.List;
 public abstract class AbstractDao<K, T extends Entity> implements CrudDao<K, T> {
 
     @Override
-    public List<T> findAll() throws DAOException {
+    public List<T> findAll() throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         List<T> entities = new ArrayList<>();
         try {
@@ -23,79 +25,79 @@ public abstract class AbstractDao<K, T extends Entity> implements CrudDao<K, T> 
                 entities.add(entity);
             }
         } catch (SQLException e) {
-            throw new DAOException(e.getMessage());
+            throw new DaoException(e.getMessage());
         }finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
         return entities;
     }
 
     @Override
-    public T findById(K id) throws DAOException {
+    public T findById(K id) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             ResultSet rs = executeSelectById(connection, id);
             rs.next();
             return getNewEntity(rs);
         } catch (SQLException e) {
-            throw new DAOException(e.getMessage());
+            throw new DaoException(e.getMessage());
         }finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
     }
 
     @Override
-    public void delete(K id) throws DAOException {
+    public void delete(K id) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             executeDelete(connection, id);
         } catch (SQLException e) {
-            throw new DAOException(e.getMessage());
+            throw new DaoException(e.getMessage());
         }finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
     }
 
     @Override
-    public void create(T entity) throws DAOException {
+    public void create(T entity) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             executeCreate(connection, entity);
         } catch (SQLException e) {
-            throw new DAOException(e.getMessage());
+            throw new DaoException(e.getMessage());
         }finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
     }
 
    @Override
-    public void update(T entity) throws DAOException {
+    public void update(T entity) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             executeUpdate(connection, entity);
         } catch (SQLException e) {
-            throw new DAOException(e.getMessage());
+            throw new DaoException(e.getMessage());
         }finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
     }

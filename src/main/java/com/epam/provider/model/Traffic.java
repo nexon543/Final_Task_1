@@ -3,9 +3,7 @@ package com.epam.provider.model;
 import java.sql.Date;
 import java.util.Objects;
 
-/**
- * Created by HP on 29.03.2018.
- */
+
 public class Traffic implements Entity {
 
     private Integer idTraffic;

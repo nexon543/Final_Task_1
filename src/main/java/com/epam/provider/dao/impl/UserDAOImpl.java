@@ -1,6 +1,6 @@
 package com.epam.provider.dao.impl;
 
-import com.epam.provider.dao.DAOException;
+import com.epam.provider.dao.DaoException;
 import com.epam.provider.dao.UserDao;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.User;
@@ -15,7 +15,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     public UserDaoImpl(){}
 
-    public User findByLoginPass(String login, String pass) throws DAOException {
+    public User findByLoginPass(String login, String pass) throws DaoException {
         User user = new User();
         Connection connection= ConnectionPool.getInstance().getConnection();
         try {
@@ -31,13 +31,13 @@ public class UserDaoImpl implements UserDao {
             user.setRole(rs.getString("role"));
         }
         } catch (SQLException e) {
-            throw new DAOException(e.getMessage());
+            throw new DaoException(e.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
         return user;
@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findById(Integer id) throws DAOException {
+    public User findById(Integer id) throws DaoException {
         return null;
     }
 

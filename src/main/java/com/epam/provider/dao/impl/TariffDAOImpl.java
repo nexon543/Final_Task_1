@@ -1,7 +1,6 @@
 package com.epam.provider.dao.impl;
 
-import com.epam.provider.dao.AbstractDao;
-import com.epam.provider.dao.DAOException;
+import com.epam.provider.dao.DaoException;
 import com.epam.provider.dao.TariffDao;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.model.Tariff;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class TariffDaoImpl extends AbstractDao<Integer, Tariff> implements TariffDao {
 
-    private static Logger logger = Logger.getLogger(TariffDaoImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(TariffDaoImpl.class);
 
     private static final String SQL_SP_SELECT_ALL = "{call get_tariffs(?)}";
     private static final String SQL_SP_SELECT_LIMITED = "{call get_tariffs_limited(?, ?, ?)}";
@@ -25,7 +24,7 @@ public class TariffDaoImpl extends AbstractDao<Integer, Tariff> implements Tarif
 
 
     @Override
-    public Integer countRecords() throws DAOException {
+    public Integer countRecords() throws DaoException {
         Integer count = 0;
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
@@ -35,13 +34,19 @@ public class TariffDaoImpl extends AbstractDao<Integer, Tariff> implements Tarif
                 count = rs.getInt(1);
             }
         } catch (SQLException e) {
-            throw new DAOException(DAOException.MESS_FINDING_TARIFF_ERROR);
+            throw new DaoException(DaoException.MESS_FINDING_TARIFF_ERROR);
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DaoException(e.getMessage());
+            }
         }
         return count;
     }
 
     @Override
-    public List findLimited(Integer start, Integer end) throws DAOException {
+    public List findLimited(Integer start, Integer end) throws DaoException {
         List<Tariff> tariffs = new ArrayList<>();
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
@@ -54,19 +59,19 @@ public class TariffDaoImpl extends AbstractDao<Integer, Tariff> implements Tarif
                 tariffs.add(getNewEntity(rs));
             }
         } catch (SQLException e) {
-            throw new DAOException(DAOException.MESS_FINDING_TARIFF_ERROR);
+            throw new DaoException(DaoException.MESS_FINDING_TARIFF_ERROR);
         } finally {
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new DAOException(e.getMessage());
+                throw new DaoException(e.getMessage());
             }
         }
         return tariffs;
     }
 
     @Override
-    public void update(Tariff entity) throws DAOException {
+    public void update(Tariff entity) throws DaoException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         delete(entity.getIdTarifs());
         create(entity);

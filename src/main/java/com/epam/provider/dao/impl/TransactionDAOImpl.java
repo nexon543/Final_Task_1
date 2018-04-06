@@ -1,6 +1,5 @@
 package com.epam.provider.dao.impl;
 
-import com.epam.provider.dao.AbstractDao;
 import com.epam.provider.dao.TransactionDao;
 import com.epam.provider.model.Transaction;
 

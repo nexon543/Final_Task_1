@@ -41,7 +41,7 @@
         }
 
         body {
-            background-color: #a2aec7;
+           /* background-color: #a2aec7;*/
         }
 
         /* Hide the carousel text when the screen is less than 600 pixels wide */
@@ -106,7 +106,7 @@
         <div class="item active">
             <img src="/img/city.jpg" alt="Image" style="height: 60%">
             <div class="carousel-caption">
-                <h3>Provider of your city</h3>
+                <h3>Интернет-провайдер твоего города</h3>
                 <p></p>
             </div>
         </div>
@@ -114,8 +114,8 @@
         <div class="item">
             <img src="/img/combo.jpg" alt="Image" style="height: 60%">
             <div class="carousel-caption">
-                <h3>New cool tariff</h3>
-                <p></p>
+                <H3></H3>
+                <p>Тарифы пополам!</p>
             </div>
         </div>
     </div>
@@ -132,8 +132,6 @@
 </div>
 <br/>
 <br/>
-<br/>
-
 <div class="container text-center">
     <h3>What We Do</h3><br>
     <div class="row">

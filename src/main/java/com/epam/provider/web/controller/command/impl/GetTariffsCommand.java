@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-/**
- * Created by HP on 30.03.2018.
- */
+
 public class GetTariffsCommand implements ActionCommand {
 
     TariffService tariffService = new TariffService();
@@ -26,7 +24,7 @@ public class GetTariffsCommand implements ActionCommand {
     Integer pagesNumber;
     Integer currentPage = new Integer(1);
 
-    private static Logger logger = Logger.getLogger(GetTariffsCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(GetTariffsCommand.class);
 
     @Override
     public CommandResult execute(HttpServletRequest req) {
@@ -35,7 +33,7 @@ public class GetTariffsCommand implements ActionCommand {
             countPages(req);
             setSessionValues(req.getSession());
         } catch (ServiceException e) {
-            logger.log(Level.ERROR, "error while counting tariff pages");
+            LOGGER.log(Level.ERROR, "error while counting tariff pages");
         }
         result.setPage(ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_TARIFF));
         result.setResponseType(CommandResult.ResponseType.FORWARD);

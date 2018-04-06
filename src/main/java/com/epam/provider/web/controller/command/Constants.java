@@ -1,8 +1,5 @@
 package com.epam.provider.web.controller.command;
 
-/**
- * Created by HP on 27.03.2018.
- */
 public class Constants {
     public static String PARAM_NAME_LOGIN="login";
     public static String PARAM_NAME_PASSWORD="password";

@@ -12,13 +12,18 @@ import java.io.IOException;
 
 public class LoginButtonTextTag extends TagSupport {
 
-    private static Logger logger = LogManager.getLogger(LoginButtonTextTag.class);
+    private static final Logger LOGGER = LogManager.getLogger(LoginButtonTextTag.class);
 
     @Override
     public int doStartTag() throws JspException {
-        User user = (User) pageContext.getAttribute(Constants.PARAM_NAME_USER);
+        User user = (User) pageContext.getSession().getAttribute(Constants.PARAM_NAME_USER);
         try {
-            pageContext.getOut().write("Login");
+            if (user == null) {
+                pageContext.getOut().write("Login");
+            }
+            else {
+                pageContext.getOut().write("Go to cabinet");
+            }
         } catch (IOException e) {
             throw new JspException(e.getMessage());
         }

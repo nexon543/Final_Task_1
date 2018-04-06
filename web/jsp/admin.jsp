@@ -45,8 +45,6 @@
 </head>
 
 <body>
-<jsp:forward page="tariffs.jsp"></jsp:forward>
-
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">

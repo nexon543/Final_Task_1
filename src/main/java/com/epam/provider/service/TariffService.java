@@ -1,6 +1,6 @@
 package com.epam.provider.service;
 
-import com.epam.provider.dao.DAOException;
+import com.epam.provider.dao.DaoException;
 import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.dao.TariffDao;
 import com.epam.provider.model.Profile;
@@ -8,9 +8,7 @@ import com.epam.provider.model.Tariff;
 
 import java.util.List;
 
-/**
- * Created by HP on 30.03.2018.
- */
+
 public class TariffService extends Service {
     private TariffDao tariffDAO = DaoFactory.getTariffDao();
 
@@ -20,14 +18,14 @@ public class TariffService extends Service {
     public void insert(Tariff tariff) throws ServiceException {
         try {
             tariffDAO.create(tariff);
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             throw new ServiceException("can't insert tariff");
         }
     }
     public Integer getNumberOfRecords() throws ServiceException {
         try {
             return tariffDAO.countRecords();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             throw new ServiceException("can't count number of tariff records");
         }
     }
@@ -35,12 +33,12 @@ public class TariffService extends Service {
     public List<Tariff> getTariffs(Integer start, Integer end) throws ServiceException {
         try {
             return tariffDAO.findLimited(start, end);
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             throw new ServiceException("error selecting tariffs");
         }
     }
 
-    public List<Tariff> getAllTariffs() throws DAOException {
+    public List<Tariff> getAllTariffs() throws DaoException {
         List<Tariff> tariffs = tariffDAO.findAll();
         return tariffs;
     }
@@ -49,7 +47,7 @@ public class TariffService extends Service {
         Tariff tariffs = new Tariff();
         try {
             tariffDAO.findById(profile.getTariff());
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             throw new ServiceException("can't find tariff for profile");
         }
         return tariffs;

@@ -19,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private static Logger logger = LogManager.getLogger(ConnectionPool.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static AtomicBoolean isAvailable = new AtomicBoolean(false);
     private static ConnectionPool instance;
     private static ReentrantLock instanceLock = new ReentrantLock();
@@ -51,7 +51,7 @@ public class ConnectionPool {
             givenAwayConnections = new ArrayBlockingQueue<>(poolSize);
             initPoolData();
         } catch (Exception ex) {
-            logger.log(Level.ERROR, "Can't init connection pool");
+            LOGGER.log(Level.ERROR, "Can't init connection pool");
         }
     }
 
@@ -71,7 +71,7 @@ public class ConnectionPool {
             connection = activePool.take();
             givenAwayConnections.add(connection);
         } catch (InterruptedException e) {
-            logger.log(Level.ERROR, MessageResourceManager.getProperty("connection.pool.error.taking"));
+            LOGGER.log(Level.ERROR, MessageResourceManager.getProperty("connection.pool.error.taking"));
         }
         return connection;
     }
@@ -90,7 +90,7 @@ public class ConnectionPool {
                 }
                 ((PooledConnection)connection).closeConnection();
             } catch (SQLException e) {
-                logger.log(Level.ERROR, MessageResourceManager.getProperty("connection.pool.error.closing"));
+                LOGGER.log(Level.ERROR, MessageResourceManager.getProperty("connection.pool.error.closing"));
             }
         }
     }

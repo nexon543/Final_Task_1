@@ -20,11 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-/**
- * Created by HP on 27.03.2018.
- */
 public class LoginCommand implements ActionCommand {
-    private static Logger logger = LogManager.getLogger(LoginCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     private UserService userService;
     private ProfileService profileService;
@@ -43,7 +40,7 @@ public class LoginCommand implements ActionCommand {
             setSessionForUser(user, req);
         } catch (Exception e) {
             page = ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ERROR);
-            logger.log(Level.ERROR, MessageResourceManager.getProperty(ResourceConstants.MESSAGE_KEY_ERROR_LOGIN));
+            LOGGER.log(Level.ERROR, MessageResourceManager.getProperty(ResourceConstants.MESSAGE_KEY_ERROR_LOGIN));
         }
         CommandResult commandResult = new CommandResult(respType, page);
         return commandResult;

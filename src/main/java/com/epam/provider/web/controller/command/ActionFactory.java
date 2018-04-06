@@ -3,9 +3,7 @@ import com.epam.provider.web.controller.command.impl.*;
 
 import java.util.EnumMap;
 
-/**
- * Created by HP on 27.03.2018.
- */
+
 public class ActionFactory {
     private static EnumMap<ActionType, ActionCommand> actions;
     static {

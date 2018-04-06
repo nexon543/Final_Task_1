@@ -1,6 +1,6 @@
 package com.epam.provider.service;
 
-import com.epam.provider.dao.DAOException;
+import com.epam.provider.dao.DaoException;
 import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.dao.UserDao;
 import com.epam.provider.model.User;
@@ -18,7 +18,7 @@ public class UserService extends Service {
     public User findUser(String login, String pass) throws ServiceException {;
         try {
             return usersDAO.findByLoginPass(login, pass);
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             throw new ServiceException(ServiceException.MESS_SEARCH_USER_ERROR);
         }
 

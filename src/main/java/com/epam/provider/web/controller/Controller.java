@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by HP on 26.03.2018.
- */
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {

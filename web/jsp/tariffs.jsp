@@ -79,8 +79,8 @@
 </nav>
 <br/>
 <br/>
-<div class="container" align="center" style="width:70%">
-    <table border="1" id="example" class="display" align="center" style="width:70%">
+<div class="container" align="center" >
+    <table border="1" id="example" class="display" align="center" style="width:70%; height:40%">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -99,11 +99,6 @@
                 <td>${tariff.price}</td>
             </tr>
         </c:forEach>
-        <tr>
-            <td colspan="5" border="0">
-
-            </td>
-        </tr>
     </table>
     <ul class="pagination" align="center">
         <c:forEach begin="1" end="${pagesNumber}" var="page">

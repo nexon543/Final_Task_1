@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Validator {
 
-    private static Logger logger = LogManager.getLogger(Validator.class);
+    private static final Logger LOGGER = LogManager.getLogger(Validator.class);
 
     HashMap<ParameterName, String> errorMessages;
 
@@ -23,7 +23,7 @@ public class Validator {
                 String regexp = field.getRegexp();
 
             } catch (IllegalArgumentException e) {
-                logger.info("Parameter is not field " + current + " value " + entry.getValue());
+                LOGGER.error("Parameter is not field " + current + " value " + entry.getValue());
             }
         });
         return errorMessages.isEmpty() ? true : false;
