@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
     public UserDaoImpl(){}
 
     public User findByLoginPass(String login, String pass) throws DaoException {
@@ -44,29 +44,32 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-        Connection connection= ConnectionPool.getInstance().getConnection();
+    protected void executeDelete(Connection connection, Integer id) throws SQLException {
+
+    }
+
+    @Override
+    protected ResultSet executeSelectAll(Connection connection) throws SQLException {
         return null;
     }
 
     @Override
-    public User findById(Integer id) throws DaoException {
+    protected ResultSet executeSelectById(Connection connection, Integer id) throws SQLException {
         return null;
     }
 
-
     @Override
-    public void delete(Integer id) {
-
-    }
-
-
-    @Override
-    public void create(User entity) {
+    protected void executeUpdate(Connection connection, User entity) throws SQLException {
 
     }
 
     @Override
-    public void update(User entity) {
+    protected void executeCreate(Connection connection, User entity) throws SQLException {
+
+    }
+
+    @Override
+    protected User getNewEntity(ResultSet rs) throws SQLException {
+        return null;
     }
 }
