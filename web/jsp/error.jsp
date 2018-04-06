@@ -24,7 +24,12 @@
         /* Add a gray background color and some padding to the footer */
         footer {
             background-color: #f2f2f2;
-            padding: 25px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            line-height: 60px;
         }
 
         .carousel-inner img {

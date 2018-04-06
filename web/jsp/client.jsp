@@ -24,7 +24,12 @@
         /* Add a gray background color and some padding to the footer */
         footer {
             background-color: #f2f2f2;
-            padding: 25px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            line-height: 60px;
         }
 
         .carousel-inner img {
@@ -56,7 +61,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/tariffs.jsp">Tariffs</a></li>
+                <li><a href="${pageContext.request.contextPath}/Controller?command=get_tariffs">Tariffs</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}/Controller?command=logout"><span class="glyphicon glyphicon-log-in">Logout</span></a></li>
