@@ -96,4 +96,13 @@ public class TariffServiceImpl implements TariffService {
             throw new ServiceException("can't find tariff by id");
         }
     }
+
+    @Override
+    public void deleteTariff(Integer id) throws ServiceException {
+        try {
+            tariffDAO.delete(id);
+        } catch (DaoException e) {
+            throw new ServiceException(("can't delete tariff with id="+id))
+        }
+    }
 }

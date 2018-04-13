@@ -54,4 +54,6 @@ public interface TariffService {
      * @throws ServiceException
      */
     Tariff getTariffById(Integer id) throws ServiceException;
+
+    void deleteTariff(Integer id) throws ServiceException;
 }
