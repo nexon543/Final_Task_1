@@ -1,13 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 26.03.2018
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="ctg" uri="customtags"%>
+<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <head>
@@ -21,38 +15,20 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
+    <link rel="stylesheet" href="/css/mainPageStyle.css">
 
-        /* Add a gray background color and some padding to the footer */
-        footer {
-            background-color: #f2f2f2;
-            padding: 25px;
-        }
-
-        .carousel-inner img {
-            width: 100%; /* Set width to 100% */
-            margin: auto;
-            min-height: 200px;
-        }
-
-        body {
-           /* background-color: #a2aec7;*/
-        }
-
-        /* Hide the carousel text when the screen is less than 600 pixels wide */
-        @media (max-width: 600px) {
-            .carousel-caption {
-                display: none;
-            }
-        }
-    </style>
 </head>
 <body>
+<fmt:setLocale value="${sessionScope.local}"/>
+<fmt:setBundle basename="message" var="loc"/>
+<fmt:message bundle="${loc}" key="button.login" var="loginButton"/>
+<fmt:message bundle="${loc}" key="button.login.cabinet" var="loginCabinetButton"/>
+<fmt:message bundle="${loc}" key="button.lang.en" var="langEn"/>
+<fmt:message bundle="${loc}" key="button.lang.ru" var="langRu"/>
+<fmt:message bundle="${loc}" key="button.lang.language" var="langLang"/>
+<fmt:message bundle="${loc}" key="button.header.home" var="home"/>
+<fmt:message bundle="${loc}" key="button.header.tariffs" var="tariffs"/>
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -65,26 +41,38 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/Controller?command=get_tariffs">Tariffs</a></li>
-
+                <li class="active"><a href="${pageContext.request.contextPath}/index.jsp"><c:out value="${home}"/></a>
+                </li>
+                <li><a href="${pageContext.request.contextPath}/Controller?command=get_tariffs"><c:out
+                        value="${tariffs}"/></a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
-                    <a href="${pageContext.request.contextPath}/jsp/login.jsp"><span
+                    <a href="${pageContext.request.contextPath}/Login"><span
                             class="glyphicon glyphicon-log-in">
-                        <ctg:login-tag/>
+                        <c:choose>
+                            <c:when test="${sessionScope.user.role=='client'}">
+                                <c:out value="${loginCabinetButton}"/>
+                            </c:when>
+                            <c:when test="${sessionScope.user.role=='admin'}">
+                                <c:out value="${loginCabinetButton}"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${loginButton}"/>
+                            </c:otherwise>
+                        </c:choose>
                             </span></a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Language
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-expanded="false"><c:out value="${langLang}"/>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">English</a></li>
+                        <li><a href="/Controller?command=set_locale&local=en"><c:out value="${langEn}"/></a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Russian</a></li>
+                        <li><a href="/Controller?command=set_locale&local=ru"><c:out value="${langRu}"/></a></li>
                     </ul>
                 </li>
             </ul>
@@ -92,63 +80,7 @@
     </div>
 </nav>
 <br/>
-<br/>
-<br/>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="/img/city.jpg" alt="Image" style="height: 60%">
-            <div class="carousel-caption">
-                <h3>Интернет-провайдер твоего города</h3>
-                <p></p>
-            </div>
-        </div>
-
-        <div class="item">
-            <img src="/img/combo.jpg" alt="Image" style="height: 60%">
-            <div class="carousel-caption">
-                <H3></H3>
-                <p>Тарифы пополам!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-<br/>
-<br/>
-<div class="container text-center">
-    <h3>What We Do</h3><br>
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="img/wifi_manual.jpg" class="img-responsive" style="width:100%" alt="Image">
-            <p>Wi-fi configuration</p>
-        </div>
-        <div class="col-sm-4">
-            <img src="img/internet_service.jpg" class="img-responsive" style="width:100%" alt="Image">
-            <p>Internet service</p>
-        </div>
-        <div class="col-sm-4">
-            <img src="img/ddos_byfly.jpg" class="img-responsive" style="width:100%" alt="Image">
-            <p>Protect from DDoS attacks</p>
-        </div>
-    </div>
-</div>
 <br>
 
 <footer class="container-fluid text-center">

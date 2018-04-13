@@ -3,17 +3,18 @@ package com.epam.provider.util.resource;
 import java.util.ResourceBundle;
 
 /**
- * Created by HP on 28.03.2018.
+ * @author Gleb Aksenov
  */
 public class ConfigResourceManager {
 
-    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_CONFIG);
+    private static ResourceBundle resourceBundle = ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_CONFIG);
 
     private ConfigResourceManager() {
+
     }
 
     public static String getPagePath(String pageName) {
-        return getProperty("pages.path." + pageName);
+        return getProperty(ResourceConstants.PAGE_PATH_PREFIX + pageName);
     }
 
     public static String getProperty(String key) {

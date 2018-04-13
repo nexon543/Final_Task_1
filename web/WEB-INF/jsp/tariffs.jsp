@@ -14,6 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
@@ -69,11 +70,11 @@
                 <li>
                     <c:choose>
                         <c:when test="${user != null}">
-                            <a href="${pageContext.request.contextPath}/jsp/${user.role}.jsp"><span
+                            <a href="/Login"><span
                                     class="glyphicon glyphicon-log-in"> Go to cabinet </span></a>
                         </c:when>
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/jsp/login.jsp"><span
+                            <a href="/Login"><span
                                     class="glyphicon glyphicon-log-in"> Login</span></a>
                         </c:otherwise>
                     </c:choose>
@@ -84,7 +85,7 @@
 </nav>
 <br/>
 <br/>
-<div class="container" align="center" >
+<div class="container" align="center">
     <table border="1" id="example" class="display" align="center" style="width:70%; height:40%">
         <tr>
             <th>Name</th>
@@ -92,16 +93,25 @@
             <th>Recieving speed</th>
             <th>Transfer speed</th>
             <th>Price</th>
+            <c:if test="${user.role == 'client'}">
+                <th>Action</th>
+            </c:if>
 
         </tr>
 
-        <c:forEach items="${tariffs}" var="tariff">
+        <c:forEach items="${tariffs}" var="idTariffs">
             <tr>
-                <td>${tariff.name}</td>
-                <td>${tariff.description}</td>
-                <td>${tariff.recievingSpeed}</td>
-                <td>${tariff.transferSpeed}</td>
-                <td>${tariff.price}</td>
+                <td>${idTariffs.name}</td>
+                <td>${idTariffs.description}</td>
+                <td>${idTariffs.recievingSpeed}</td>
+                <td>${idTariffs.transferSpeed}</td>
+                <td>${idTariffs.price}</td>
+                <c:if test="${(user.role == 'client') and (user.tariffId!=idTariffs.tariffId)}">
+                    <td>
+                        <a href="/Controller?change_tariff=${idTariffs.tariffId}" class="change" title="Change"
+                           data-toggle="tooltip"><i class="material-icons">&#xE8C9;</i></a>
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>
@@ -114,7 +124,7 @@
 <c:if test="${user.role == 'admin'}">
     <div class="container" align="center">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                data-whatever="@mdo">Add tariff
+                data-whatever="@mdo">Add idTariffs
         </button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -122,7 +132,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New tariff</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New idTariffs</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

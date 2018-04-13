@@ -1,55 +1,57 @@
 package com.epam.provider.service;
 
-import com.epam.provider.dao.DaoException;
-import com.epam.provider.dao.factory.DaoFactory;
-import com.epam.provider.dao.TariffDao;
-import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
 
 import java.util.List;
 
+/**
+ * This class serves to process operations with tariffs
+ *
+ * @author Gleb Aksenov
+ */
+public interface TariffService {
+    /**
+     * Method sves tariff object to the database of throws exception
+     *
+     * @param tariff object to save
+     * @throws ServiceException
+     */
+    void createTariff(Tariff tariff) throws ServiceException;
 
-public class TariffService extends Service {
-    private TariffDao tariffDAO = DaoFactory.getTariffDao();
+    void updateTariff(Tariff tariff) throws ServiceException;
 
-    public TariffService() {
-    }
 
-    public void insert(Tariff tariff) throws ServiceException {
-        try {
-            tariffDAO.create(tariff);
-        } catch (DaoException e) {
-            throw new ServiceException("can't insert tariff");
-        }
-    }
-    public Integer getNumberOfRecords() throws ServiceException {
-        try {
-            return tariffDAO.countRecords();
-        } catch (DaoException e) {
-            throw new ServiceException("can't count number of tariff records");
-        }
-    }
+    /**
+     * Method counts all tariffs in the database
+     *
+     * @return number of founded tariffs
+     * @throws ServiceException
+     */
+    Integer getNumberOfRecords() throws ServiceException;
 
-    public List<Tariff> getTariffs(Integer start, Integer end) throws ServiceException {
-        try {
-            return tariffDAO.findLimited(start, end);
-        } catch (DaoException e) {
-            throw new ServiceException("error selecting tariffs");
-        }
-    }
+    /**
+     * Method selects sublist of tariffs limited from start to end ordered by id
+     *
+     * @param start index to open sublist
+     * @param end   index to close sublist
+     * @return number of founded tariffs
+     * @throws ServiceException
+     */
+    List<Tariff> getTariffs(Integer start, Integer end, String lang) throws ServiceException;
 
-    public List<Tariff> getAllTariffs() throws DaoException {
-        List<Tariff> tariffs = tariffDAO.findAll();
-        return tariffs;
-    }
+    /**
+     * Method selects a list of tariffs
+     *
+     * @return list of all tariffs
+     * @throws ServiceException
+     */
+    List<Tariff> getAllTariffs(String lang) throws ServiceException;
 
-    public Tariff getTariffForUser(Profile profile) throws ServiceException {
-        Tariff tariffs = new Tariff();
-        try {
-            tariffDAO.findById(profile.getTariff());
-        } catch (DaoException e) {
-            throw new ServiceException("can't find tariff for profile");
-        }
-        return tariffs;
-    }
+    /**
+     * Method selects tariff for a specific client
+     *
+     * @return tariff object
+     * @throws ServiceException
+     */
+    Tariff getTariffById(Integer id) throws ServiceException;
 }

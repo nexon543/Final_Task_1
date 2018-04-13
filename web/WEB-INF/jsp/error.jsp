@@ -35,7 +35,7 @@
         .carousel-inner img {
             width: 100%; /* Set width to 100% */
             margin: auto;
-            min-height:200px;
+            min-height: 200px;
         }
 
         /* Hide the carousel text when the screen is less than 600 pixels wide */
@@ -61,7 +61,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/tariffs.jsp">Tariffs</a></li>
+                <li><a href="${pageContext.request.contextPath}/Controller.">Tariffs</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

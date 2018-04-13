@@ -1,47 +1,55 @@
 package com.epam.provider.model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.OptionalInt;
 
-
+/**
+ * @author Gleb Aksenov
+ */
 public class Transaction implements Entity {
-    private Integer idTransactions;
+    private Integer transactionId;
     private Integer amount;
     private Date date;
+
+    /**
+     * Client which made a transaction
+     */
     private Integer idProfiles;
 
-    public Integer getIdTransactions() {
-        return idTransactions;
+    public Integer getTransactionId() {
+        return transactionId;
     }
 
-    public void setIdTransactions(Integer idTransactions) {
-        this.idTransactions = idTransactions;
+    public Transaction setTransactionId(Integer transactionId) {
+        this.transactionId = transactionId;
+        return this;
     }
 
     public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public Transaction setAmount(Integer amount) {
         this.amount = amount;
+        return this;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public Transaction setDate(Date date) {
         this.date = date;
+        return this;
     }
 
     public Integer getIdProfiles() {
         return idProfiles;
     }
 
-    public void setIdProfiles(Integer idProfiles) {
+    public Transaction setIdProfiles(Integer idProfiles) {
         this.idProfiles = idProfiles;
+        return this;
     }
 
     @Override
@@ -49,7 +57,7 @@ public class Transaction implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Objects.equals(idTransactions, that.idTransactions) &&
+        return Objects.equals(transactionId, that.transactionId) &&
                 Objects.equals(amount, that.amount) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(idProfiles, that.idProfiles);
@@ -57,6 +65,6 @@ public class Transaction implements Entity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTransactions, amount, date, idProfiles);
+        return Objects.hash(transactionId, amount, date, idProfiles);
     }
 }

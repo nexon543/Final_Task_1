@@ -2,14 +2,15 @@ package com.epam.provider.model;
 
 import java.util.Objects;
 
-
+/**
+ * @author Gleb Aksenov
+ */
 public class Tariff implements Entity {
-    private Integer idTarifs;
+    private Integer tariffId;
     private Integer price;
     private Integer recievingSpeed;
     private Integer transferSpeed;
     private String name;
-    private Boolean isUnlim;
     private String description;
     private String lang;
 
@@ -21,14 +22,6 @@ public class Tariff implements Entity {
         this.lang = lang;
     }
 
-    public Boolean getUnlim() {
-        return isUnlim;
-    }
-
-    public void setUnlim(Boolean unlim) {
-        isUnlim = unlim;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -37,12 +30,12 @@ public class Tariff implements Entity {
         this.description = descriprion;
     }
 
-    public Integer getIdTarifs() {
-        return idTarifs;
+    public Integer getTariffId() {
+        return tariffId;
     }
 
-    public void setIdTarifs(Integer idTarifs) {
-        this.idTarifs = idTarifs;
+    public void setTariffId(Integer tariffId) {
+        this.tariffId = tariffId;
     }
 
     public Integer getPrice() {
@@ -82,7 +75,7 @@ public class Tariff implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tariff tariff = (Tariff) o;
-        return Objects.equals(idTarifs, tariff.idTarifs) &&
+        return Objects.equals(tariffId, tariff.tariffId) &&
                 Objects.equals(price, tariff.price) &&
                 Objects.equals(recievingSpeed, tariff.recievingSpeed) &&
                 Objects.equals(name, tariff.name);
@@ -90,13 +83,13 @@ public class Tariff implements Entity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTarifs, price, recievingSpeed, name);
+        return Objects.hash(tariffId, price, recievingSpeed, name);
     }
 
     @Override
     public String toString() {
         return "Tariff{" +
-                "idTarifs=" + idTarifs +
+                "tariffId=" + tariffId +
                 ", price=" + price +
                 ", recievingSpeed=" + recievingSpeed +
                 ", name='" + name + '\'' +

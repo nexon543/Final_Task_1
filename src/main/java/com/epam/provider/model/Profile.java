@@ -4,70 +4,114 @@ import java.sql.Date;
 import java.util.Objects;
 
 
+/**
+ * @author Gleb Aksenov
+ */
 public class Profile implements Entity {
-    private Integer idProfiles;
+    private Integer profileId;
     private String firstName;
     private String secondName;
     private String passport;
-    private Integer tariff;
+
+    /**
+     * Clients current idTariffs
+     */
+    private Integer idTariffs;
     private Double balance;
     private Date registerDate;
+    private String login;
+    private String password;
+    private String role;
 
 
-    public Integer getIdProfiles() {
-        return idProfiles;
+    public String getLogin() {
+        return login;
     }
 
-    public void setIdProfiles(Integer idProfiles) {
-        this.idProfiles = idProfiles;
+    public Profile setLogin(String login) {
+        this.login = login;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Profile setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public Profile setRole(String role) {
+        this.role = role;
+        return this;
+    }
+
+    public Integer getProfileId() {
+        return profileId;
+    }
+
+    public Profile setProfileId(Integer profileId) {
+        this.profileId = profileId;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public Profile setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getSecondName() {
         return secondName;
     }
 
-    public void setSecondName(String secondName) {
+    public Profile setSecondName(String secondName) {
         this.secondName = secondName;
+        return this;
     }
 
     public String getPassport() {
         return passport;
     }
 
-    public void setPassport(String passport) {
+    public Profile setPassport(String passport) {
         this.passport = passport;
+        return this;
     }
 
-    public Integer getTariff() {
-        return tariff;
+    public Integer getIdTariffs() {
+        return idTariffs;
     }
 
-    public void setTariff(Integer tariff) {
-        this.tariff = tariff;
+    public Profile setIdTariffs(Integer idTariffs) {
+        this.idTariffs = idTariffs;
+        return this;
     }
 
     public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public Profile setBalance(Double balance) {
         this.balance = balance;
+        return this;
     }
 
     public Date getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Date registerDate) {
+    public Profile setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+        return this;
     }
 
     @Override
@@ -75,17 +119,18 @@ public class Profile implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Profile profile = (Profile) o;
-        return Objects.equals(idProfiles, profile.idProfiles) &&
+        return Objects.equals(profileId, profile.profileId) &&
                 Objects.equals(firstName, profile.firstName) &&
                 Objects.equals(secondName, profile.secondName) &&
                 Objects.equals(passport, profile.passport) &&
-                Objects.equals(tariff, profile.tariff) &&
+                Objects.equals(idTariffs, profile.idTariffs) &&
                 Objects.equals(balance, profile.balance) &&
                 Objects.equals(registerDate, profile.registerDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idProfiles, firstName, secondName, passport, tariff, balance, registerDate);
+        return Objects.hash(profileId, firstName, secondName, passport, idTariffs, balance, registerDate);
     }
+
 }

@@ -1,25 +1,38 @@
 package com.epam.provider.service;
 
-import com.epam.provider.dao.DaoException;
-import com.epam.provider.dao.ProfileDao;
-import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.model.Profile;
-import com.epam.provider.model.User;
 
+import java.util.List;
 
-public class ProfileService extends Service {
-    ProfileDao profileDAO =  DaoFactory.getProfileDao();
+/**
+ * @author Gleb Aksenov
+ */
+public interface ProfileService {
 
-    public ProfileService() {
-    }
+    /**
+     * Method changes balance of a user while doing a transaction
+     *
+     * @param amount    money to deposit
+     * @param profileId id of client who pays
+     * @throws ServiceException
+     */
+    void addBalance(Integer amount, Integer profileId) throws ServiceException;
 
-    public Profile findUserProfile(User user) throws ServiceException {
-        Profile profile;
-        try {
-            profile = profileDAO.findById(user.getIdProfiles());
-        } catch (DaoException e) {
-            throw new ServiceException(ServiceException.MESS_SEARCH_PROFILE_ERROR);
-        }
-        return profile;
-    }
+    /**
+     * Method selects user from database by login and pass. If no user was found the empty object is returned
+     *
+     * @param login user login
+     * @param pass  user password
+     * @return initialized or empty user object
+     * @throws ServiceException
+     */
+    Profile findUser(String login, String pass) throws ServiceException;
+
+    boolean isUserExists(String login) throws ServiceException;
+
+    void createProfile(Profile profile) throws ServiceException;
+
+    List<Profile> findAll() throws ServiceException;
+
+    Profile getById(Integer id) throws ServiceException;
 }
