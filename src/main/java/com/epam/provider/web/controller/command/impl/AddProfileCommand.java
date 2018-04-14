@@ -5,8 +5,8 @@ import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.util.SessionRequestContent;
-import com.epam.provider.util.resource.ConfigResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -33,7 +33,7 @@ public class AddProfileCommand implements ActionCommand {
                 res.setState(CommandResult.CommandResultState.FORWARD_ADMIN);
             } else {
                 req.setAttribute(Constants.PARAM_ERROR_MESSAGE, "Such user already exists");
-                res.setPage(ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ADMIN));
+                res.setPage(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ADMIN));
                 res.setResponseType(CommandResult.ResponseType.FORWARD);
             }
         } catch (ServiceException e) {

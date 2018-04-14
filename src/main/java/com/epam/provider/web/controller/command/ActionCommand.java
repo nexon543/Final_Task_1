@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
  * Main interface
  *
  * @author Gleb Aksenov
- *         Interface of Command pattern which is using to delegate action from controller to separate classes
+ * Interface of Command pattern which is using to delegate action from controller to separate classes
  */
 public interface ActionCommand {
     /**

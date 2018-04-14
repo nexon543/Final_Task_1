@@ -7,8 +7,8 @@ import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.service.impl.TariffServiceImpl;
-import com.epam.provider.util.resource.MessageResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * This command is used to verify the user
  *
  * @author Gleb Aksenov
- *         {@link ActionCommand}  invokes method execute()
+ * {@link ActionCommand}  invokes method execute()
  */
 public class LoginCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
@@ -51,9 +51,9 @@ public class LoginCommand implements ActionCommand {
             }
         } catch (ServiceException e) {
             commandResult.setState(CommandResult.CommandResultState.REDIRECT_ERROR);
-            LOGGER.log(Level.ERROR, MessageResourceManager.getProperty(ResourceConstants.MESSAGE_KEY_ERROR_LOGIN));
+            LOGGER.log(Level.ERROR, ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN));
         }
-        commandResult.setPage(commandResult.getPage()+"?wrongAction=redirect");
+        commandResult.setPage(commandResult.getPage() + "?wrongAction=redirect");
         return commandResult;
     }
 

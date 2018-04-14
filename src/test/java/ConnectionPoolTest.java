@@ -21,13 +21,6 @@ public class ConnectionPoolTest {
         }
     }
 
-    @Test()
-    void getConnectionTest() {
-        assertTimeout(Duration.ofMillis(1), () -> {
-            ConnectionPool.getInstance().getConnection();
-        }, "can't get connection");
-    }
-
     @AfterAll
     static void tearDownAll() {
         try {
@@ -35,5 +28,12 @@ public class ConnectionPoolTest {
         } catch (ConnectionPoolException e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test()
+    void getConnectionTest() {
+        assertTimeout(Duration.ofMillis(1), () -> {
+            ConnectionPool.getInstance().getConnection();
+        }, "can't get connection");
     }
 }

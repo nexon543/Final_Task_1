@@ -100,7 +100,8 @@ public abstract class AbstractDao<T extends Entity> implements CrudDao<T> {
                     connection.close();
                 }
             } catch (SQLException e) {
-                throw new DaoException(e.getMessage());
+                LOGGER.log(Level.ERROR, e.getMessage());
+                throw new DaoException("can't delete record with id=" + id);
             }
         }
     }

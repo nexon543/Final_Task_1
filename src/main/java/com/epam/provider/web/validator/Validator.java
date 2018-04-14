@@ -56,7 +56,7 @@ public class Validator {
                 LOGGER.error("Parameter is not field " + current + " value " + entry.getValue());
             }
         });
-        return errorMessages.isEmpty() ? true : false;
+        return errorMessages.isEmpty();
     }
 
     /**

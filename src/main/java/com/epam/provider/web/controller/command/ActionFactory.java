@@ -25,6 +25,7 @@ public class ActionFactory {
         actions.put(ActionType.GET_UPDATE_PAGE, new GetUpdatableEntityCommand());
         actions.put(ActionType.UPDATE_TARIFF, new UpdateTariffCommand());
         actions.put(ActionType.GET_PROFILES, new GetProfilesCommand());
+        actions.put(ActionType.DELETE_TARIFF, new DeleteTariffCommand());
 
     }
 
@@ -32,7 +33,7 @@ public class ActionFactory {
         if (commandName == null) {
             return new EmptyCommand();
         }
-        ActionType actionType = ActionType.GET_TARIFFS.valueOf(commandName.toUpperCase());
+        ActionType actionType = ActionType.valueOf(commandName.toUpperCase());
         return actions.get(actionType);
     }
 }

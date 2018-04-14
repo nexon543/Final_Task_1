@@ -1,7 +1,7 @@
 package com.epam.provider.dao.pool;
 
-import com.epam.provider.util.resource.MessageResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -29,6 +29,21 @@ public class ConnectionPool {
     private ArrayBlockingQueue<Connection> givenAwayConnections;
     private int poolSize;
 
+    /**
+     * This constructor serves to initialize the connection parameters to the database.
+     */
+    private ConnectionPool() throws ConnectionPoolException {
+        try {
+            poolSize = Integer.parseInt(ResourceManager.getDatabaseProperty(ResourceConstants.DB_KEY_POOL_SIZE));
+            activePool = new ArrayBlockingQueue<>(poolSize);
+            givenAwayConnections = new ArrayBlockingQueue<>(poolSize);
+        } catch (Exception ex) {
+            LOGGER.log(Level.ERROR, ex.getMessage());
+            throw new ConnectionPoolException("Can't init connection pool", ex);
+
+        }
+    }
+
     public static ConnectionPool getInstance() throws ConnectionPoolException {
         if (!isAvailable.get()) {
             try {
@@ -42,22 +57,6 @@ public class ConnectionPool {
             }
         }
         return instance;
-    }
-
-    /**
-     * This constructor serves to initialize the connection parameters to the database.
-     */
-    private ConnectionPool() throws ConnectionPoolException {
-        try {
-            ResourceBundle resourceBundle = ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_DATABASE);
-            poolSize = Integer.parseInt(resourceBundle.getString(ResourceConstants.DB_KEY_POOL_SIZE));
-            activePool = new ArrayBlockingQueue<>(poolSize);
-            givenAwayConnections = new ArrayBlockingQueue<>(poolSize);
-        } catch (Exception ex) {
-            LOGGER.log(Level.ERROR, ex.getMessage());
-            throw new ConnectionPoolException("Can't init connection pool", ex);
-
-        }
     }
 
     /**
@@ -130,7 +129,7 @@ public class ConnectionPool {
                 }
                 ((PooledConnection) connection).closeConnection();
             } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, MessageResourceManager.getProperty("connection.pool.error.closing"));
+                LOGGER.log(Level.ERROR, ResourceManager.getMessage("connection.pool.error.closing"));
                 throw new ConnectionPoolException(e.getMessage());
             }
         }

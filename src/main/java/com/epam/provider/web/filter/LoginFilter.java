@@ -1,8 +1,8 @@
 package com.epam.provider.web.filter;
 
 import com.epam.provider.model.Profile;
-import com.epam.provider.util.resource.ConfigResourceManager;
 import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.Constants;
 
 import javax.servlet.*;
@@ -26,12 +26,12 @@ public class LoginFilter implements Filter {
         Profile user = (Profile) session.getAttribute(Constants.PARAM_USER);
         if ((user != null) && (user.getProfileId() != null)) {
             if (Constants.ROLE_NAME_ADMIN.equals(user.getRole())) {
-                req.getRequestDispatcher(ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ADMIN)).forward(servletRequest, servletResponse);
+                req.getRequestDispatcher(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ADMIN)).forward(servletRequest, servletResponse);
             } else {
-                req.getRequestDispatcher(ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_CLIENT)).forward(servletRequest, servletResponse);
+                req.getRequestDispatcher(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_CLIENT)).forward(servletRequest, servletResponse);
             }
         } else {
-            req.getRequestDispatcher(ConfigResourceManager.getPagePath(ResourceConstants.PAGE_NAME_LOGIN)).forward(servletRequest, servletResponse);
+            req.getRequestDispatcher(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_LOGIN)).forward(servletRequest, servletResponse);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

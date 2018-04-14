@@ -40,6 +40,19 @@ update `ttariffs` set `ttariffs`.`name`=tname,`ttariffs`.`description`=descripti
 end//
 delimiter ;
 
+drop procedure if exists delete_tariff;
+delimiter //
+create procedure delete_tariff (in id int)
+begin
+DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
+DECLARE EXIT HANDLER FOR NOT FOUND ROLLBACK;
+DECLARE EXIT HANDLER FOR SQLWARNING ROLLBACK;
+START TRANSACTION READ WRITE;
+delete from ttariffs where id_tariffs=id;
+delete from tariffs where id_tariffs=id;
+COMMIT;
+end//
+delimiter ;
 
 drop trigger if exists upd_balance;
 delimiter //

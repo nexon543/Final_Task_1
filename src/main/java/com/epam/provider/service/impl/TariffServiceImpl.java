@@ -102,7 +102,8 @@ public class TariffServiceImpl implements TariffService {
         try {
             tariffDAO.delete(id);
         } catch (DaoException e) {
-            throw new ServiceException(("can't delete tariff with id="+id))
+            LOGGER.log(Level.ERROR, e.getMessage());
+            throw new ServiceException(("can't delete tariff with id=" + id));
         }
     }
 }

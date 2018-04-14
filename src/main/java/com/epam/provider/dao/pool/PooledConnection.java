@@ -72,17 +72,6 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the auto commit.
-     *
-     * @param autoCommit the new auto commit
-     * @throws SQLException the SQL exception
-     */
-    @Override
-    public void setAutoCommit(boolean autoCommit) throws SQLException {
-        connection.setAutoCommit(autoCommit);
-    }
-
-    /**
      * Gets the auto commit.
      *
      * @return the auto commit
@@ -91,6 +80,17 @@ public class PooledConnection implements Connection {
     @Override
     public boolean getAutoCommit() throws SQLException {
         return connection.getAutoCommit();
+    }
+
+    /**
+     * Sets the auto commit.
+     *
+     * @param autoCommit the new auto commit
+     * @throws SQLException the SQL exception
+     */
+    @Override
+    public void setAutoCommit(boolean autoCommit) throws SQLException {
+        connection.setAutoCommit(autoCommit);
     }
 
     /**
@@ -160,17 +160,6 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the read only.
-     *
-     * @param readOnly the new read only
-     * @throws SQLException the SQL exception
-     */
-    @Override
-    public void setReadOnly(boolean readOnly) throws SQLException {
-        connection.setReadOnly(readOnly);
-    }
-
-    /**
      * Checks if is read only.
      *
      * @return true, if is read only
@@ -182,14 +171,14 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the catalog.
+     * Sets the read only.
      *
-     * @param catalog the new catalog
+     * @param readOnly the new read only
      * @throws SQLException the SQL exception
      */
     @Override
-    public void setCatalog(String catalog) throws SQLException {
-        connection.setCatalog(catalog);
+    public void setReadOnly(boolean readOnly) throws SQLException {
+        connection.setReadOnly(readOnly);
     }
 
     /**
@@ -204,14 +193,14 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the transaction isolation.
+     * Sets the catalog.
      *
-     * @param level the new transaction isolation
+     * @param catalog the new catalog
      * @throws SQLException the SQL exception
      */
     @Override
-    public void setTransactionIsolation(int level) throws SQLException {
-        connection.setTransactionIsolation(level);
+    public void setCatalog(String catalog) throws SQLException {
+        connection.setCatalog(catalog);
     }
 
     /**
@@ -223,6 +212,17 @@ public class PooledConnection implements Connection {
     @Override
     public int getTransactionIsolation() throws SQLException {
         return connection.getTransactionIsolation();
+    }
+
+    /**
+     * Sets the transaction isolation.
+     *
+     * @param level the new transaction isolation
+     * @throws SQLException the SQL exception
+     */
+    @Override
+    public void setTransactionIsolation(int level) throws SQLException {
+        connection.setTransactionIsolation(level);
     }
 
     /**
@@ -310,17 +310,6 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the holdability.
-     *
-     * @param holdability the new holdability
-     * @throws SQLException the SQL exception
-     */
-    @Override
-    public void setHoldability(int holdability) throws SQLException {
-        connection.setHoldability(holdability);
-    }
-
-    /**
      * Gets the holdability.
      *
      * @return the holdability
@@ -329,6 +318,17 @@ public class PooledConnection implements Connection {
     @Override
     public int getHoldability() throws SQLException {
         return connection.getHoldability();
+    }
+
+    /**
+     * Sets the holdability.
+     *
+     * @param holdability the new holdability
+     * @throws SQLException the SQL exception
+     */
+    @Override
+    public void setHoldability(int holdability) throws SQLException {
+        connection.setHoldability(holdability);
     }
 
     /**
@@ -528,17 +528,6 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the client info.
-     *
-     * @param properties the new client info
-     * @throws SQLClientInfoException the SQL client info exception
-     */
-    @Override
-    public void setClientInfo(Properties properties) throws SQLClientInfoException {
-
-    }
-
-    /**
      * Gets the client info.
      *
      * @param name the name
@@ -559,6 +548,17 @@ public class PooledConnection implements Connection {
     @Override
     public Properties getClientInfo() throws SQLException {
         return connection.getClientInfo();
+    }
+
+    /**
+     * Sets the client info.
+     *
+     * @param properties the new client info
+     * @throws SQLClientInfoException the SQL client info exception
+     */
+    @Override
+    public void setClientInfo(Properties properties) throws SQLClientInfoException {
+
     }
 
     /**
@@ -588,17 +588,6 @@ public class PooledConnection implements Connection {
     }
 
     /**
-     * Sets the schema.
-     *
-     * @param schema the new schema
-     * @throws SQLException the SQL exception
-     */
-    @Override
-    public void setSchema(String schema) throws SQLException {
-        connection.setSchema(schema);
-    }
-
-    /**
      * Gets the schema.
      *
      * @return the schema
@@ -607,6 +596,17 @@ public class PooledConnection implements Connection {
     @Override
     public String getSchema() throws SQLException {
         return connection.getSchema();
+    }
+
+    /**
+     * Sets the schema.
+     *
+     * @param schema the new schema
+     * @throws SQLException the SQL exception
+     */
+    @Override
+    public void setSchema(String schema) throws SQLException {
+        connection.setSchema(schema);
     }
 
     /**

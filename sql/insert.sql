@@ -33,8 +33,6 @@ INSERT INTO `mydb`.`ttariffs` (`lang`,`id_tariffs`,`name`,`description`)VALUES('
 INSERT INTO `mydb`.`Profiles` (`id_profiles`,`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) VALUES (1, 'Ivan', 'Ivanov', 'MP267523', 1, 170, '2017-12-02','user','user','client');
 INSERT INTO `mydb`.`Profiles` (`id_profiles`,`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) VALUES (2, 'Admin', 'Admin', 'Admin', 1, 0, '2007-12-02','admin','admin','admin');
 
-INSERT INTO `mydb`.`Users` (`login`, `pass`, `id_profiles`, `role`) VALUES ('user', 'user', 1, 'client');
-INSERT INTO `mydb`.`Users` (`login`, `pass`, `id_profiles`, `role`) VALUES ('admin', 'admin', 2, 'admin');
 
 INSERT INTO `mydb`.`transactions` (`amount`, `date`, `id_profiles`) VALUES (30, '2018-07-04', 1);
 INSERT INTO `mydb`.`transactions` (`amount`, `date`, `id_profiles`) VALUES (30, '2018-07-04', 1);

@@ -37,6 +37,15 @@ public class TariffDaoTest {
         tariff.setDescription("testDescription");
     }
 
+    @AfterAll
+    static void tearDownAll() {
+        try {
+            ConnectionPool.getInstance().clearConnectionQueue();
+        } catch (ConnectionPoolException e) {
+            fail(e.getMessage());
+        }
+    }
+
     @Test
     public void createTariff() {
 
@@ -61,7 +70,6 @@ public class TariffDaoTest {
         }
     }
 
-
     @Test
     void findLimited() {
         int start = 1;
@@ -70,15 +78,6 @@ public class TariffDaoTest {
             List<Tariff> tariffs = tariffDao.findLimited(1, 3, "en");
             assertEquals(tariffs.size(), end - start);
         } catch (DaoException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    @AfterAll
-    static void tearDownAll() {
-        try {
-            ConnectionPool.getInstance().clearConnectionQueue();
-        } catch (ConnectionPoolException e) {
             fail(e.getMessage());
         }
     }

@@ -56,14 +56,15 @@
     </div>
 </nav>
 
-<form method="post" action="/Controller">
-    <input type="text" name="test"/>
-    <button type="submit"> Отправить</button>
-</form>
-
 <br/>
-<c:out value="${param.messageSuccess}"/>
-<c:out value="${param.messageError}"/>
+<div class="container" align="center">
+    <p style="color: green">
+        <c:out value="${messageSuccess}"/>
+    </p>
+    <p style="color: crimson">
+        <c:out value="${messageError}"/>
+    </p>
+</div>
 <br/>
 
 
@@ -212,223 +213,13 @@
                 </li>
             </ul>
         </div>
-
-
-        <c:if test="${state=='show_tariffs'}">
-            <div class="container" align="center">
-                <table id="example" class="table" align="center" style="width:70%; height:60%">
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Recieving speed</th>
-                        <th>Transfer speed</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                    <c:forEach items="${tariffs}" var="idTariffs">
-                        <tr>
-                            <td>${idTariffs.name}</td>
-                            <td>${idTariffs.description}</td>
-                            <td>${idTariffs.recievingSpeed}</td>
-                            <td>${idTariffs.transferSpeed}</td>
-                            <td>${idTariffs.price}</td>
-                            <td>
-                                <a href="/Controller?command=get_update_page&id=${idTariffs.tariffId}&entity=tariff"
-                                   data-target="#profileModal" class="edit" title="Edit" data-toggle="tooltip"><i
-                                        class="material-icons">&#xE254;</i></a>
-                                <a href="/Controller?command=delete&id=${idTariffs.tariffId}&entity=tariff"
-                                   class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">
-                                    &#xE872;</i></a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-                <ul class="pagination" align="center">
-                    <c:forEach begin="1" end="${pagesNumber}" var="page">
-                        <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a></li>
-                    </c:forEach>
-                </ul>
-            </div>
-        </c:if>
-
-
-        <c:if test="${state=='show_users'}">
-            <div class="container" align="center">
-                <table class="table" align="center" style="width:70%; height:60%">
-                    <tr>
-                        <th>First name</th>
-                        <th>Second name</th>
-                        <th>Passport</th>
-                        <th>Balance</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Action</th>
-                    </tr>
-                    <c:forEach items="${users}" var="profile">
-                        <tr>
-                            <td>${profile.firstName}</td>
-                            <td>${profile.secondName}</td>
-                            <td>${profile.passport}</td>
-                            <td>${profile.balance}</td>
-                            <td>${profile.login}</td>
-                            <td>${profile.pass}</td>
-                            <td>${profile.role}</td>
-                            <td>
-                                <a href="/Controller?command=get_update_page&id=${profile.profileId}&entity=profile"
-                                   data-target="#profileModal" class="edit" title="Edit" data-toggle="tooltip"><i
-                                        class="material-icons">&#xE254;</i></a>
-                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">
-                                    &#xE872;</i></a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-                <ul class="pagination" align="center">
-                    <c:forEach begin="1" end="${pagesNumber}" var="page">
-                        <li><a href="Controller?command=get_profiles&currentPage=${page}">${page}</a></li>
-                    </c:forEach>
-                </ul>
-            </div>
-        </c:if>
-
-
-        <c:if test="${state=='update_tariff'}">
-            <a data-toggle="modal" data-target="#tariffUpdateModal" id="tariffUpdateModalButton" href=""></a>
-            <div class="container" align="center">
-                <div class="modal fade" id="tariffUpdateModal" tabindex="-1" role="dialog"
-                     aria-labelledby="addTariffModal"
-                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Изменить тариф</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/Controller?command=update_tariff">
-                                <input type="text" style="display:none" name="lang" class="form-control"
-                                       value="en">
-                                <input type="number" name="id" style="display: none"
-                                       value="${updatableTariff.tariffId}">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Name:</label>
-                                        <input type="text" name="name" class="form-control" id="recipient-name"
-                                               value="${updatableTariff.name}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="message-text" class="col-form-label">Description:</label>
-                                        <textarea class="form-control" name="description"
-                                                  id="message-text">${updatableTariff.description}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="transf-speed" class="col-form-label">Transfer speed:</label>
-                                        <input type="number" min="25" class="form-control" name="transferSpeed"
-                                               id="transf-speed"
-                                               value="${updatableTariff.transferSpeed}">
-                                        <label for="recieving-speed" class="col-form-label">Recieving
-                                            speed:</label>
-                                        <input type="number" min="25" name="recievingSpeed" class="form-control"
-                                               id="recieving-speed"
-                                               value="${updatableTariff.recievingSpeed}">
-                                        <label for="price" class="col-form-label">Price:</label>
-                                        <input type="number" min="0" class="form-control" name="price"
-                                               id="price"
-                                               value="${updatableTariff.price}">
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                            data-dismiss="modal">Закрыть
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:if>
-
-
-        <c:if test="${state=='update_profile'}">
-            <a href="" data-toggle="modal" id="profileUpdateModalButton" data-target="#profileUpdateModal"><i
-                    class=""></i>Добавить
-                клиента
-            </a>
-            <div class="container" align="center">
-                <div class="modal fade" id="profileUpdateModal" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="profileUpdateModalLabel">Изменить данные клиента</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/Controller?command=update_profile">
-                                <input type="text" style="display:none" name="lang" class="form-control" value="en">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="update-first-name" class="col-form-label">First name:</label>
-                                        <input type="text" class="form-control" name="firstName" id="update-first-name"
-                                               value="${updatableProfile.firstName}">
-
-                                        <label for="update-second-name" class="col-form-label">Second name:</label>
-                                        <input type="text" name="secondName" class="form-control"
-                                               id="update-second-name"
-                                               value="${updatableProfile.secondName}"/>
-
-                                        <label for="update-passport" class="form-control">Passport:</label>
-                                        <input type="text" class="form-control" name="passport" id="update-passport"
-                                               value="${updatableProfile.passport}"/>
-
-                                        <label for="update-tariffId" style="display: none" class="col-form-label">Tariff
-                                            id:</label>
-                                        <input type="text" class="form-control" name="tariffId" id="update-tariffId"
-                                               value="${updatableProfile.tariffId}"/>
-
-                                        <label for="update-balance" class="col-form-label">Balance:</label>
-                                        <input type="text" class="form-control" name="balance" id="update-balance"
-                                               value="${updatableProfile.balance}"/>
-
-                                        <label for="update-user-name" class="col-form-label">User name:</label>
-                                        <input type="text" name="name" class="form-control" id="update-user-name"
-                                               value="${updatableProfile.login}">
-
-                                        <label for="update-password" class="col-form-label">Password:</label>
-                                        <input type="password" class="form-control" name="password" id="update-password"
-                                               value="${updatableProfile.pass}">
-
-                                        <label class="col-form-label">Role:</label>
-                                        <select class="form-control" name="role" required="required"
-                                                formId="addUser" value="${updatableProfile.role}">
-                                            <option>user</option>
-                                            <option>admin</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Добавить</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:if>
+        <div class="col-md-3">
+            <c:import url="elementpage/showProfiles.jsp"/>
+        </div>
     </div>
 </div>
-
+<c:import url="elementpage/showTariffs.jsp"/>
+<c:import url="elementpage/updateTariff.jsp"/>
 <footer class="container-fluid text-center">
     <p>ByFlow</p>
 </footer>

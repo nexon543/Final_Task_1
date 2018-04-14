@@ -14,7 +14,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 
 public class UpdateTariffCommand implements ActionCommand {
 
@@ -25,7 +24,7 @@ public class UpdateTariffCommand implements ActionCommand {
     public CommandResult execute(HttpServletRequest req) {
         CommandResult res = new CommandResult();
         res.setController(ActionType.GET_TARIFFS);
-        Tariff tariff= SessionRequestContent.getTariff(req);
+        Tariff tariff = SessionRequestContent.getTariff(req);
         try {
             tariffService.updateTariff(tariff);
             res.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE, "tariff was successfully upadted");
@@ -33,6 +32,7 @@ public class UpdateTariffCommand implements ActionCommand {
             res.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, "invalid login or password");
             LOGGER.log(Level.ERROR, e.getMessage());
         }
+        req.setAttribute("updatableTariff", null);
         return res;
     }
 }

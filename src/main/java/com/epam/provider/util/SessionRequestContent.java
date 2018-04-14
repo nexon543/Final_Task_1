@@ -17,59 +17,10 @@ public class SessionRequestContent {
     private HashMap<String, String> requestAttributes;
     private HashMap<String, String[]> requestParameters;
     private HttpSession session;
+
     public SessionRequestContent(HttpServletRequest req) {
         //extractValues(req);
         session = req.getSession();
-    }
-
-    public Profile getUser() {
-        if (session != null) {
-            return (Profile) session.getAttribute(Constants.PARAM_USER);
-        }
-        return null;
-    }
-
-    public Object getAttribute(String attributeName) {
-        return requestAttributes.get(attributeName);
-    }
-
-    public String[] getParameter(String parameterName) {
-        return requestParameters.get(parameterName);
-    }
-
-    public void extractValues(HttpServletRequest req) {
-        requestAttributes = new HashMap<>();
-        Enumeration<String> attributeNames = req.getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            String attrName = attributeNames.nextElement();
-            String attrValue = (String) req.getAttribute(attrName);
-            requestAttributes.put(attrName, attrValue);
-        }
-        Enumeration<String> parameterNames = req.getParameterNames();
-        requestParameters = (HashMap<String, String[]>) req.getParameterMap();
-    }
-
-    public void insertAttribute(HttpServletRequest req) {
-        requestAttributes.forEach((k, v) -> req.setAttribute(k, v));
-    }
-
-
-    public HashMap<String, String> getRequestAttributes() {
-        return requestAttributes;
-    }
-
-    public SessionRequestContent setRequestAttributes(HashMap<String, String> requestAttributes) {
-        this.requestAttributes = requestAttributes;
-        return this;
-    }
-
-    public HashMap<String, String[]> getRequestParameters() {
-        return requestParameters;
-    }
-
-    public SessionRequestContent setRequestParameters(HashMap<String, String[]> requestParameters) {
-        this.requestParameters = requestParameters;
-        return this;
     }
 
     public static Profile getProfile(HttpServletRequest req) {
@@ -113,5 +64,54 @@ public class SessionRequestContent {
         newTariff.setName(req.getParameter("name"));
         newTariff.setLang(req.getParameter("lang"));
         return newTariff;
+    }
+
+    public Profile getUser() {
+        if (session != null) {
+            return (Profile) session.getAttribute(Constants.PARAM_USER);
+        }
+        return null;
+    }
+
+    public Object getAttribute(String attributeName) {
+        return requestAttributes.get(attributeName);
+    }
+
+    public String[] getParameter(String parameterName) {
+        return requestParameters.get(parameterName);
+    }
+
+    public void extractValues(HttpServletRequest req) {
+        requestAttributes = new HashMap<>();
+        Enumeration<String> attributeNames = req.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            String attrName = attributeNames.nextElement();
+            String attrValue = (String) req.getAttribute(attrName);
+            requestAttributes.put(attrName, attrValue);
+        }
+        Enumeration<String> parameterNames = req.getParameterNames();
+        requestParameters = (HashMap<String, String[]>) req.getParameterMap();
+    }
+
+    public void insertAttribute(HttpServletRequest req) {
+        requestAttributes.forEach((k, v) -> req.setAttribute(k, v));
+    }
+
+    public HashMap<String, String> getRequestAttributes() {
+        return requestAttributes;
+    }
+
+    public SessionRequestContent setRequestAttributes(HashMap<String, String> requestAttributes) {
+        this.requestAttributes = requestAttributes;
+        return this;
+    }
+
+    public HashMap<String, String[]> getRequestParameters() {
+        return requestParameters;
+    }
+
+    public SessionRequestContent setRequestParameters(HashMap<String, String[]> requestParameters) {
+        this.requestParameters = requestParameters;
+        return this;
     }
 }

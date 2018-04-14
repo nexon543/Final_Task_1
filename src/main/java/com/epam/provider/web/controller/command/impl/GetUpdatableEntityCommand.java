@@ -7,8 +7,6 @@ import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.service.impl.ProfileServiceImpl;
 import com.epam.provider.service.impl.TariffServiceImpl;
-import com.epam.provider.util.resource.ConfigResourceManager;
-import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -33,12 +31,12 @@ public class GetUpdatableEntityCommand implements ActionCommand {
                 case "tariff":
                     Tariff tariff = tariffService.getTariffById(id);
                     req.setAttribute("updatableTariff", tariff);
-                    req.setAttribute(Constants.PARAM_ADMIN_STATUS,Constants.ADMIN_STATUS_UPDATE_TARIFF);
+                    req.setAttribute(Constants.PARAM_ADMIN_STATUS, Constants.ADMIN_STATUS_UPDATE_TARIFF);
                     break;
                 case "profile":
-                    Profile profile=profileService.getById(id);
-                    req.setAttribute("updatableTariff",profile);
-                    req.setAttribute(Constants.PARAM_ADMIN_STATUS,Constants.ADMIN_STATUS_UPDATE_PROFILE);
+                    Profile profile = profileService.getById(id);
+                    req.setAttribute("updatableTariff", profile);
+                    req.setAttribute(Constants.PARAM_ADMIN_STATUS, Constants.ADMIN_STATUS_UPDATE_PROFILE);
                     break;
             }
         } catch (ServiceException e) {

@@ -26,7 +26,7 @@ public class TariffDaoImpl extends AbstractDao<Tariff> implements TariffDao {
     private static final String SQL_SP_UPDATE = "{call update_tariff(?,?,?,?,?,?,?)}";
     private static final String SQL_SELECT_BY_ID = "select * from Tariffs where id_tariffs=?";
     private static final String SQL_COUNT_RECORDS = "select count(*) from Tariffs";
-    private static final String SQL_DELETE_ID = "delete from Tariffs where id_tariffs=?";
+    private static final String SQL_DELETE_ID = "{call delete_tariff(?)}";
 
     public TariffDaoImpl() {
     }

@@ -5,16 +5,19 @@ package com.epam.provider.util.resource;
  */
 public class ResourceConstants {
 
-    public static String RESOURCE_PATH_CONFIG = "config";
+    public static String RESOURCE_PATH_PAGES = "page";
     public static String RESOURCE_PATH_MESSAGE = "message";
     public static String RESOURCE_PATH_DATABASE = "database";
-    public static String RESOURCE_PATH_LOCALIZATION = "message";
     public static String PAGE_PATH_PREFIX = "pages.path.";
 
-    public static String MESSAGE_KEY_ERROR_TAKING = "log.error.connection.taking";
-    public static String MESSAGE_KEY_ERROR_LOGIN = "login.error";
-    public static String MESSAGE_KEY_CONNECTION_ERROR_CLOSING = "log.error.connection.closing";
-    public static String MESSAGE_KEY_BUTTON_LOGIN = "button.login";
+    public static String M_LANG_RU="ru";
+    public static String M_LANG_EN="en";
+    public static String M_ERROR_TAKING = "log.error.connection.taking";
+    public static String M_ERROR_LOGIN = "login.error";
+    public static String M_CONNECTION_ERROR_CLOSING = "log.error.connection.closing";
+    public static String M_BUTTON_LOGIN = "button.login";
+    public static String M_ERROR_DELETE_TARIFF = "message.operations.tariff.delete.error";
+    public static String M_SUCCESS_DELETE_TARIFF = "message.operations.tariff.delete.success";
 
     public static String DB_KEY_POOL_SIZE = "poolSize";
     public static String DB_KEY_DRIVER_NAME = "driver";
@@ -29,5 +32,4 @@ public class ResourceConstants {
     public static String PAGE_NAME_LOGIN_REDIRECT = "login.redirect";
     public static String PAGE_NAME_INDEX = "index";
     public static String PAGE_NAME_TARIFF = "tariff";
-
 }

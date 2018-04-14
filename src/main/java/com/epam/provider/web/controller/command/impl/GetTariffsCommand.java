@@ -6,6 +6,7 @@ import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.service.impl.TariffServiceImpl;
 import com.epam.provider.util.SessionRequestContent;
+import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -34,7 +35,7 @@ public class GetTariffsCommand implements ActionCommand {
      */
     @Override
     public CommandResult execute(HttpServletRequest req) {
-        SessionRequestContent sessionRequestContent=new SessionRequestContent(req);
+        SessionRequestContent sessionRequestContent = new SessionRequestContent(req);
         CommandResult res = new CommandResult();
         res.setState(CommandResult.CommandResultState.REDIRECT_LOGIN);
         try {
@@ -45,15 +46,7 @@ public class GetTariffsCommand implements ActionCommand {
             }
             countPages(req);
             setSessionValues(session, profile);
-            String message=req.getParameter(Constants.PARAM_ERROR_MESSAGE);
-            if(message!=null)
-            {
-                res.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, message);
-            }
-            message=req.getParameter(Constants.PARAM_SUCCESS_MESSAGE);
-            if (message!=null){
-                res.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE, message);
-            }
+            appendMessageIfExists(req, res);
             return res;
         } catch (ServiceException e) {
             res.setState(CommandResult.CommandResultState.REDIRECT_ERROR);
@@ -62,6 +55,17 @@ public class GetTariffsCommand implements ActionCommand {
         return res;
     }
 
+    private void appendMessageIfExists(HttpServletRequest req, CommandResult res){
+        String message = req.getParameter(Constants.PARAM_ERROR_MESSAGE);
+        if (message != null) {
+            res.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, message);
+        }
+        message = req.getParameter(Constants.PARAM_SUCCESS_MESSAGE);
+        if (message != null) {
+            res.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE, message);
+        }
+
+    }
     private void countPages(HttpServletRequest req) throws ServiceException {
         String currPageStr = req.getParameter(Constants.PARAM_CURR_PAGE);
         if (currPageStr != null) {
@@ -76,6 +80,9 @@ public class GetTariffsCommand implements ActionCommand {
         pagesNumber = recordsNumber / recordsPerPage;
         if (recordsNumber % recordsPerPage != 0) {
             pagesNumber++;
+        }
+        if (currentPage>pagesNumber){
+            currentPage=pagesNumber;
         }
     }
 

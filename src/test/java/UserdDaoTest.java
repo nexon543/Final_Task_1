@@ -40,20 +40,20 @@ public class UserdDaoTest {
         }
     }
 
-    @Test
-    void testFindUserByLoginPass() {
+    @AfterAll
+    static void tearDownAll() {
         try {
-            profile = profileDao.findByLoginPass(LOGIN, hashedPass);
-            assertNotNull(profile.getProfileId());
+            profileDao.delete(profile.getProfileId());
         } catch (DaoException e) {
             fail(e.getMessage());
         }
     }
 
-    @AfterAll
-    static void tearDownAll() {
+    @Test
+    void testFindUserByLoginPass() {
         try {
-            profileDao.delete(profile.getProfileId());
+            profile = profileDao.findByLoginPass(LOGIN, hashedPass);
+            assertNotNull(profile.getProfileId());
         } catch (DaoException e) {
             fail(e.getMessage());
         }

@@ -5,8 +5,6 @@ import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.impl.ProfileServiceImpl;
 import com.epam.provider.util.SessionRequestContent;
-import com.epam.provider.util.resource.ConfigResourceManager;
-import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * This command is changing balance of client when he wants to deposit money
  *
  * @author Gleb Aksenov
- *         {@link ActionCommand}  invokes method execute()
+ * {@link ActionCommand}  invokes method execute()
  */
 public class AddBalance implements ActionCommand {
 
@@ -54,16 +52,16 @@ public class AddBalance implements ActionCommand {
                 profileService.addBalance(amount, profileId);
                 profile.setBalance(profile.getBalance() + amount);
                 session.setAttribute(Constants.PARAM_PROFILE, profile);
-                result.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE,"money was successfully deposit");
+                result.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE, "money was successfully deposit");
 
             } catch (ServiceException e) {
                 result.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, "error on server while depositing");
                 LOGGER.log(Level.ERROR, "error depositing money");
             }
         } else {
-            result.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE,"incorrect value");
+            result.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, "incorrect value");
         }
-        result.appendToRedirectParam(Constants.PARAM_IS_SUCCESS,String.valueOf(isSuccess));
+        result.appendToRedirectParam(Constants.PARAM_IS_SUCCESS, String.valueOf(isSuccess));
         return result;
     }
 }

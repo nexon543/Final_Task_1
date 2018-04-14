@@ -2,6 +2,7 @@ package com.epam.provider.web.listener;
 
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.dao.pool.ConnectionPoolException;
+import com.epam.provider.util.resource.ResourceManager;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -27,6 +28,7 @@ public class ContextListener implements ServletContextListener {
         File file = new File(classLoader.getResource(fileName).getFile());
         String fullPath = file.getAbsolutePath();
         PropertyConfigurator.configure(fullPath);
+        ResourceManager.initResources();
         try {
             ConnectionPool.getInstance().initPoolData();
         } catch (ConnectionPoolException e) {

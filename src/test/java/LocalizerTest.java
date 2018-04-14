@@ -1,8 +1,9 @@
-import com.epam.provider.util.Localizer;
 import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -15,17 +16,9 @@ public class LocalizerTest {
     public static String RU_LOC = "ru";
 
     @Test
-    void getLocalizeTextTest() {
-        Localizer localizer = new Localizer();
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
-        String text1 = null;
-        try {
-            text1 = localizer.getLocalizedText(EN_LOC, ResourceConstants.MESSAGE_KEY_BUTTON_LOGIN);
-            String text2 = localizer.getLocalizedText(RU_LOC, ResourceConstants.MESSAGE_KEY_BUTTON_LOGIN);
+    void getLocalizedTextTest() {
+            String text1 = ResourceManager.getMessage( ResourceConstants.M_BUTTON_LOGIN, EN_LOC);
+            String text2 = ResourceManager.getMessage( ResourceConstants.M_BUTTON_LOGIN, RU_LOC);
             assertNotEquals(text1, text2);
-        } catch (UnsupportedEncodingException e) {
-            fail(e.getMessage());
-        }
-
     }
 }
