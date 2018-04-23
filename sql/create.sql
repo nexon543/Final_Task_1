@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Profiles` (
   `id_tariffs` INT NULL,
   `balance` DECIMAL(15,2) NULL,
   `register_date` DATE NULL,
-  `login` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(45) NOT NULL UNIQUE,
   `pass` VARCHAR(45) NOT NULL,
   `role` ENUM('admin', 'client') NULL,
   PRIMARY KEY (`id_profiles`),

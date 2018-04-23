@@ -30,8 +30,17 @@ INSERT INTO `mydb`.`ttariffs` (`lang`,`id_tariffs`,`name`,`description`)VALUES('
 INSERT INTO `mydb`.`ttariffs` (`lang`,`id_tariffs`,`name`,`description`)VALUES('ru',5,'Социальный анлим 3',
 '"Социальный анлим 3" (со скоростью доступа, определяемой технической возможностью абонентской линии, но не превышающей 3072/512 Кбит/с на прием/передачу)');
 
-INSERT INTO `mydb`.`Profiles` (`id_profiles`,`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) VALUES (1, 'Ivan', 'Ivanov', 'MP267523', 1, 170, '2017-12-02','user','user','client');
-INSERT INTO `mydb`.`Profiles` (`id_profiles`,`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) VALUES (2, 'Admin', 'Admin', 'Admin', 1, 0, '2007-12-02','admin','admin','admin');
+DELETE FROM `mydb`.`Profiles` where id_profiles>0;
+INSERT INTO `mydb`.`Profiles` (`id_profiles`,`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) 
+VALUES (1, 'Ivan', 'Ivanov', 'MP347423', 1, 10, '2017-12-02','user',MD5('user'),'client');
+INSERT INTO `mydb`.`Profiles` (`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`)
+VALUES ('Kevin', 'Smnith', 'MP432634', 2, 1, '2017-12-02','user1',MD5('user'),'client');
+INSERT INTO `mydb`.`Profiles` (`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) 
+VALUES ('Barbra', 'Okland', 'MP344522', 3, 0.5, '2017-12-02','user2',MD5('user'),'client');
+INSERT INTO `mydb`.`Profiles` (`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) 
+VALUES ('Vasiliy', 'Boyko', 'MP453678', 4, 2, '2017-12-02','user3',MD5('user'),'client');
+INSERT INTO `mydb`.`Profiles` (`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`) 
+VALUES ('Admin', 'Admin', 'Admin', 1, 0, '2007-12-02','admin',MD5('admin'),'admin');
 
 
 INSERT INTO `mydb`.`transactions` (`amount`, `date`, `id_profiles`) VALUES (30, '2018-07-04', 1);
