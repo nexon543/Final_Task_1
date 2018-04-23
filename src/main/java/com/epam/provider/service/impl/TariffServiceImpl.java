@@ -1,7 +1,7 @@
 package com.epam.provider.service.impl;
 
 import com.epam.provider.dao.DaoException;
-import com.epam.provider.dao.TariffDao;
+import com.epam.provider.dao.GenericDao;
 import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ServiceException;
@@ -19,7 +19,7 @@ import java.util.List;
 public class TariffServiceImpl implements TariffService {
 
     private static final Logger LOGGER = LogManager.getLogger(TariffServiceImpl.class);
-    private TariffDao tariffDAO;
+    private GenericDao<Tariff> tariffDAO;
 
     public TariffServiceImpl() {
         tariffDAO = DaoFactory.getTariffDao();
@@ -79,7 +79,7 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public List<Tariff> getAllTariffs(String lang) throws ServiceException {
         try {
-            return tariffDAO.findAll();
+            return tariffDAO.findAll(lang);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -89,10 +89,11 @@ public class TariffServiceImpl implements TariffService {
      * {@inheritDoc}
      */
     @Override
-    public Tariff getTariffById(Integer id) throws ServiceException {
+    public Tariff getTariffById(Integer id, String lang) throws ServiceException {
         try {
-            return tariffDAO.findById(id);
+            return tariffDAO.findById(id, lang);
         } catch (DaoException e) {
+            LOGGER.log(Level.ERROR, e.getStackTrace());
             throw new ServiceException("can't find tariff by id");
         }
     }
@@ -102,7 +103,7 @@ public class TariffServiceImpl implements TariffService {
         try {
             tariffDAO.delete(id);
         } catch (DaoException e) {
-            LOGGER.log(Level.ERROR, e.getMessage());
+            LOGGER.log(Level.ERROR, e.getStackTrace());
             throw new ServiceException(("can't delete tariff with id=" + id));
         }
     }

@@ -17,7 +17,7 @@ public class LogoutCommand implements ActionCommand {
      */
     @Override
     public CommandResult execute(HttpServletRequest req) {
-        CommandResult result = new CommandResult(CommandResult.ResponseType.FORWARD, ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_INDEX));
+        CommandResult result = new CommandResult(CommandResult.CommandResultState.REDIRECT_INDEX);
         req.getSession().invalidate();
         return result;
     }

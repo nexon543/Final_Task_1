@@ -1,0 +1,39 @@
+<fmt:message bundle="${loc}" key="form.tariff.description" var="fDescription"/>
+<fmt:message bundle="${loc}" key="form.tariff.name" var="fName"/>
+<fmt:message bundle="${loc}" key="form.tariff.price" var="fPrice"/>
+<fmt:message bundle="${loc}" key="form.tariff.receiveSpeed" var="fReceiveSpeed"/>
+<fmt:message bundle="${loc}" key="form.tariff.transferSpeed" var="fTransferSpeed"/>
+
+<form method="post"
+      action="${pageContext.request.contextPath}/Controller?command=add_tariff">
+    <input type="text" style="display:none" name="lang" class="form-control"
+           value=${sessionScope.local}>
+    <input type="number" name="id" style="display: none"
+           value="${updatableTariff.tariffId}">
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label"><c:out value="${fName}"/>:</label>
+            <input required="required" minlength="2" maxlength="25" type="text" name="tariff_name" class="form-control"
+                   id="recipient-name"/>
+        </div>
+        <div class="form-group">
+            <label for="message-text" class="col-form-label"><c:out value="${fDescription}"/> :</label>
+            <textarea required="required"  minlength="2" maxlength="25" class="form-control" name="description"
+                      id="message-text"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="transf-speed" class="col-form-label"><c:out value="${fTransferSpeed}"/> :</label>
+            <input required="required" type="number" min="25" class="form-control" name="transfer_speed"
+                   id="transf-speed"/>
+            <label for="recieving-speed" class="col-form-label"><c:out value="${fReceiveSpeed}"/> :</label>
+            <input required="required" type="number" min="25" name="receiving_speed" class="form-control"
+                   id="recieving-speed"/>
+            <label for="price" class="col-form-label"><c:out value="${fPrice}"/> :</label>
+            <input required="required" type="number" min="0" max="250" class="form-control" name="price"
+                   id="price"/>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <%@include file="../menu/menuelement/saveButton.jspf"%>
+    </div>
+</form>

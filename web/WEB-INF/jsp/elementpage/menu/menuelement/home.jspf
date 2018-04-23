@@ -1,0 +1,3 @@
+<fmt:message bundle="${loc}" key="button.home" var="homeButton"/>
+<a href="${pageContext.request.contextPath}/Home"><i class="material-icons">home</i><c:out
+        value="${homeButton}"/></a>

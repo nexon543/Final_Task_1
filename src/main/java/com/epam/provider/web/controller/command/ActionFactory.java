@@ -18,15 +18,14 @@ public class ActionFactory {
         actions.put(ActionType.ADD_TARIFF, new AddTariffCommand());
         actions.put(ActionType.SET_LOCALE, new SetLocal());
         actions.put(ActionType.ADD_BALANCE, new AddBalance());
-        actions.put(ActionType.ADD_USER, new AddProfileCommand());
         actions.put(ActionType.ADD_PROFILE, new AddProfileCommand());
         actions.put(ActionType.CHANGE_TARIFF, new ChangeTariffCommand());
-        actions.put(ActionType.GET_USERS, new GetProfilesCommand());
-        actions.put(ActionType.GET_UPDATE_PAGE, new GetUpdatableEntityCommand());
+        actions.put(ActionType.GET_UPDATE_PAGE, new GetUpdatePageCommand());
         actions.put(ActionType.UPDATE_TARIFF, new UpdateTariffCommand());
+        actions.put(ActionType.UPDATE_PROFILE, new UpdateProfileCommand());
         actions.put(ActionType.GET_PROFILES, new GetProfilesCommand());
         actions.put(ActionType.DELETE_TARIFF, new DeleteTariffCommand());
-
+        actions.put(ActionType.DELETE_PROFILE, new DeleteProfileCommand());
     }
 
     public static ActionCommand defineCommand(String commandName) {

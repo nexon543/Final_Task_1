@@ -1,5 +1,5 @@
 import com.epam.provider.dao.DaoException;
-import com.epam.provider.dao.TariffDao;
+import com.epam.provider.dao.GenericDao;
 import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.dao.pool.ConnectionPoolException;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class TariffDaoTest {
 
-    static TariffDao tariffDao;
+    static GenericDao<Tariff> tariffDao;
     static Tariff tariff;
 
     @BeforeAll
@@ -33,7 +33,7 @@ public class TariffDaoTest {
         tariff.setPrice(5);
         tariff.setTransferSpeed(216);
         tariff.setName("testtariff");
-        tariff.setRecievingSpeed(564);
+        tariff.setReceivingSpeed(564);
         tariff.setDescription("testDescription");
     }
 

@@ -1,0 +1,2 @@
+<fmt:message bundle="${loc}" key="button.show.tariff" var="tariffButton"/>
+<a href="/Controller?command=get_tariffs"><i class="material-icons">&#xE01D;</i>${tariffButton} </a>

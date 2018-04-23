@@ -4,10 +4,14 @@ import com.epam.provider.model.Profile;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.impl.ProfileServiceImpl;
-import com.epam.provider.util.SessionRequestContent;
+import com.epam.provider.util.RequestContent;
+import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
+import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
+import com.epam.provider.web.validator.ParameterName;
 import com.epam.provider.web.validator.Validator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -20,7 +24,7 @@ import javax.servlet.http.HttpSession;
  * This command is changing balance of client when he wants to deposit money
  *
  * @author Gleb Aksenov
- * {@link ActionCommand}  invokes method execute()
+ *         {@link ActionCommand}  invokes method execute()
  */
 public class AddBalance implements ActionCommand {
 
@@ -38,30 +42,22 @@ public class AddBalance implements ActionCommand {
     public CommandResult execute(HttpServletRequest req) {
         CommandResult result = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
         HttpSession session = req.getSession();
-        SessionRequestContent reqContent = new SessionRequestContent(req);
-        Validator validator = new Validator();
-        boolean isSuccess = true;//validator.isValid(reqContent.getRequestAttributes());
-        String message;
-        String messageKey;
-        if (isSuccess) {
+        boolean isValid = Validator.isValid(RequestContent.getValuesForValidation(ParameterName.getParamSet(ActionType.ADD_BALANCE), req));
+        if (!isValid) {
             Integer amount = Integer.parseInt(req.getParameter(Constants.PARAM_BALANCE));
-            Profile Profile = (Profile) session.getAttribute(Constants.PARAM_USER);
-            Profile profile = (Profile) session.getAttribute(Constants.PARAM_PROFILE);
-            Integer profileId = Profile.getProfileId();
+            Profile profile = (Profile) session.getAttribute(Constants.ATTR_SESSION_PROFILE);
+            Integer profileId = profile.getProfileId();
             try {
                 profileService.addBalance(amount, profileId);
                 profile.setBalance(profile.getBalance() + amount);
-                session.setAttribute(Constants.PARAM_PROFILE, profile);
-                result.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE, "money was successfully deposit");
-
+                result.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_SUCCESS_ADD_BALANCE));
             } catch (ServiceException e) {
-                result.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, "error on server while depositing");
-                LOGGER.log(Level.ERROR, "error depositing money");
+                result.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_FAILD));
+                LOGGER.log(Level.ERROR, e.getStackTrace());
             }
         } else {
-            result.appendToRedirectParam(Constants.PARAM_ERROR_MESSAGE, "incorrect value");
+            result.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_INCORRECT_VALUE));
         }
-        result.appendToRedirectParam(Constants.PARAM_IS_SUCCESS, String.valueOf(isSuccess));
         return result;
     }
 }

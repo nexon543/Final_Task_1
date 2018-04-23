@@ -35,4 +35,12 @@ public interface ProfileService {
     List<Profile> findAll() throws ServiceException;
 
     Profile getById(Integer id) throws ServiceException;
+
+    void updateUser(Profile profile) throws ServiceException;
+
+    void updateUsersTariff(Integer profileId, Integer newTariffId) throws ServiceException;
+
+    void deleteProfile (Integer profileId)throws ServiceException;
+
+    Profile findUser(String login)throws ServiceException;
 }

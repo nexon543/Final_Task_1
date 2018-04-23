@@ -1,23 +1,30 @@
 package com.epam.provider.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 
 /**
+ * This entity contains information about client of internet provider
+ *
  * @author Gleb Aksenov
  */
-public class Profile implements Entity {
+public class Profile implements Entity, Serializable {
     private Integer profileId;
     private String firstName;
     private String secondName;
     private String passport;
 
     /**
-     * Clients current idTariffs
+     * Client tariff id
      */
     private Integer idTariffs;
     private Double balance;
+
+    /**
+     * When the client was registered
+     */
     private Date registerDate;
     private String login;
     private String password;

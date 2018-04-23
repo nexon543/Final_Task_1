@@ -1,0 +1,24 @@
+<nav class="mainmenu">
+    <div class="container">
+        <div class="dropdown">
+            <button type="button" class="navbar-toggle" data-toggle="dropdown"><span class="icon-bar"></span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span></button>
+            <!-- <a data-toggle="dropdown" href="#">Dropdown trigger</a> -->
+            <ul class="dropdown-menu">
+                <li>
+                    <%@include file="menuelement/home.jspf" %>
+                </li>
+                <li>
+                    <%@include file="menuelement/showTariffs.jspf" %>
+                </li>
+                <li>
+                    <%@include file="menuelement/showProfiles.jspf" %>
+                </li>
+                <li>
+                    <%@include file="menuelement/login.jspf" %>
+                </li>
+            </ul>
+        </div>
+        <%@include file="menuelement/lang.jspf" %>
+    </div>
+</nav>

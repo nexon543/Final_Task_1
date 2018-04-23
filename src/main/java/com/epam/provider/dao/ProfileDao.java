@@ -8,7 +8,7 @@ import com.epam.provider.model.Profile;
  *
  * @author Gleb Akseonov
  */
-public interface ProfileDao extends CrudDao<Profile> {
+public interface ProfileDao extends GenericDao<Profile> {
     /**
      * Method selects user from database by login and pass. If no user was found the empty object is returned
      *
@@ -20,4 +20,6 @@ public interface ProfileDao extends CrudDao<Profile> {
     Profile findByLoginPass(String login, String pass) throws DaoException;
 
     Profile finByLogin(String login) throws DaoException;
+
+    void updateTariff(Integer idProfile, Integer newIdTariff) throws DaoException;
 }

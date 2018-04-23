@@ -1,0 +1,8 @@
+<div class="container" align="center">
+    <p style="color: green">
+        <c:out value="${param.messageSuccess}"/>
+    </p>
+    <p style="color: crimson">
+        <c:out value="${param.messageError}"/>
+    </p>
+</div>

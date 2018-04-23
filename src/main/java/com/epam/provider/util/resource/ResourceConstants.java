@@ -18,6 +18,15 @@ public class ResourceConstants {
     public static String M_BUTTON_LOGIN = "button.login";
     public static String M_ERROR_DELETE_TARIFF = "message.operations.tariff.delete.error";
     public static String M_SUCCESS_DELETE_TARIFF = "message.operations.tariff.delete.success";
+    public static String M_ERROR_DELETE_PROFILE = "message.operations.profile.delete.error";
+    public static String M_SUCCESS_DELETE_PROFILE = "message.operations.profile.delete.success";
+    public static String M_SUCCESS_ADD_BALANCE="message.operations.balance.success";
+    public static String M_FAILD="message.operations.failed";
+    public static String M_SUCCESS="message.operations.success";
+    public static String M_PROFILE_EXISTS="message.operations.profile.exists";
+    public static String M_LOGIN_EXISTS="message.operations.profile.login.exists";
+    public static String M_INCORRECT_VALUE ="message.operations.incorrect_value";
+
 
     public static String DB_KEY_POOL_SIZE = "poolSize";
     public static String DB_KEY_DRIVER_NAME = "driver";
@@ -30,6 +39,15 @@ public class ResourceConstants {
     public static String PAGE_NAME_CLIENT = "client";
     public static String PAGE_NAME_LOGIN = "login";
     public static String PAGE_NAME_LOGIN_REDIRECT = "login.redirect";
+    public static String PAGE_NAME_ADMIN_REDIRECT = "admin.redirect";
     public static String PAGE_NAME_INDEX = "index";
+    public static String PAGE_NAME_INDEX_REDIRECT="index.redirect";
     public static String PAGE_NAME_TARIFF = "tariff";
+    public static String PAGE_NAME_ADD_PROFILE="profile.add";
+    public static String PAGE_NAME_UPDATE_PROFILE="profile.update";
+    public static String PAGE_NAME_SHOW_PROFILES="profile.show";
+    public static String PAGE_NAME_ADD_TARIFF="tariff.add";
+    public static String PAGE_NAME_UPDATE_TARIFF="tariff.update";
+
+
 }

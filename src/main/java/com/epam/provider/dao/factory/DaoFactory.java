@@ -1,12 +1,11 @@
 package com.epam.provider.dao.factory;
 
-import com.epam.provider.dao.CrudDao;
+import com.epam.provider.dao.GenericDao;
 import com.epam.provider.dao.ProfileDao;
-import com.epam.provider.dao.TariffDao;
+import com.epam.provider.dao.impl.PaymentDaoImpl;
 import com.epam.provider.dao.impl.ProfileDaoImpl;
 import com.epam.provider.dao.impl.TariffDaoImpl;
-import com.epam.provider.dao.impl.TransactionDaoImpl;
-import com.epam.provider.model.Transaction;
+import com.epam.provider.model.Payment;
 
 /**
  * @author Gleb Akseonov
@@ -14,18 +13,18 @@ import com.epam.provider.model.Transaction;
 public class DaoFactory {
 
     private static ProfileDao profileDao = new ProfileDaoImpl();
-    private static TariffDao tariffDao = new TariffDaoImpl();
-    private static CrudDao<Transaction> transactionsDao = new TransactionDaoImpl();
+    private static GenericDao tariffDao = new TariffDaoImpl();
+    private static GenericDao<Payment> transactionsDao = new PaymentDaoImpl();
 
     public static ProfileDao getProfileDao() {
         return profileDao;
     }
 
-    public static TariffDao getTariffDao() {
+    public static GenericDao getTariffDao() {
         return tariffDao;
     }
 
-    public static CrudDao<Transaction> getTransactionDao() {
+    public static GenericDao<Payment> getTransactionDao() {
         return transactionsDao;
     }
 }

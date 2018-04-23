@@ -4,7 +4,7 @@ import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.service.impl.TariffServiceImpl;
-import com.epam.provider.util.SessionRequestContent;
+import com.epam.provider.util.RequestContent;
 import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
@@ -34,11 +34,12 @@ public class AddTariffCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest req) {
         CommandResult res = new CommandResult();
-        res.setController(ActionType.GET_TARIFFS);
-        Tariff tariff = SessionRequestContent.getTariff(req);
+
+        res.setControllerRequest(ActionType.GET_TARIFFS);
+        Tariff tariff = RequestContent.getTariff(req);
         try {
             tariffService.createTariff(tariff);
-            res.appendToRedirectParam(Constants.PARAM_SUCCESS_MESSAGE, "tariff was successfully created");
+            res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, "tariff \""+tariff.getName()+"\" was successfully created");
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "can't add new tariff");
             res.setPage(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ERROR));

@@ -4,6 +4,8 @@ import com.epam.provider.model.Profile;
 import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.Constants;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -14,6 +16,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/Login")
 public class LoginFilter implements Filter {
+
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

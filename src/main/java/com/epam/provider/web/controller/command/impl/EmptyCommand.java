@@ -20,8 +20,8 @@ public class EmptyCommand implements ActionCommand {
      */
     @Override
     public CommandResult execute(HttpServletRequest req) {
-        CommandResult result = new CommandResult(CommandResult.ResponseType.FORWARD,
-                ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_INDEX));
+        CommandResult result = new CommandResult(CommandResult.ResponseType.REDIRECT,
+                ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_INDEX_REDIRECT));
         return result;
     }
 }

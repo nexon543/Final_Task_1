@@ -1,14 +1,15 @@
 package com.epam.provider.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Gleb Aksenov
  */
-public class Tariff implements Entity {
+public class Tariff implements Entity, Serializable {
     private Integer tariffId;
     private Integer price;
-    private Integer recievingSpeed;
+    private Integer receivingSpeed;
     private Integer transferSpeed;
     private String name;
     private String description;
@@ -26,8 +27,8 @@ public class Tariff implements Entity {
         return description;
     }
 
-    public void setDescription(String descriprion) {
-        this.description = descriprion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getTariffId() {
@@ -46,12 +47,12 @@ public class Tariff implements Entity {
         this.price = price;
     }
 
-    public Integer getRecievingSpeed() {
-        return recievingSpeed;
+    public Integer getReceivingSpeed() {
+        return receivingSpeed;
     }
 
-    public void setRecievingSpeed(Integer recievingSpeed) {
-        this.recievingSpeed = recievingSpeed;
+    public void setReceivingSpeed(Integer receivingSpeed) {
+        this.receivingSpeed = receivingSpeed;
     }
 
     public Integer getTransferSpeed() {
@@ -77,13 +78,13 @@ public class Tariff implements Entity {
         Tariff tariff = (Tariff) o;
         return Objects.equals(tariffId, tariff.tariffId) &&
                 Objects.equals(price, tariff.price) &&
-                Objects.equals(recievingSpeed, tariff.recievingSpeed) &&
+                Objects.equals(receivingSpeed, tariff.receivingSpeed) &&
                 Objects.equals(name, tariff.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tariffId, price, recievingSpeed, name);
+        return Objects.hash(tariffId, price, receivingSpeed, name);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class Tariff implements Entity {
         return "Tariff{" +
                 "tariffId=" + tariffId +
                 ", price=" + price +
-                ", recievingSpeed=" + recievingSpeed +
+                ", receivingSpeed=" + receivingSpeed +
                 ", name='" + name + '\'' +
                 '}';
     }

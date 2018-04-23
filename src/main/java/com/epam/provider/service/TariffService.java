@@ -53,7 +53,7 @@ public interface TariffService {
      * @return tariff object
      * @throws ServiceException
      */
-    Tariff getTariffById(Integer id) throws ServiceException;
+    Tariff getTariffById(Integer id, String lang) throws ServiceException;
 
     void deleteTariff(Integer id) throws ServiceException;
 }
