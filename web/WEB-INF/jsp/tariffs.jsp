@@ -8,8 +8,18 @@
 <head>
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.show.tariff" var="title"/>
-    <fmt:message bundle="${loc}" key="message.page.subtitle.tariffs" var="subTitle"/>
     <fmt:message bundle="${loc}" key="message.page.title.show.tariff" var="pageTitle"/>
+
+    <fmt:message bundle="${loc}" key="modal.button.accept" var="acceptModal"/>
+    <fmt:message bundle="${loc}" key="modal.button.close" var="closeModal"/>
+    <fmt:message bundle="${loc}" key="modal.delete.tariff.content" var="contentModal"/>
+    <fmt:message bundle="${loc}" key="modal.delete.tariff.title" var="titleModal"/>
+    <fmt:message bundle="${loc}" key="modal.delete.tariff.title" var="titleModal"/>
+    <fmt:message bundle="${loc}" key="message.tariff.money" var="messMoney"/>
+    <fmt:message bundle="${loc}" key="button.client.deposit" var="depositButton"/>
+    <fmt:message bundle="${loc}" key="modal.button.close" var="closeButton"/>
+    <c:set var="currentPageReq" value="get_tariffs"/>
+    <link rel="stylesheet" href="/css/profile.css">
 </head>
 
 <!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
@@ -18,66 +28,120 @@
 <!-- Main (Home) section -->
 <section class="section" id="head">
     <%@include file="elementpage/message.jspf" %>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-0 col-lg-0 col-md-offset-1 col-lg-offset-1 text-center">
-                <%@include file="elementpage/pageTitle.jspf" %>
-                <!-- Short introductory (optional) -->
-                <div class="container" align="center">
-                    <table border="1" id="example" class="display" align="center" style="width:70%; height:40%">
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Recieving speed</th>
-                            <th>Transfer speed</th>
-                            <th>Price</th>
-                            <c:if test="${sessionScope.user.role=='client' || sessionScope.user.role=='admin'}">
-                                <th>Action</th>
-                            </c:if>
-                        </tr>
 
-                        <c:forEach items="${tariff_list}" var="currTariff">
-                            <tr>
-                                <td>${currTariff.name}</td>
-                                <td>${currTariff.description}</td>
-                                <td>${currTariff.receivingSpeed}</td>
-                                <td>${currTariff.transferSpeed}</td>
-                                <td>${currTariff.price}</td>
+    <%--<div class="container">
+        <div class="row">
+            <div class="col-md-0 col-lg-0 col-md-offset-1 col-lg-offset-1 text-center">--%>
+
+    <div class="container">
+        <div class="container" align="center">
+            <%@include file="elementpage/pageTitle.jspf" %>
+            <section>
+                <c:forEach items="${tariff_list}" varStatus="status" var="currTariff">
+                <c:if test="${(status.count+1)%2==0}">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-2 text-center"></c:if>
+                        <c:if test="${(status.count+1)%2!=0}">
+                        <div class="col-sm-4 text-center"></c:if>
+                            <div class="card" style="background-color: #FDF9F4">
+                                <h1>${currTariff.name}</h1>
+                                <p class="titleUserProfile">${currTariff.description} </p>
+                                <p>${currTariff.transferSpeed}/${currTariff.receivingSpeed}</p>
+                                <p><i class="fa fa-bitcoin"></i>${currTariff.price}</p>
+
                                 <c:if test="${sessionScope.session_profile.role=='client'}">
-                                    <td>
+                                <c:choose>
+                                    <c:when test="${(sessionScope.session_profile.balance<currTariff.price)}">
+                                        <p><a href="#addBalanceModal" data-toggle="modal"
+                                              data-target="#addBalanceModal">${messMoney}</a></p>
+                                        <p>${sessionScope.session_profile.balance}</p>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="addBalanceModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <form name="loginForm" method="post" action="/Controller?command=add_balance">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="addBalanceModalTitle">Deposit money</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <label for="value" class="col-form-label">Value:</label>
+                                                            <input required="required" type="number" min="5" max="255" class="form-control" name="balance"
+                                                                   id="value">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                                    ${closeButton}
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary">${depositButton}</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </c:when>
+                                    <c:otherwise>
                                         <a href="/Controller?command=change_tariff&change_tariff=${currTariff.tariffId}"
-                                           class="change"
-                                           title="Change"
-                                           data-toggle="tooltip"><i class="material-icons">&#xE8C9;</i></a>
-                                    </td>
+                                           class="change" title="Change" data-toggle="tooltip">
+                                            <i class="material-icons">&#xE8C9;</i></a>
+                                    </c:otherwise>
+                                </c:choose>
                                 </c:if>
                                 <c:if test="${sessionScope.session_profile.role=='admin'}">
-                                    <td>
-                                        <a href="/Controller?command=get_update_page&id_tariffs=${currTariff.tariffId}&entity=tariff"
-                                           data-target="#profileModal" class="edit" title="Edit"
-                                           data-toggle="tooltip"><i
-                                                class="material-icons">&#xE254;</i></a>
-                                        <a href="/Controller?command=delete_tariff&id=${currTariff.tariffId}&entity=tariff"
-                                           class="delete" title="Delete" data-toggle="tooltip"><i
-                                                class="material-icons">
-                                            &#xE872;</i></a>
-                                    </td>
+                                    <a href="/Controller?command=get_update_page&id_tariffs=${currTariff.tariffId}&entity=tariff"
+                                       data-target="#profileModal" class="edit" title="Edit"
+                                       data-toggle="tooltip"><i
+                                            class="material-icons">&#xE254;</i></a>
+                                    <a href="#TariffDelete" class="delete" title="Delete"
+                                       data-target="#tariffDelete" data-toggle="modal"><i
+                                            class="material-icons">
+                                        &#xE872;</i></a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="tariffDelete" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">${titleModal}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                        ${contentModal}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">${closeModal}
+                                                    </button>
+                                                    <a type="button"
+                                                       href="/Controller?command=delete_tariff&id=${currTariff.tariffId}&entity=tariff"
+                                                       class="btn btn-primary">${acceptModal}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </c:if>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                                <!-- Modal -->
+                            </div>
+                        </div> <!-- /col -->
+                        <c:if test="${(status.count+1)%2!=0}"> </div> </c:if><!-- /row -->
+                    </c:forEach>
                     <ul class="pagination" align="center">
                         <c:forEach begin="1" end="${pagesNumber}" var="page">
                             <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a></li>
                         </c:forEach>
                     </ul>
-
-                </div>
-            </div> <!-- /col -->
-        </div> <!-- /row -->
+            </section>
+        </div>
     </div>
-</section>
-
-<%@include file="elementpage/jsLoading.jspf" %>
+    <%@include file="elementpage/jsLoading.jspf" %>
 </body>
 </html>

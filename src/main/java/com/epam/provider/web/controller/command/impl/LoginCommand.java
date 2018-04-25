@@ -46,7 +46,7 @@ public class LoginCommand implements ActionCommand {
         profileService = ServiceFactory.getProfileService();
         CommandResult result = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
         boolean isValid = Validator.isValid(RequestContent.getValuesForValidation(ParameterName.getParamSet(ActionType.LOGIN), req));
-        if (isValid) {
+        if (!isValid) {
             result.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN, "en"));
             return result;
         }

@@ -10,6 +10,11 @@ public class Constants {
     public static String ATTR_SESSION_PROFILE = "session_profile";
     public static String PARAM_USER = "user";
     public static String PARAM_LOCAL = "local";
+    public static String PARAM_CURRENT_PAGE_REQUEST_NAME = "currentPageReq";
+    public static String PARAM_DISPLAY_MESSAGE="displayMessage";
+    public static String VALUE_DISPLAY_MESSAGE_YES="yes";
+    public static String VALUE_DISPLAY_MESSAGE_NO="no";
+
 
 
     ////////////////////////////////////////////////////////////

@@ -9,6 +9,7 @@
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.update.tariff" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.update.tariff" var="pageTitle"/>
+    <c:set var="currentPageReq" value="/UpdateTariff"/>
 </head>
 
 <body class="theme-invert">

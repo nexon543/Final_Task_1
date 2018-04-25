@@ -1,2 +1,5 @@
-<fmt:message bundle="${loc}" key="button.add.profile" var="addProfile"/>
-<a href="/Controller?command=get_update_page&entity=profile"> <i class="material-icons">person_add</i><c:out value="${addProfile}"/></a>
+<c:if test="${sessionScope.session_profile.role=='admin'}">
+    <fmt:message bundle="${loc}" key="button.add.profile" var="addProfile"/>
+    <a href="/Controller?command=get_update_page&entity=profile"> <i class="material-icons">person_add</i><c:out
+            value="${addProfile}"/></a>
+</c:if>

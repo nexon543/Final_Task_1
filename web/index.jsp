@@ -11,6 +11,7 @@
     <fmt:message bundle="${loc}" key="message.page.subtitle.home" var="subTitle"/>
     <fmt:message bundle="${loc}" key="message.page.title.home" var="pageTitle"/>
     <fmt:message bundle="${loc}" key="message.page.content.home" var="pageContent"/>
+    <c:set var="currentPageReq" value="/Home"/>
     <title>${title}</title>
 </head>
 
@@ -21,6 +22,7 @@
 
 <!-- Main (Home) section -->
 <section class="section" id="head">
+
     <div class="container">
         <%@include file="WEB-INF/jsp/elementpage/message.jspf" %>
         <div class="row">
@@ -30,9 +32,12 @@
 
                 <!-- Short introductory (optional) -->
                 <h4 class="tagline">
+
                     <c:out value="${pageContent}"/>
                 </h4>
                 <p><%@include file="WEB-INF/jsp/elementpage/menu/menuelement/loginButton.jsp"%></p>
+
+
             </div> <!-- /col -->
         </div> <!-- /row -->
     </div>

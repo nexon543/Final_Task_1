@@ -8,8 +8,11 @@ import com.epam.provider.util.RequestContent;
 import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
+import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
+import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.Validator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -32,25 +35,30 @@ public class UpdateProfileCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest req) {
         Profile updatedProfile = RequestContent.getProfile(req);
-        String currentUserRole=RequestContent.getCurrentUserRole(req);
+        String currentUserRole = RequestContent.getCurrentUserRole(req);
         CommandResult res = new CommandResult(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);
-        try {
-            Profile existedProfile=profileService.findUser(updatedProfile.getLogin());
+        boolean isValid = Validator.isValid(RequestContent.getValuesForValidation(ParameterName.getParamSet(ActionType.UPDATE_PROFILE), req));
+        if (isValid) {
+            try {
+                Profile existedProfile = profileService.findUser(updatedProfile.getLogin());
 
-            if ((existedProfile.getProfileId() == null)||existedProfile.getProfileId() == updatedProfile.getProfileId()) {
-                profileService.updateUser(updatedProfile);
-                res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, getSuccessMessage(currentUserRole));
-            }else {
-                res.setState(CommandResult.CommandResultState.GET_UPDATE_PAGE);
-                res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_PROFILE_EXISTS));
-                res.appendParamToRedirect(Constants.PARAM_UPDATED_ENTITY, "profile");
-                res.appendParamToRedirect(Constants.PARAM_PROFILE_ID, updatedProfile.getProfileId().toString());
-
+                if ((existedProfile.getProfileId() == null) || existedProfile.getProfileId() == updatedProfile.getProfileId()) {
+                    profileService.updateUser(updatedProfile);
+                    res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, getSuccessMessage(currentUserRole));
+                } else {
+                    res.setState(CommandResult.CommandResultState.GET_UPDATE_PAGE);
+                    req.setAttribute(Constants.PARAM_SUCCESS_MESSAGE, "tariff was successfully updated");
+                    res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_PROFILE_EXISTS));
+                    res.appendParamToRedirect(Constants.PARAM_UPDATED_ENTITY, "profile");
+                    res.appendParamToRedirect(Constants.PARAM_PROFILE_ID, updatedProfile.getProfileId().toString());
+                }
+            } catch (ServiceException e) {
+                res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, getErrorMessage(currentUserRole));
+                LOGGER.log(Level.ERROR, e.getStackTrace());
             }
-        } catch (ServiceException e) {
-            res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, getErrorMessage(currentUserRole));
-            LOGGER.log(Level.ERROR, e.getStackTrace());
+
         }
+        req.getSession().setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
         return res;
     }
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
 <html>
@@ -8,6 +8,7 @@
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.add.profile" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.add.tariff" var="pageTitle"/>
+    <c:set var="currentPageReq" value="/AddTariff"/>
     <title>${title}</title>
 </head>
 

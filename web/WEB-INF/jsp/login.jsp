@@ -7,6 +7,10 @@
     <%@include file="elementpage/headContent.jspf"%>
     <fmt:message bundle="${loc}" key="message.title.login" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.login" var="pageTitle"/>
+    <fmt:message bundle="${loc}" key="message.form.field.login" var="login"/>
+    <fmt:message bundle="${loc}" key="message.form.field.password" var="password"/>
+    <fmt:message bundle="${loc}" key="message.form.button.login" var="loginFormButton"/>
+    <c:set var="currentPageReq" value="/Login"/>
     <title>${title}</title>
 </head>
 
@@ -25,7 +29,7 @@
                     <div>
                         <div class="login" class="container text-center login">
                             <input type="hidden" name="command" value="login"/>
-                            <label for="log">Login</label>
+                            <label for="log">${login}</label>
                         </div>
                     </div>
                 </div> <!-- /col -->
@@ -41,7 +45,7 @@
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
                     <br/>
-                    <label for="log">Password</label>
+                    <label for="log">${password}</label>
                 </div> <!-- /col -->
             </div> <!-- /row -->
             <div class="row">
@@ -54,7 +58,7 @@
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
                     <br/>
-                    <button type="submit" class="btn btn-default btn-lg">Let me in.</button>
+                    <button type="submit" class="btn btn-default btn-lg">${loginFormButton}</button>
                 </div> <!-- /col -->
             </div> <!-- /row -->
         </form>

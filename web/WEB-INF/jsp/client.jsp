@@ -11,6 +11,8 @@
     <fmt:message bundle="${loc}" key="message.page.title.client" var="pageTitle"/>
     <fmt:message bundle="${loc}" key="button.client.change_tariff" var="changeTariffButton"/>
     <fmt:message bundle="${loc}" key="button.client.deposit" var="depositButton"/>
+    <fmt:message bundle="${loc}" key="modal.button.close" var="closeButton"/>
+    <c:set var="currentPageReq" value="/Login"/>
     <title>${title}</title>
 
 </head>
@@ -38,11 +40,6 @@
                     Transfer speed: ${session_profile_tariff.transferSpeed}.<br>
                     Balance:${session_profile.balance}
                 </h4>
-                <a href="/Controller?command=get_tariffs" class="btn btn-default btn-lg"><c:out value="${changeTariffButton}" /></a>
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#depositModal">
-                    <i class="material-icons">payment</i><c:out value="${depositButton}"/>
-                </button>
             </div> <!-- /col -->
         </div> <!-- /row -->
     </div>
@@ -67,9 +64,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
+                        ${closeButton}
                     </button>
-                    <button type="submit" class="btn btn-primary">Deposit</button>
+                    <button type="submit" class="btn btn-primary">${depositButton}</button>
                 </div>
             </div>
         </form>

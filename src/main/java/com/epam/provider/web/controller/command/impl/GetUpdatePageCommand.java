@@ -45,6 +45,7 @@ public class GetUpdatePageCommand implements ActionCommand {
                     }
                     req.setAttribute(Constants.ATTR_UPDATABLE_TARIFF, tariff);
                     req.setAttribute(Constants.ATTR_STATUS, Constants.ADMIN_STATUS_UPDATE_TARIFF);
+                    req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, "/UpdateTariffPage");
                     break;
                 case "profile":
                     idParam=req.getParameter(Constants.PARAM_PROFILE_ID);
@@ -61,7 +62,7 @@ public class GetUpdatePageCommand implements ActionCommand {
                     List<Tariff> tariffs = tariffService.getAllTariffs(lang);
                     req.setAttribute(Constants.ATTR_ALL_TARIFFS, tariffs);
                     req.setAttribute(Constants.ATTR_UPDATABLE_PROFILE, profile);
-
+                    req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, "/UpdateProfile");
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());

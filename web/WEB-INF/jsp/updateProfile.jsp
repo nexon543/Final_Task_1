@@ -9,6 +9,7 @@
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.update.profile" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.update.profile" var="pageTitle"/>
+    <c:set var="currentPageReq" value="/UpdateTariff"/>
     <title>${title}</title>
 </head>
 

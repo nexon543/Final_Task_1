@@ -28,12 +28,13 @@ public class UpdateTariffCommand implements ActionCommand {
         Tariff tariff = RequestContent.getTariff(req);
         try {
             tariffService.updateTariff(tariff);
-            res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, "tariff was successfully upadted");
+            res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, "tariff was successfully updated");
         } catch (ServiceException e) {
             res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, "invalid login or password");
             LOGGER.log(Level.ERROR, e.getMessage());
         }
         req.setAttribute("updatableTariff", null);
+        req.getSession().setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
         return res;
     }
 

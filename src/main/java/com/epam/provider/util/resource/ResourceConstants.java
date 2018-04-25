@@ -16,6 +16,7 @@ public class ResourceConstants {
     public static String M_ERROR_LOGIN = "login.error";
     public static String M_CONNECTION_ERROR_CLOSING = "log.error.connection.closing";
     public static String M_BUTTON_LOGIN = "button.login";
+    public static String M_BUTTON_LOGIN_CABINET ="button.login.cabinet";
     public static String M_ERROR_DELETE_TARIFF = "message.operations.tariff.delete.error";
     public static String M_SUCCESS_DELETE_TARIFF = "message.operations.tariff.delete.success";
     public static String M_ERROR_DELETE_PROFILE = "message.operations.profile.delete.error";

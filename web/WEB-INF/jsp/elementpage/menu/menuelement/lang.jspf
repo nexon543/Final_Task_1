@@ -3,7 +3,9 @@
         <button type="button" class="navbar-toggle" data-toggle="dropdown"><i class="material-icons">translate</i>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="/Controller?command=set_locale&local=en"><img src="../../img/lang/eng.png"/></a></li>
-            <li><a href="/Controller?command=set_locale&local=ru"><img src="../../img/lang/ru.png"/></a></li>
+            <form>
+            <li><a href="/Controller?command=set_locale&local=en&currentPageReq=${currentPageReq}"><img src="../../img/lang/eng.png"/></a></li>
+            <li><a href="/Controller?command=set_locale&local=ru&currentPageReq=${currentPageReq}"><img src="../../img/lang/ru.png"/></a></li>
+            </form>
         </ul>
     </div>

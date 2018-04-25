@@ -6,6 +6,7 @@ import com.epam.provider.dao.ProfileDao;
 import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Payment;
+import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import org.apache.log4j.Level;
@@ -20,11 +21,11 @@ import java.util.List;
  */
 public class ProfileServiceImpl implements ProfileService {
     private static final Logger LOGGER = Logger.getLogger(ProfileServiceImpl.class);
-    private ProfileDao profileDao;
+    private ProfileDao profileDao = DaoFactory.getProfileDao();
+    private GenericDao<Tariff> tariffDao = DaoFactory.getTariffDao();
     private GenericDao<Payment> transactionGenericDao = DaoFactory.getTransactionDao();
 
     public ProfileServiceImpl() {
-        profileDao = DaoFactory.getProfileDao();
     }
 
     /**
@@ -50,11 +51,12 @@ public class ProfileServiceImpl implements ProfileService {
         Payment payment = new Payment().setAmount(amount)
                 .setDate(date)
                 .setIdProfiles(profileId);
+
         try {
             transactionGenericDao.create(payment);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("can't add balance",e);
+            throw new ServiceException("can't add balance", e);
         }
     }
 
@@ -77,7 +79,7 @@ public class ProfileServiceImpl implements ProfileService {
             return profileDao.finByLogin(login).getProfileId() != null;
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("can't find user by login",e);
+            throw new ServiceException("can't find user by login", e);
         }
     }
 
@@ -87,7 +89,7 @@ public class ProfileServiceImpl implements ProfileService {
             profileDao.create(profile);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("Error in creatong profile",e);
+            throw new ServiceException("Error in creatong profile", e);
         }
     }
 
@@ -97,7 +99,7 @@ public class ProfileServiceImpl implements ProfileService {
             return profileDao.findAll(null);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("Error finding all profiles",e);
+            throw new ServiceException("Error finding all profiles", e);
         }
     }
 
@@ -107,7 +109,7 @@ public class ProfileServiceImpl implements ProfileService {
             return profileDao.findById(id, null);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("Error find by id",e);
+            throw new ServiceException("Error find by id", e);
         }
     }
 
@@ -117,27 +119,35 @@ public class ProfileServiceImpl implements ProfileService {
             profileDao.update(profile);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("Error updating profile",e);
+            throw new ServiceException("Error updating profile", e);
         }
     }
 
+
     @Override
-    public void updateUsersTariff(Integer profileId, Integer newTariffId) throws ServiceException {
-        try{
-            profileDao.updateTariff(profileId, newTariffId);
+    public boolean updateUsersTariff(Integer profileId, Integer newTariffId) throws ServiceException {
+        Profile profile = null;
+        try {
+            profile = profileDao.findById(profileId, null);
+            Tariff tariff = tariffDao.findById(newTariffId, "en");
+            if (profile.getBalance() >= tariff.getPrice()) {
+                profile.setIdTariffs(newTariffId);
+                updateUser(profile);
+                return true;
+            }
+            return false;
         } catch (DaoException e) {
-            LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("updating profile tariff error",e);
+            throw new ServiceException("updating profile tariff error", e);
         }
     }
 
     @Override
     public void deleteProfile(Integer profileId) throws ServiceException {
-        try{
+        try {
             profileDao.delete(profileId);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("updating profile tariff error",e);
+            throw new ServiceException("updating profile tariff error", e);
         }
     }
 
@@ -150,7 +160,7 @@ public class ProfileServiceImpl implements ProfileService {
             return profileDao.finByLogin(login);
         } catch (DaoException e) {
             LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("can't find user by login",e);
+            throw new ServiceException("can't find user by login", e);
         }
     }
 }

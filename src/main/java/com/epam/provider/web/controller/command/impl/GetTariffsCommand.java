@@ -37,11 +37,13 @@ public class GetTariffsCommand implements ActionCommand {
             countPages(req);
             setValues(req);
             appendMessageIfExists(req, res);
+            req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, "get_tariffs");
             return res;
         } catch (ServiceException e) {
             res.setState(CommandResult.CommandResultState.REDIRECT_ERROR);
             LOGGER.log(Level.ERROR, "error while counting tariff pages");
         }
+        req.getSession().setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_NO);
         return res;
     }
 

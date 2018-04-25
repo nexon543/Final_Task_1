@@ -23,10 +23,11 @@ public class LoginButtonTextTag extends TagSupport {
         Profile user = (Profile) pageContext.getSession().getAttribute(Constants.PARAM_USER);
         try {
             String buttonText = ResourceManager.getMessage(ResourceConstants.M_BUTTON_LOGIN, locName);
+            String buttonCabText = ResourceManager.getMessage(ResourceConstants.M_BUTTON_LOGIN_CABINET, locName);
             if (user == null) {
                 pageContext.getOut().write(buttonText);
             } else {
-                pageContext.getOut().write(buttonText);
+                pageContext.getOut().write(buttonCabText);
             }
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());

@@ -23,7 +23,7 @@ public class AddProfileCommand implements ActionCommand {
 
     private static final Logger LOGGER = LogManager.getLogger(AddTariffCommand.class);
 
-    ProfileService profileService = ServiceFactory.getProfileService();
+    private ProfileService profileService = ServiceFactory.getProfileService();
 
     @Override
     public CommandResult execute(HttpServletRequest req) {

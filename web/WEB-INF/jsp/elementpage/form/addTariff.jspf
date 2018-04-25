@@ -32,8 +32,6 @@
             <input required="required" type="number" min="0" max="250" class="form-control" name="price"
                    id="price"/>
         </div>
-    </div>
-    <div class="modal-footer">
         <%@include file="../menu/menuelement/saveButton.jspf"%>
     </div>
 </form>

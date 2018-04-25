@@ -83,6 +83,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UpdateProfile</servlet-name>
+        <jsp-file>/WEB-INF/jsp/updateProfile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProfile</servlet-name>
+        <url-pattern>/UpdateProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateTariff</servlet-name>
+        <jsp-file>/WEB-INF/jsp/updateTariff.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateTariff</servlet-name>
+        <url-pattern>/UpdateTariff</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Tariff</servlet-name>
         <jsp-file>/WEB-INF/jsp/tariffs.jsp</jsp-file>
     </servlet>

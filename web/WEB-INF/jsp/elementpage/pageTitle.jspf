@@ -1,2 +1,2 @@
-<h2 class="title">${pageTitle}</h2>
-<h3 class="subtitle">${subTitle}</h3>
+<p class="title">${pageTitle}</p>
+<p class="subtitle">${subTitle}</p>

@@ -31,10 +31,11 @@ public class ChangeTariffCommand implements ActionCommand {
         profile.setIdTariffs(Integer.parseInt(req.getParameter("change_tariff")));
         CommandResult res = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
         try {
-            profileService.updateUsersTariff(profile.getProfileId(), profile.getIdTariffs());
-            Tariff tariff = tariffService.getTariffById(profile.getIdTariffs(), lang);
-            session.setAttribute(Constants.ATT_SESSION_PROFILE_TARIFF, tariff);
-        res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, "you have successfully switched your tariff to: "+tariff.getName());
+            if (profileService.updateUsersTariff(profile.getProfileId(), profile.getIdTariffs())) {
+                Tariff tariff = tariffService.getTariffById(profile.getIdTariffs(), lang);
+                session.setAttribute(Constants.ATT_SESSION_PROFILE_TARIFF, tariff);
+                res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, "you have successfully switched your tariff to: " + tariff.getName());
+            }
         } catch (ServiceException e) {
             res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, "error");
         }
