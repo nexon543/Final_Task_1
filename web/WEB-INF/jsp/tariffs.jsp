@@ -84,7 +84,6 @@
                                                 </form>
                                             </div>
                                         </div>
-
                                     </c:when>
                                     <c:otherwise>
                                         <a href="/Controller?command=change_tariff&change_tariff=${currTariff.tariffId}"
@@ -134,12 +133,13 @@
                         </div> <!-- /col -->
                         <c:if test="${(status.count+1)%2!=0}"> </div> </c:if><!-- /row -->
                     </c:forEach>
-                    <ul class="pagination" align="center">
-                        <c:forEach begin="1" end="${pagesNumber}" var="page">
-                            <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a></li>
-                        </c:forEach>
-                    </ul>
+
             </section>
+            <ul class="pagination" align="center">
+                <c:forEach begin="1" end="${pagesNumber}" var="page">
+                    <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a></li>
+                </c:forEach>
+            </ul>
         </div>
     </div>
     <%@include file="elementpage/jsLoading.jspf" %>

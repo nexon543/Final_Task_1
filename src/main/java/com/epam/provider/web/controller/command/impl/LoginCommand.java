@@ -16,7 +16,7 @@ import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
 import com.epam.provider.web.validator.ParameterName;
 import com.epam.provider.web.validator.Validator;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
