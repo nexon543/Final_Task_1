@@ -30,6 +30,8 @@ public class Profile implements Entity, Serializable {
     private String password;
     private String role;
 
+    public Profile() {
+    }
 
     public String getLogin() {
         return login;

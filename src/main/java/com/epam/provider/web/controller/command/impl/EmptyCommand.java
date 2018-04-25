@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class EmptyCommand implements ActionCommand {
 
+    public EmptyCommand(){}
     /**
      * {@inheritDoc}
      */

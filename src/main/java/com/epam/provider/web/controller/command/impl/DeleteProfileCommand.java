@@ -20,6 +20,7 @@ public class DeleteProfileCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteTariffCommand.class);
     private ProfileService profileService= ServiceFactory.getProfileService();
 
+    public DeleteProfileCommand(){}
     @Override
     public CommandResult execute(HttpServletRequest req) {
         CommandResult res = new CommandResult(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);

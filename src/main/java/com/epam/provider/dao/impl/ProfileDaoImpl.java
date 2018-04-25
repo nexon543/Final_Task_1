@@ -116,7 +116,7 @@ public class ProfileDaoImpl extends AbstractDao<Profile> implements ProfileDao {
 
     @Override
     String getSqlCount() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -202,11 +202,11 @@ public class ProfileDaoImpl extends AbstractDao<Profile> implements ProfileDao {
 
     @Override
     public Integer countRecords() throws DaoException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List findLimited(Integer start, Integer end, String lang) throws DaoException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

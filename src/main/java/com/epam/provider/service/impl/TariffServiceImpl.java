@@ -19,10 +19,9 @@ import java.util.List;
 public class TariffServiceImpl implements TariffService {
 
     private static final Logger LOGGER = LogManager.getLogger(TariffServiceImpl.class);
-    private GenericDao<Tariff> tariffDAO;
+    private GenericDao<Tariff> tariffDAO  = DaoFactory.getTariffDao();;
 
     public TariffServiceImpl() {
-        tariffDAO = DaoFactory.getTariffDao();
     }
 
     /**

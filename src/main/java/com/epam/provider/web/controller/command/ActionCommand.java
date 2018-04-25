@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * Interface of Command pattern which is using to delegate action from controller to separate classes
  */
 public interface ActionCommand {
+
     /**
      * Executes single command on demand of client
      *

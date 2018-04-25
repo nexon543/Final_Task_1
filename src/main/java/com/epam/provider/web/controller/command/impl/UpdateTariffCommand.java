@@ -21,6 +21,8 @@ public class UpdateTariffCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateTariffCommand.class);
     private TariffService tariffService = ServiceFactory.getTariffService();
 
+    public UpdateTariffCommand(){}
+
     @Override
     public CommandResult execute(HttpServletRequest req) {
         CommandResult res = new CommandResult();

@@ -29,10 +29,9 @@ import javax.servlet.http.HttpSession;
 public class AddBalance implements ActionCommand {
 
     private static final Logger LOGGER = LogManager.getLogger(AddTariffCommand.class);
-    private ProfileService profileService;
+    private ProfileService profileService = new ProfileServiceImpl();
 
     public AddBalance() {
-        profileService = new ProfileServiceImpl();
     }
 
     /**

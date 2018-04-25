@@ -34,7 +34,7 @@ public class LoginCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     private TariffService tariffService = ServiceFactory.getTariffService();
-    private ProfileService profileService;
+    private ProfileService profileService=ServiceFactory.getProfileService();;
 
     /**
      * {@inheritDoc}
@@ -43,7 +43,6 @@ public class LoginCommand implements ActionCommand {
     public CommandResult execute(HttpServletRequest req) {
         String login = req.getParameter(Constants.PARAM_LOGIN);
         String pass = req.getParameter(Constants.PARAM_PASSWORD);
-        profileService = ServiceFactory.getProfileService();
         CommandResult result = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
         boolean isValid = Validator.isValid(RequestContent.getValuesForValidation(ParameterName.getParamSet(ActionType.LOGIN), req));
         if (!isValid) {

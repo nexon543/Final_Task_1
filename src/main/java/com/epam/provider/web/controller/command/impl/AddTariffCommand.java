@@ -2,6 +2,7 @@ package com.epam.provider.web.controller.command.impl;
 
 import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ServiceException;
+import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.service.impl.TariffServiceImpl;
 import com.epam.provider.util.RequestContent;
@@ -26,8 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AddTariffCommand implements ActionCommand {
 
     private static final Logger LOGGER = LogManager.getLogger(AddTariffCommand.class);
-    private TariffService tariffService = new TariffServiceImpl();
+    private TariffService tariffService =ServiceFactory.getTariffService();
 
+    public AddTariffCommand(){}
     /**
      * {@inheritDoc}
      */

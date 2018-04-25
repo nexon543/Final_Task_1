@@ -15,6 +15,8 @@ public class Tariff implements Entity, Serializable {
     private String description;
     private String lang;
 
+    public Tariff(){}
+
     public String getLang() {
         return lang;
     }

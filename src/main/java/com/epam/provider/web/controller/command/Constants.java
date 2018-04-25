@@ -6,7 +6,6 @@ package com.epam.provider.web.controller.command;
 public class Constants {
 
     public static String PARAM_COMMAND = "command";
-
     public static String ATTR_SESSION_PROFILE = "session_profile";
     public static String PARAM_USER = "user";
     public static String PARAM_LOCAL = "local";
@@ -15,11 +14,10 @@ public class Constants {
     public static String VALUE_DISPLAY_MESSAGE_YES="yes";
     public static String VALUE_DISPLAY_MESSAGE_NO="no";
 
-
-
     ////////////////////////////////////////////////////////////
     /////////////////////PAGINATION SESSION PARAMS//////////////
     ////////////////////////////////////////////////////////////
+
     public static String PARAM_FIRST_NAME = "first_name";
     public static String PARAM_SECOND_NAME = "second_name";
     public static String PARAM_PASSPORT = "passport";
@@ -37,12 +35,7 @@ public class Constants {
     public static String PARAM_TRANSFER_SPEED="transfer_speed";
     public static String PARAM_PRICE="price";
 
-
-
-
-
     ////////////////////////////////////////////////////////////
-    ////////////////////
 
     public static String PARAM_RECORDS_PER_PAGE = "recordsPerPage";
     public static String PARAM_TARIFFS = "tariff_list";
@@ -76,8 +69,6 @@ public class Constants {
     public static String ATTR_UPDATABLE_TARIFF ="updatableTariff";
     public static String ATTR_UPDATABLE_PROFILE ="updatableProfile";
     public static String ATTR_ALL_TARIFFS="tariffsAvailableForUser";
-
-
 
     ////////////////////////////////////////////////////////
 

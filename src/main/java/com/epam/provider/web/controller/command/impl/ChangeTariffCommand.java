@@ -17,10 +17,9 @@ import javax.servlet.http.HttpSession;
 public class ChangeTariffCommand implements ActionCommand {
 
     private TariffService tariffService = ServiceFactory.getTariffService();
-    private ProfileService profileService;
+    private ProfileService profileService= ServiceFactory.getProfileService();
 
     public ChangeTariffCommand() {
-        profileService = ServiceFactory.getProfileService();
     }
 
     @Override

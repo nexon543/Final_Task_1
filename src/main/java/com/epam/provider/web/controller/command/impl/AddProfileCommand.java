@@ -22,8 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AddProfileCommand implements ActionCommand {
 
     private static final Logger LOGGER = LogManager.getLogger(AddTariffCommand.class);
-
     private ProfileService profileService = ServiceFactory.getProfileService();
+
+    public AddProfileCommand(){}
 
     @Override
     public CommandResult execute(HttpServletRequest req) {

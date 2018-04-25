@@ -49,12 +49,12 @@ public class PaymentDaoImpl extends AbstractDao<Payment> {
 
     @Override
     String getSqlDelete() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     String getSqlUpdate() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -64,21 +64,21 @@ public class PaymentDaoImpl extends AbstractDao<Payment> {
 
     @Override
     String getSqlCount() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     String getSqlFindById() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     String getSqlFindAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     String getSqlFindLimited() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

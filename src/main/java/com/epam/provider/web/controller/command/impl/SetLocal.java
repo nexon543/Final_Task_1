@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Gleb Akseonov
  */
 public class SetLocal implements ActionCommand {
+
     @Override
     public CommandResult execute(HttpServletRequest req) {
         CommandResult result = new CommandResult();

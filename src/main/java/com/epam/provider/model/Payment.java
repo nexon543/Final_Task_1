@@ -18,6 +18,8 @@ public class Payment implements Entity, Serializable {
      */
     private Integer idProfiles;
 
+    public Payment(){}
+
     public Integer getTransactionId() {
         return transactionId;
     }

@@ -6,6 +6,7 @@ import com.epam.provider.dao.impl.PaymentDaoImpl;
 import com.epam.provider.dao.impl.ProfileDaoImpl;
 import com.epam.provider.dao.impl.TariffDaoImpl;
 import com.epam.provider.model.Payment;
+import com.epam.provider.model.Tariff;
 
 /**
  * @author Gleb Akseonov
@@ -13,7 +14,7 @@ import com.epam.provider.model.Payment;
 public class DaoFactory {
 
     private static ProfileDao profileDao = new ProfileDaoImpl();
-    private static GenericDao tariffDao = new TariffDaoImpl();
+    private static GenericDao<Tariff> tariffDao = new TariffDaoImpl();
     private static GenericDao<Payment> transactionsDao = new PaymentDaoImpl();
 
     public static ProfileDao getProfileDao() {

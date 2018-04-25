@@ -21,6 +21,8 @@ public class DeleteTariffCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteTariffCommand.class);
     private TariffService tariffService = ServiceFactory.getTariffService();
 
+    public DeleteTariffCommand(){}
+
     @Override
     public CommandResult execute(HttpServletRequest req) {
         CommandResult res = new CommandResult(CommandResult.CommandResultState.GET_TARIFFS);
