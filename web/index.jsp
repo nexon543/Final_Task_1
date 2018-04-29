@@ -28,14 +28,16 @@
         <div class="row">
             <div class="col-md-0 col-lg-0 col-md-offset-1 col-lg-offset-1 text-center">
                 <!-- Site Title, your name, HELLO msg, etc. -->
-                <%@include file="WEB-INF/jsp/elementpage/pageTitle.jspf"%>
+                <%@include file="WEB-INF/jsp/elementpage/pageTitle.jspf" %>
 
                 <!-- Short introductory (optional) -->
                 <h4 class="tagline">
 
                     <c:out value="${pageContent}"/>
                 </h4>
-                <p><%@include file="WEB-INF/jsp/elementpage/menu/menuelement/loginButton.jsp"%></p>
+                <p>
+                    <%@include file="WEB-INF/jsp/elementpage/menu/menuelement/loginButton.jsp" %>
+                </p>
 
 
             </div> <!-- /col -->

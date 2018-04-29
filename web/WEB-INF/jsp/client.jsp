@@ -59,7 +59,8 @@
                 </div>
                 <div class="modal-body">
                     <label for="value" class="col-form-label">Value:</label>
-                    <input required="required" type="number" min="5" max="255" class="form-control" name="balance"
+                    <input required="required" type="number" min="5" max="255" class="form-control"
+                           name="balance"
                            id="value">
                 </div>
                 <div class="modal-footer">
@@ -73,6 +74,6 @@
     </div>
 </div>
 
-<%@include file="elementpage/jsLoading.jspf"%>
+<%@include file="elementpage/jsLoading.jspf" %>
 </body>
 </html>

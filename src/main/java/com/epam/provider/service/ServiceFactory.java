@@ -8,16 +8,16 @@ import com.epam.provider.service.impl.TariffServiceImpl;
  */
 public abstract class ServiceFactory {
 
-    private static ProfileService profileService = new ProfileServiceImpl();
-    private static TariffService tariffService = new TariffServiceImpl();
+  private static ProfileService profileService = new ProfileServiceImpl();
+  private static TariffService tariffService = new TariffServiceImpl();
 
 
-    public static ProfileService getProfileService() {
-        return profileService;
-    }
+  public static ProfileService getProfileService() {
+    return profileService;
+  }
 
-    public static TariffService getTariffService() {
-        return tariffService;
-    }
+  public static TariffService getTariffService() {
+    return tariffService;
+  }
 
 }

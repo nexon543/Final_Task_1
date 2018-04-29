@@ -18,22 +18,22 @@
     <div class="modal-body">
         <div class="form-group">
             <label for="first-name" class="col-form-label"><c:out value="${fFirstName}"/>:</label>
-            <input required="required" minlength="2" maxlength="25" type="text" class="form-control" name="first_name"
-                   id="first-name"/>
+            <input minlength="2" maxlength="25" type="text" class="form-control" name="first_name"
+                   id="first-name" value="${createProfile.firstName}"/>
 
             <label for="second-name" class="col-form-label"><c:out value="${fSecondName}"/>:</label>
-            <input required="required" minlength="2" maxlength="25" type="text" name="second_name" class="form-control"
-                   id="second-name"/>
+            <input minlength="2" maxlength="25" type="text" name="second_name" class="form-control"
+                   id="second-name" value="${createProfile.secondName}"/>
 
             <label for="passport" class="col-form-control"><c:out value="${fPassport}"/>:</label>
-            <input required="required" minlength="5" maxlength="15" type="text" class="form-control" name="passport"
-                   id="passport"/>
+            <input minlength="5" maxlength="15" type="text" class="form-control" name="passport"
+                   id="passport" value="${createProfile.passport}"/>
 
             <label for="id_tariffs" class="col-form-label">Tariff id:</label>
             <select class="form-control" name="id_tariffs" id="id_tariffs" formId="updateProfile">
                 <c:forEach items="${tariffsAvailableForUser}" var="t">
                     <c:choose>
-                        <c:when test="${t.tariffId==updatableProfile.idTariffs}">
+                        <c:when test="${t.tariffId==createProfile.idTariffs}">
                             <option selected="selected" value="${t.tariffId}">${t.name}</option>
                         </c:when>
                         <c:otherwise>
@@ -44,14 +44,15 @@
             </select>
 
             <label for="balance" class="col-form-label"><c:out value="${fBalance}"/>:</label>
-            <input required="required" type="number" min="0" max="550" class="form-control" name="balance" id="balance"/>
+            <input type="number" min="0" max="550" class="form-control" name="balance" id="balance"
+                   value="${createProfile.balance}"/>
 
             <label for="user-name" class="col-form-label"><c:out value="${fLogin}"/>:</label>
-            <input required="required" minlength="4" maxlength="15" type="text" name="login" class="form-control"
+            <input minlength="4" maxlength="15" type="text" name="login" class="form-control"
                    id="user-name">
 
             <label for="password" class="col-form-label"><c:out value="${fPassword}"/>:</label>
-            <input required="required" minlength="4" maxlength="15" type="password" class="form-control" name="password"
+            <input minlength="4" maxlength="15" type="password" class="form-control" name="password"
                    id="password"/>
 
             <label class="col-form-label"><c:out value="${fRole}"/>:</label>
@@ -61,7 +62,7 @@
                 <option value="client"><c:out value="${fRoleClient}"/></option>
             </select>
         </div>
-        <%@include file="../menu/menuelement/saveButton.jspf"%>
+        <%@include file="../menu/menuelement/saveButton.jspf" %>
     </div>
 
 </form>

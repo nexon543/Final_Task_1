@@ -7,95 +7,109 @@ import java.util.Objects;
  * @author Gleb Aksenov
  */
 public class Tariff implements Entity, Serializable {
-    private Integer tariffId;
-    private Integer price;
-    private Integer receivingSpeed;
-    private Integer transferSpeed;
-    private String name;
-    private String description;
-    private String lang;
 
-    public Tariff(){}
+  private Integer tariffId;
+  private Integer price;
+  private Integer receivingSpeed;
+  private Integer transferSpeed;
+  private String name;
+  private String description;
+  private String lang;
 
-    public String getLang() {
-        return lang;
+  public Tariff() {
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    public void setLang(String lang) {
-        this.lang = lang;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    Tariff tariff = (Tariff) o;
+    return Objects.equals(tariffId, tariff.tariffId) &&
+        Objects.equals(price, tariff.price) &&
+        Objects.equals(receivingSpeed, tariff.receivingSpeed) &&
+        Objects.equals(name, tariff.name);
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public Integer getTariffId() {
+    return tariffId;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public Tariff setTariffId(Integer tariffId) {
+    this.tariffId = tariffId;
+    return this;
+  }
 
-    public Integer getTariffId() {
-        return tariffId;
-    }
+  public Integer getPrice() {
+    return price;
+  }
 
-    public void setTariffId(Integer tariffId) {
-        this.tariffId = tariffId;
-    }
+  public Tariff setPrice(Integer price) {
+    this.price = price;
+    return this;
+  }
 
-    public Integer getPrice() {
-        return price;
-    }
+  public Integer getReceivingSpeed() {
+    return receivingSpeed;
+  }
 
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
+  public Tariff setReceivingSpeed(Integer receivingSpeed) {
+    this.receivingSpeed = receivingSpeed;
+    return this;
+  }
 
-    public Integer getReceivingSpeed() {
-        return receivingSpeed;
-    }
+  public Integer getTransferSpeed() {
+    return transferSpeed;
+  }
 
-    public void setReceivingSpeed(Integer receivingSpeed) {
-        this.receivingSpeed = receivingSpeed;
-    }
+  public Tariff setTransferSpeed(Integer transferSpeed) {
+    this.transferSpeed = transferSpeed;
+    return this;
+  }
 
-    public Integer getTransferSpeed() {
-        return transferSpeed;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setTransferSpeed(Integer transferSpeed) {
-        this.transferSpeed = transferSpeed;
-    }
+  public Tariff setName(String name) {
+    this.name = name;
+    return this;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Tariff setDescription(String description) {
+    this.description = description;
+    return this;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tariff tariff = (Tariff) o;
-        return Objects.equals(tariffId, tariff.tariffId) &&
-                Objects.equals(price, tariff.price) &&
-                Objects.equals(receivingSpeed, tariff.receivingSpeed) &&
-                Objects.equals(name, tariff.name);
-    }
+  public String getLang() {
+    return lang;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(tariffId, price, receivingSpeed, name);
-    }
+  public Tariff setLang(String lang) {
+    this.lang = lang;
+    return this;
+  }
 
-    @Override
-    public String toString() {
-        return "Tariff{" +
-                "tariffId=" + tariffId +
-                ", price=" + price +
-                ", receivingSpeed=" + receivingSpeed +
-                ", name='" + name + '\'' +
-                '}';
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(tariffId, price, receivingSpeed, name);
+  }
+
+  @Override
+  public String toString() {
+    return "Tariff{" +
+        "tariffId=" + tariffId +
+        ", price=" + price +
+        ", receivingSpeed=" + receivingSpeed +
+        ", name='" + name + '\'' +
+        '}';
+  }
 }

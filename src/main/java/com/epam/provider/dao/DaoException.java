@@ -9,11 +9,12 @@ package com.epam.provider.dao;
  * @author Gleb Aksenov
  */
 public class DaoException extends Exception {
-    public final static String MESS_CLOSE_CONECTION_ERROR = "can't close connection";
-    public final static String MESS_FINDING_TARIFF_ERROR = "can't find tariff";
-    public final static String MESS_INSERT_TARIFF_ERROR = "can't createTariff tariff record";
 
-    public DaoException(String message, Exception e) {
-        super(message, e);
-    }
+  public final static String MESS_CLOSE_CONECTION_ERROR = "can't close connection";
+  public final static String MESS_FINDING_TARIFF_ERROR = "can't find tariff";
+  public final static String MESS_INSERT_TARIFF_ERROR = "can't createTariff tariff record";
+
+  public DaoException(String message, Exception e) {
+    super(message, e);
+  }
 }

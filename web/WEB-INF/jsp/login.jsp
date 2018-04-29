@@ -4,7 +4,7 @@
 <%@ taglib prefix="ctg" uri="customtags" %>
 <html>
 <head>
-    <%@include file="elementpage/headContent.jspf"%>
+    <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.login" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.login" var="pageTitle"/>
     <fmt:message bundle="${loc}" key="message.form.field.login" var="login"/>
@@ -23,7 +23,8 @@
 <section class="section" id="head">
     <%@include file="elementpage/message.jspf" %>
     <div class="container">
-        <form name="loginForm" method="post" action="${pageContext.request.contextPath}/Controller" accept-charset="UTF-8">
+        <form name="loginForm" method="post" action="${pageContext.request.contextPath}/Controller"
+              accept-charset="UTF-8">
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
                     <div>
@@ -37,7 +38,8 @@
 
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-                    <input type="text" id="log" name="login" placeholder="Username" required="required"/>
+                    <input type="text" id="log" name="login" placeholder="Username"
+                           required="required"/>
                     <br/>
                 </div> <!-- /col -->
             </div> <!-- /row -->
@@ -50,7 +52,8 @@
             </div> <!-- /row -->
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-                        <input type="password" name="password" placeholder="Password" required="required"/>
+                    <input type="password" name="password" placeholder="Password"
+                           required="required"/>
 
                 </div> <!-- /col -->
             </div> <!-- /row -->
@@ -64,6 +67,6 @@
         </form>
     </div>
 </section>
-<%@include file="elementpage/jsLoading.jspf"%>
+<%@include file="elementpage/jsLoading.jspf" %>
 </body>
 </html>

@@ -50,47 +50,62 @@
                                 <p><i class="fa fa-bitcoin"></i>${currTariff.price}</p>
 
                                 <c:if test="${sessionScope.session_profile.role=='client'}">
-                                <c:choose>
-                                    <c:when test="${(sessionScope.session_profile.balance<currTariff.price)}">
-                                        <p><a href="#addBalanceModal" data-toggle="modal"
-                                              data-target="#addBalanceModal">${messMoney}</a></p>
-                                        <p>${sessionScope.session_profile.balance}</p>
+                                    <c:choose>
+                                        <c:when test="${(sessionScope.session_profile.balance<currTariff.price)}">
+                                            <p><a href="#addBalanceModal" data-toggle="modal"
+                                                  data-target="#addBalanceModal">${messMoney}</a>
+                                            </p>
+                                            <p>${sessionScope.session_profile.balance}</p>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="addBalanceModal" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <form name="loginForm" method="post" action="/Controller?command=add_balance">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="addBalanceModalTitle">Deposit money</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="addBalanceModal"
+                                                 tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <form name="loginForm" method="post"
+                                                          action="/Controller?command=add_balance">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="addBalanceModalTitle">
+                                                                    Deposit money</h5>
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label for="value"
+                                                                       class="col-form-label">Value:</label>
+                                                                <input required="required"
+                                                                       type="number" min="5"
+                                                                       max="255"
+                                                                       class="form-control"
+                                                                       name="balance"
+                                                                       id="value">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                        class="btn btn-secondary"
+                                                                        data-dismiss="modal">
+                                                                        ${closeButton}
+                                                                </button>
+                                                                <button type="submit"
+                                                                        class="btn btn-primary">${depositButton}</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <label for="value" class="col-form-label">Value:</label>
-                                                            <input required="required" type="number" min="5" max="255" class="form-control" name="balance"
-                                                                   id="value">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                                    ${closeButton}
-                                                            </button>
-                                                            <button type="submit" class="btn btn-primary">${depositButton}</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="/Controller?command=change_tariff&change_tariff=${currTariff.tariffId}"
-                                           class="change" title="Change" data-toggle="tooltip">
-                                            <i class="material-icons">&#xE8C9;</i></a>
-                                    </c:otherwise>
-                                </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="/Controller?command=change_tariff&change_tariff=${currTariff.tariffId}"
+                                               class="change" title="Change" data-toggle="tooltip">
+                                                <i class="material-icons">&#xE8C9;</i></a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:if>
                                 <c:if test="${sessionScope.session_profile.role=='admin'}">
                                     <a href="/Controller?command=get_update_page&id_tariffs=${currTariff.tariffId}&entity=tariff"
@@ -102,13 +117,16 @@
                                             class="material-icons">
                                         &#xE872;</i></a>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="tariffDelete" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="tariffDelete" tabindex="-1"
+                                         role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">${titleModal}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
+                                                    <h5 class="modal-title"
+                                                        id="exampleModalLabel">${titleModal}</h5>
+                                                    <button type="button" class="close"
+                                                            data-dismiss="modal"
                                                             aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -135,11 +153,14 @@
                     </c:forEach>
 
             </section>
+            <c:if test="${pagesNumber!=1}">
             <ul class="pagination" align="center">
                 <c:forEach begin="1" end="${pagesNumber}" var="page">
-                    <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a></li>
+                    <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a>
+                    </li>
                 </c:forEach>
             </ul>
+            </c:if>
         </div>
     </div>
     <%@include file="elementpage/jsLoading.jspf" %>

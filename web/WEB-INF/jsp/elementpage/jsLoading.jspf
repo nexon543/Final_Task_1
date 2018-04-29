@@ -6,10 +6,10 @@
 <script src="/js/magister.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
 <script>$(function () {
-    $('.selectpicker').selectpicker();
+  $('.selectpicker').selectpicker();
 });</script>
 <script>
-    $(window).on('load', function () {
-        $('#${entity}UpdateModalButton').click();
-    });
+  $(window).on('load', function () {
+    $('#${entity}UpdateModalButton').click();
+  });
 </script>

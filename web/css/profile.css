@@ -1,24 +1,23 @@
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
 }
 
 .titleUserProfile {
-    color: grey;
-    font-size: 18px;
+  color: grey;
+  font-size: 18px;
 }
 
-
 a.edit {
-    text-decoration: none;
-    font-size: 22px;
-    color: #FFC107;
+  text-decoration: none;
+  font-size: 22px;
+  color: #FFC107;
 }
 
 a.delete {
-    text-decoration: none;
-    font-size: 22px;
-    color: #E34724;
+  text-decoration: none;
+  font-size: 22px;
+  color: #E34724;
 }

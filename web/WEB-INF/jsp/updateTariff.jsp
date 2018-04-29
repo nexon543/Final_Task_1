@@ -26,6 +26,6 @@
 </section>
 
 
-<%@include file="elementpage/jsLoading.jspf"%>
+<%@include file="elementpage/jsLoading.jspf" %>
 </body>
 </html>

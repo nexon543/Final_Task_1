@@ -49,7 +49,8 @@
                                        data-toggle="tooltip"><i
                                             class="material-icons">&#xE254;</i></a>
                                     <a href="#profileDelete"
-                                       class="delete" title="Delete" data-target="#profileDelete" data-toggle="modal"><i
+                                       class="delete" title="Delete" data-target="#profileDelete"
+                                       data-toggle="modal"><i
                                             class="material-icons">
                                         &#xE872;</i></a>
                                     <!-- Modal -->
@@ -66,7 +67,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">${titleModal}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -74,7 +76,8 @@
                             ${contentModal}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">${closeModal}
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">${closeModal}
                             </button>
                             <a type="button"
                                href="/Controller?command=delete_profile&id=${profile.profileId}&entity=profile"
@@ -85,7 +88,8 @@
             </div>
             <ul class="pagination" align="center">
                 <c:forEach begin="1" end="${pagesNumber}" var="page">
-                    <li><a href="Controller?command=get_profiles&currentPage=${page}">${page}</a></li>
+                    <li><a href="Controller?command=get_profiles&currentPage=${page}">${page}</a>
+                    </li>
                 </c:forEach>
             </ul>
         </div>
