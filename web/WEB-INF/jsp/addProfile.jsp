@@ -8,6 +8,7 @@
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.add.profile" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.add.profile" var="pageTitle"/>
+    <fmt:message bundle="${loc}" key="message.page.subtitle.add.profile" var="subTitle"/>
     <c:set var="currentPageReq" value="/AddProfile"/>
     <title>${title}</title>
 </head>

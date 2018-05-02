@@ -29,7 +29,7 @@ public class ContextListener implements ServletContextListener {
     PropertyConfigurator.configure(fullPath);
     ResourceManager.initResources();
     try {
-      ConnectionPool.getInstance().initPoolData();
+      ConnectionPool.initialize();
     } catch (ConnectionPoolException e) {
       LOGGER.log(Level.FATAL, e.getMessage());
     }

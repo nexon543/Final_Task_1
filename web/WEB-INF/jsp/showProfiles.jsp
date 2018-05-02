@@ -8,9 +8,11 @@
 <head>
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="modal.button.accept" var="acceptModal"/>
-    <fmt:message bundle="${loc}" key="modal.button.close" var="closeModal"/>
+    <fmt:message bundle="${loc}" key="modal.button.reject" var="closeModal"/>
     <fmt:message bundle="${loc}" key="modal.delete.profile.content" var="contentModal"/>
     <fmt:message bundle="${loc}" key="modal.delete.profile.title" var="titleModal"/>
+    <fmt:message bundle="${loc}" key="message.page.title.show.profiles" var="pageTitle"/>
+    <fmt:message bundle="${loc}" key="message.page.subtitle.show.profiles" var="subTitle"/>
     <c:set var="currentPageReq" value="get_profiles"/>
     <link rel="stylesheet" href="/css/profile.css">
 </head>
@@ -25,6 +27,7 @@
 
     <div class="container">
         <div class="container" align="center">
+            <%@include file="elementpage/pageTitle.jspf" %>
             <section>
                 <c:forEach items="${users}" varStatus="status" var="profile">
                 <c:if test="${profile.role == 'client' or profile.role == 'admin'}">
@@ -33,7 +36,8 @@
                     <div class="col-sm-4 col-sm-offset-2 text-center"></c:if>
                         <c:if test="${(status.count+1)%2!=0}">
                         <div class="col-sm-4 text-center"></c:if>
-                            <div class="card">
+                            <div class="card" style="background-color: #FDF9F4">
+                                <br/>
                                 <i class="material-icons">account_circle</i>
                                 <h1>${profile.firstName} ${profile.secondName}</h1>
                                 <p class="titleUserProfile">${profile.passport} </p>

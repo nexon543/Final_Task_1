@@ -17,13 +17,13 @@ import org.apache.log4j.Logger;
  */
 public class ConnectionPool {
 
+  private static final int DEFAULT_POOL_SIZE = 5;
   private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
-
   private static AtomicBoolean isAvailable = new AtomicBoolean(false);
   private static AtomicBoolean isInitialized = new AtomicBoolean(false);
   private static ConnectionPool instance;
   private static ReentrantLock instanceLock = new ReentrantLock();
-  private ArrayBlockingQueue<Connection> activePool;
+  private ArrayBlockingQueue<Connection> freeConnections;
   private ArrayBlockingQueue<Connection> givenAwayConnections;
   private int poolSize;
 
@@ -34,38 +34,57 @@ public class ConnectionPool {
     try {
       poolSize = Integer
           .parseInt(ResourceManager.getDatabaseProperty(ResourceConstants.DB_KEY_POOL_SIZE));
-      activePool = new ArrayBlockingQueue<>(poolSize);
+      if (poolSize == 0) {
+        poolSize = DEFAULT_POOL_SIZE;
+      }
+      freeConnections = new ArrayBlockingQueue<>(poolSize);
       givenAwayConnections = new ArrayBlockingQueue<>(poolSize);
+      initPoolData();
     } catch (Exception ex) {
       LOGGER.log(Level.ERROR, ex.getMessage());
-      throw new ConnectionPoolException("Can't init connection pool", ex);
+      throw new ConnectionPoolException("Can't initialize connection pool", ex);
 
     }
   }
 
+  /**
+   * Returns instance of connection pool only if it is initialized
+   */
+
   public static ConnectionPool getInstance() throws ConnectionPoolException {
-    if (!isAvailable.get()) {
+    if (isInitialized.get()) {
+      return instance;
+    }
+    throw new ConnectionPoolException("Trying to use not initialized connection pool");
+  }
+
+  /**
+   * This method must be called before using the connection pool
+   */
+
+  public static void initialize() throws ConnectionPoolException {
+    if (!isInitialized.get()) {
       try {
         instanceLock.lock();
         if (instance == null) {
           instance = new ConnectionPool();
-          isAvailable.set(true);
+          isInitialized.set(true);
         }
       } finally {
         instanceLock.unlock();
+        LOGGER.log(Level.INFO, "connection pool was initialized");
       }
     }
-    return instance;
   }
 
   /**
    * This method creates free connections. And also creates list of busy connection.
    */
-  public void initPoolData() throws ConnectionPoolException {
-    if (activePool.size() + givenAwayConnections.size() == 0) {
+  private void initPoolData() throws ConnectionPoolException {
+    if (freeConnections.size() + givenAwayConnections.size() == 0) {
       try {
         for (int i = 0; i < poolSize; i++) {
-          activePool.offer(new PooledConnection(ConnectorDB.getConnection()));
+          freeConnections.offer(new PooledConnection(ConnectorDB.getConnection()));
         }
         isInitialized.set(true);
       } catch (SQLException e) {
@@ -77,8 +96,8 @@ public class ConnectionPool {
 
   private void checkIfInitialized() throws ConnectionPoolException {
     if (!isInitialized.get()) {
-      LOGGER.log(Level.ERROR, "can't initialize connection pool");
-      throw new ConnectionPoolException("can't initialize connection pool");
+      LOGGER.log(Level.ERROR, "connection pool not initialize");
+      throw new ConnectionPoolException("connection pool not initialize");
     }
   }
 
@@ -88,9 +107,9 @@ public class ConnectionPool {
    * @return {@link Connection}
    */
   public Connection getConnection() throws ConnectionPoolException {
-    //checkIfInitialized();
+    checkIfInitialized();
     try {
-      Connection connection = activePool.take();
+      Connection connection = freeConnections.take();
       givenAwayConnections.add(connection);
       return connection;
     } catch (InterruptedException e) {
@@ -109,7 +128,7 @@ public class ConnectionPool {
       isAvailable.set(false);
     }
     closeConnectionQueue(givenAwayConnections);
-    closeConnectionQueue(activePool);
+    closeConnectionQueue(freeConnections);
     isInitialized.set(false);
     LOGGER.log(Level.INFO, "Connection pool was closed");
 
@@ -125,11 +144,10 @@ public class ConnectionPool {
         }
         ((PooledConnection) connection).closeConnection();
       } catch (SQLException e) {
-        LOGGER.log(Level.ERROR, ResourceManager.getMessage("connection.pool.error.closing"));
+        LOGGER.log(Level.ERROR, "Error closing connection queue");
         throw new ConnectionPoolException(e.getMessage());
       }
     }
-
   }
 
   /**
@@ -153,7 +171,7 @@ public class ConnectionPool {
               "Error deleting connection from the given connection pool");
         }
       }
-      if (!activePool.offer(connection)) {
+      if (!freeConnections.offer(connection)) {
         throw new ConnectionPoolException("Error allocating connection in the pool");
       }
     } catch (SQLException e) {

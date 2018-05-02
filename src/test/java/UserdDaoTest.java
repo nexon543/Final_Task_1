@@ -24,8 +24,7 @@ public class UserdDaoTest {
   static void setUp() {
     profileDao = new ProfileDaoImpl();
     try {
-      ConnectionPool connectionPool = ConnectionPool.getInstance();
-      connectionPool.initPoolData();
+      ConnectionPool.initialize();
       MessageDigest md = MessageDigest.getInstance("MD5");
       md.update(PASSWORD.getBytes("UTF-8"));
       profile.setLogin(LOGIN);

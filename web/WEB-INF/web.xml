@@ -42,7 +42,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Admin</servlet-name>
-    <jsp-file>/WEB-INF/jsp/admin.jsp</jsp-file>
+    <jsp-file>/WEB-INF/jsp/adminPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Admin</servlet-name>
@@ -50,7 +50,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Client</servlet-name>
-    <jsp-file>/WEB-INF/jsp/client.jsp</jsp-file>
+    <jsp-file>/WEB-INF/jsp/clientPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Client</servlet-name>
@@ -58,7 +58,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <jsp-file>/WEB-INF/jsp/login.jsp</jsp-file>
+    <jsp-file>/WEB-INF/jsp/loginPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -102,7 +102,7 @@
 
   <servlet>
     <servlet-name>Tariff</servlet-name>
-    <jsp-file>/WEB-INF/jsp/tariffs.jsp</jsp-file>
+    <jsp-file>/WEB-INF/jsp/showTariffs.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Tariff</servlet-name>

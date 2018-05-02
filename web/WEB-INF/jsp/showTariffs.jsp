@@ -8,8 +8,8 @@
 <head>
     <%@include file="elementpage/headContent.jspf" %>
     <fmt:message bundle="${loc}" key="message.title.show.tariff" var="title"/>
-    <fmt:message bundle="${loc}" key="message.page.title.show.tariff" var="pageTitle"/>
-
+    <fmt:message bundle="${loc}" key="message.page.title.tariffs" var="pageTitle"/>
+    <fmt:message bundle="${loc}" key="message.page.subtitle.tariffs" var="subTitle"/>
     <fmt:message bundle="${loc}" key="modal.button.accept" var="acceptModal"/>
     <fmt:message bundle="${loc}" key="modal.button.close" var="closeModal"/>
     <fmt:message bundle="${loc}" key="modal.delete.tariff.content" var="contentModal"/>

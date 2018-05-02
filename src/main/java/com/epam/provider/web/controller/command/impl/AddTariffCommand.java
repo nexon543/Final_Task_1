@@ -11,6 +11,7 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
+import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -41,7 +42,7 @@ public class AddTariffCommand implements ActionCommand {
     try {
       tariffService.createTariff(tariff);
       res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE,
-          "tariff \"" + tariff.getName() + "\" was successfully created");
+          "tariff was successfully created");
     } catch (ServiceException e) {
       LOGGER.log(Level.ERROR, "can't add new tariff");
       res.setPage(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ERROR));

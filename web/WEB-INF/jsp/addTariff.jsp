@@ -6,8 +6,9 @@
 <html>
 <head>
     <%@include file="elementpage/headContent.jspf" %>
-    <fmt:message bundle="${loc}" key="message.title.add.profile" var="title"/>
+    <fmt:message bundle="${loc}" key="message.title.add.tariff" var="title"/>
     <fmt:message bundle="${loc}" key="message.page.title.add.tariff" var="pageTitle"/>
+    <fmt:message bundle="${loc}" key="message.page.subtitle.add.tariff" var="subTitle"/>
     <c:set var="currentPageReq" value="/AddTariff"/>
     <title>${title}</title>
 </head>

@@ -13,8 +13,7 @@ public class ConnectionPoolTest {
   @BeforeAll
   public static void setUp() {
     try {
-      ConnectionPool connectionPool = ConnectionPool.getInstance();
-      connectionPool.initPoolData();
+      ConnectionPool.initialize();
     } catch (ConnectionPoolException e) {
       fail(e.getMessage());
     }
