@@ -1,3 +1,5 @@
+package com.epam.provider.dao;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 

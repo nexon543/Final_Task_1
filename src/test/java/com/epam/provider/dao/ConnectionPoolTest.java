@@ -1,3 +1,5 @@
+package com.epam.provider.dao;
+
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.fail;
 

@@ -12,6 +12,13 @@
     <fmt:message bundle="${loc}" key="button.client.change_tariff" var="changeTariffButton"/>
     <fmt:message bundle="${loc}" key="button.client.deposit" var="depositButton"/>
     <fmt:message bundle="${loc}" key="modal.button.close" var="closeButton"/>
+    <fmt:message bundle="${loc}" key="message.page.content.client.balance" var="balance"/>
+    <fmt:message bundle="${loc}" key="message.page.content.client.tariff" var="tariff"/>
+    <fmt:message bundle="${loc}" key="message.page.content.client.tspeed" var="tspeed"/>
+    <fmt:message bundle="${loc}" key="message.page.content.client.rspeed" var="rspeed"/>
+    <fmt:message bundle="${loc}" key="message.page.content.client.passport" var="passport"/>
+    <fmt:message bundle="${loc}" key="message.page.content.client.registerdate" var="regDate"/>
+    <fmt:message bundle="${loc}" key="modal.deposit.value" var="value"/>
     <c:set var="currentPageReq" value="/Login"/>
     <title>${title}</title>
 
@@ -28,17 +35,18 @@
             <div class="col-md-0 col-lg-0 col-md-offset-1 col-lg-offset-1 text-center">
 
                 <!-- Site Title, your name, HELLO msg, etc. -->
-                <h2 class="title">${pageTitle}</h2>
-                <h3 class="subtitle">${profile.firstName} ${profile.secondName}</h3>
+                <%@include file="elementpage/pageTitle.jspf" %>
 
                 <!-- Short introductory (optional) -->
                 <h4 class="tagline">
-                    Passport: ${session_profile.passport}. <br>
-                    Tariff: ${session_profile_tariff.name}.<br>
-                    Register date: ${session_profile.registerDate}.<br>
-                    Recieving speed: ${session_profile_tariff.receivingSpeed}.<br>
-                    Transfer speed: ${session_profile_tariff.transferSpeed}.<br>
-                    Balance:${session_profile.balance}
+                    <c:out value="${passport}: ${session_profile.passport}"/> <br>
+                    <c:out value="${tariff}: ${session_profile_tariff.name}"/><br>
+                    <fmt:setLocale value="${sessionScope.local}" scope="page"/>
+                    <c:out value="${regDate}:" />
+                    <fmt:formatDate value="${session_profile.registerDate}" dateStyle="full"/><br>
+                    <c:out value="${rspeed}:${session_profile_tariff.receivingSpeed}" /> <br>
+                    <c:out value="${tspeed}:${session_profile_tariff.transferSpeed}" /> <br>
+                    <c:out value="${balance}:${session_profile.balance}" />
                 </h4>
             </div> <!-- /col -->
         </div> <!-- /row -->
@@ -58,16 +66,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="value" class="col-form-label">Value:</label>
+                    <label for="value" class="col-form-label">${value}:</label>
                     <input required="required" type="number" min="5" max="255" class="form-control"
                            name="balance"
                            id="value">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: red">
                         ${closeButton}
                     </button>
-                    <button type="submit" class="btn btn-primary">${depositButton}</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: limegreen">${depositButton}</button>
                 </div>
             </div>
         </form>

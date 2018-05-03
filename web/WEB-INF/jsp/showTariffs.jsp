@@ -42,8 +42,8 @@
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-2 text-center"></c:if>
                         <c:if test="${(status.count+1)%2!=0}">
-                        <div class="col-sm-4 text-center"></c:if>
-                            <div class="card" style="background-color: #FDF9F4">
+                        <div class="col-sm-4 text-center" style="height:10% "></c:if>
+                            <div class="card" style="background-color: #FDF9F4; height:10% ">
                                 <h1>${currTariff.name}</h1>
                                 <p class="titleUserProfile">${currTariff.description} </p>
                                 <p>${currTariff.transferSpeed}/${currTariff.receivingSpeed}</p>

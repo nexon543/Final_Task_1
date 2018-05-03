@@ -1,3 +1,5 @@
+package com.epam.provider.util.resource;
+
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.epam.provider.util.resource.ResourceConstants;
@@ -5,7 +7,7 @@ import com.epam.provider.util.resource.ResourceManager;
 import org.junit.jupiter.api.Test;
 
 
-public class LocalizerTest {
+public class ResourceManagerTest {
 
   public static String EN_LOC = "en";
   public static String RU_LOC = "ru";

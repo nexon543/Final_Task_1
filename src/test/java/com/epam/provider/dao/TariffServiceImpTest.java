@@ -1,3 +1,5 @@
+package com.epam.provider.dao;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.epam.provider.dao.pool.ConnectionPool;
