@@ -1,5 +1,5 @@
 <c:if test="${sessionScope.session_profile.role=='admin'}">
     <fmt:message bundle="${loc}" key="button.show.profile" var="profileButton"/>
-    <a href="/Controller?command=get_profiles"><i
+    <a href="${pageContext.request.contextPath}/Controller?command=get_profiles"><i
             class="material-icons">&#xE8D3;</i>${profileButton}</a>
 </c:if>
