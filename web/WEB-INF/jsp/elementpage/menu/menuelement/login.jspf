@@ -1,5 +1,0 @@
-<fmt:message bundle="${loc}" key="button.login" var="loginButton"/>
-<fmt:message bundle="${loc}" key="button.login.cabinet" var="loginCabinetButton"/>
-<a href="${pageContext.request.contextPath}/Login"><img src="${pageContext.request.contextPath}/img/login.png"/>
-    <ctg:login-tag/>
-</a>

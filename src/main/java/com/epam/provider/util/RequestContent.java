@@ -7,6 +7,7 @@ import com.epam.provider.web.validator.ParameterName;
 import java.sql.Date;
 import java.util.EnumMap;
 import java.util.Set;
+import javax.servlet.SessionCookieConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,20 +16,38 @@ import javax.servlet.http.HttpSession;
  */
 public class RequestContent {
 
-  public RequestContent() {
+  private static ThreadLocal<HttpSession> session=new ThreadLocal<>();
+
+
+  public static String getCurrentLang(){
+    return (String)getSessionAttribute(Constants.PARAM_LOCAL);
+  }
+  public static void init(HttpServletRequest req){
+    session.set(req.getSession(true));
   }
 
-
+  public static void setSessionAttribute(String sessionAttrKey, Object attrValue){
+    session.get().setAttribute(sessionAttrKey, attrValue);
+  }
+  public static Object getSessionAttribute(String key){
+    return session.get().getAttribute(key);
+  }
+  public static void setMessage(String messageKey, String messageContent){
+    setSessionAttribute(messageKey, messageContent);
+    setSessionAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
+  }
   public static Profile getProfile(HttpServletRequest req) {
     Profile profile = new Profile();
     Date date = new Date(new java.util.Date().getTime());
     String balance = req.getParameter(Constants.PARAM_BALANCE);
-    if (balance != null) {
+    if (balance != null && balance != "") {
       profile.setBalance(Double.parseDouble(balance));
     }
     profile.setFirstName(req.getParameter(Constants.PARAM_FIRST_NAME));
     String paramIdTariff = req.getParameter(Constants.PARAM_TARIFFS_ID);
-    profile.setIdTariffs(Integer.parseInt(paramIdTariff));
+    if (paramIdTariff != null && paramIdTariff != "") {
+      profile.setIdTariffs(Integer.parseInt(paramIdTariff));
+    }
     profile.setPassport(req.getParameter(Constants.PARAM_PASSPORT));
     profile.setSecondName(req.getParameter(Constants.PARAM_SECOND_NAME));
     profile.setRegisterDate(date);
@@ -42,9 +61,8 @@ public class RequestContent {
     return profile;
   }
 
-  public static String getCurrentUserRole(HttpServletRequest req) {
-    HttpSession session = req.getSession(true);
-    Profile profile = (Profile) session.getAttribute(Constants.PARAM_USER);
+  public static String getCurrentUserRole() {
+    Profile profile = (Profile) session.get().getAttribute(Constants.PARAM_USER);
     if (profile == null) {
       return null;
     }
@@ -53,8 +71,7 @@ public class RequestContent {
 
   public static Tariff getTariff(HttpServletRequest req) {
     Tariff newTariff = new Tariff();
-    HttpSession session = req.getSession();
-    String lang = (String) session.getAttribute(Constants.PARAM_LOCAL);
+    String lang = (String) session.get().getAttribute(Constants.PARAM_LOCAL);
     String id = req.getParameter("id");
     if (id != null && !"".equals(id)) {
       newTariff.setTariffId(Integer.parseInt(id));
@@ -72,9 +89,8 @@ public class RequestContent {
   }
 
   public static Profile getSessionProfile(HttpServletRequest req) {
-    HttpSession session = req.getSession();
     if (session != null) {
-      return (Profile) session.getAttribute(Constants.ATTR_SESSION_PROFILE);
+      return (Profile) session.get().getAttribute(Constants.ATTR_SESSION_PROFILE);
     }
     return null;
   }

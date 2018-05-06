@@ -1,5 +1,0 @@
-<c:if test="${sessionScope.session_profile.role=='admin'}">
-    <fmt:message bundle="${loc}" key="button.add.tariff" var="addTariff"/>
-    <a href="${pageContext.request.contextPath}/Controller?command=get_update_page&entity=tariff"> <i class="material-icons">person_add</i><c:out
-            value="${addTariff}"/></a>
-</c:if>

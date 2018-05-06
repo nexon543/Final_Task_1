@@ -1,4 +1,0 @@
-<fmt:message bundle="${loc}" key="button.logout" var="logoutButton"/>
-<a href="${pageContext.request.contextPath}/Controller?command=logout"><img src="${pageContext.request.contextPath}/img/logout.png"/>
-    <c:out value="${logoutButton}"/>
-</a>
