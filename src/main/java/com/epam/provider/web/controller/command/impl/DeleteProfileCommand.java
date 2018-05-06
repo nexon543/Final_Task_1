@@ -3,6 +3,7 @@ package com.epam.provider.web.controller.command.impl;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
+import com.epam.provider.util.RequestContent;
 import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
@@ -18,33 +19,30 @@ public class DeleteProfileCommand implements ActionCommand {
   private static final Logger LOGGER = LogManager.getLogger(DeleteTariffCommand.class);
   private ProfileService profileService = ServiceFactory.getProfileService();
 
-  public DeleteProfileCommand() {
-  }
-
   @Override
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);
     String idStr = req.getParameter(Constants.PARAM_DELET_ENTITY_ID);
+    RequestContent.init(req);
+    String lang=RequestContent.getCurrentLang();
     if (idStr != null) {
       Integer id = Integer.parseInt(idStr);
       try {
         profileService.deleteProfile(id);
         if (profileService.getById(id) == null) {
-          res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE,
-              ResourceManager.getMessage(ResourceConstants.M_SUCCESS_DELETE_PROFILE));
+          RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE,
+              ResourceManager.getMessage(ResourceConstants.M_SUCCESS_DELETE_PROFILE,lang));
         } else {
-          res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE,
-              ResourceManager.getMessage(ResourceConstants.M_ERROR_DELETE_PROFILE));
+          RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
+              ResourceManager.getMessage(ResourceConstants.M_ERROR_DELETE_PROFILE,lang));
         }
       } catch (ServiceException e) {
         LOGGER.log(Level.ERROR, e.getMessage());
       }
     } else {
-      res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE,
-          ResourceManager.getMessage(ResourceConstants.M_ERROR_DELETE_PROFILE));
+      RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
+          ResourceManager.getMessage(ResourceConstants.M_ERROR_DELETE_PROFILE,lang));
     }
-    req.getSession()
-        .setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
     return res;
   }
 }

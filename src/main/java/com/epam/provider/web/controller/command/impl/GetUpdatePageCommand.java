@@ -6,6 +6,7 @@ import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
+import com.epam.provider.util.RequestContent;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -25,10 +26,9 @@ public class GetUpdatePageCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
     CommandResult result = new CommandResult();
     String entity = req.getParameter(Constants.PARAM_UPDATED_ENTITY);
-    HttpSession session = req.getSession();
-    String lang = (String) session.getAttribute(Constants.PARAM_LOCAL);
+    RequestContent.init(req);
+    String lang=RequestContent.getCurrentLang();
     String idParam;
-    //Validator.isValid(idParam);
     try {
       switch (entity) {
         case "tariff":
@@ -44,7 +44,7 @@ public class GetUpdatePageCommand implements ActionCommand {
           }
           req.setAttribute(Constants.ATTR_UPDATABLE_TARIFF, tariff);
           req.setAttribute(Constants.ATTR_STATUS, Constants.ADMIN_STATUS_UPDATE_TARIFF);
-          req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, "/UpdateTariffPage");
+          req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, Constants.REQUEST_UPDATE_TARIFF);
           break;
         case "profile":
           idParam = req.getParameter(Constants.PARAM_PROFILE_ID);
@@ -60,23 +60,11 @@ public class GetUpdatePageCommand implements ActionCommand {
           List<Tariff> tariffs = tariffService.getAllTariffs(lang);
           req.setAttribute(Constants.ATTR_ALL_TARIFFS, tariffs);
           req.setAttribute(Constants.ATTR_UPDATABLE_PROFILE, profile);
-          req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, "/UpdateProfile");
+          req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, Constants.REQUEST_UPDATE_PROFILE);
       }
     } catch (ServiceException e) {
       LOGGER.log(Level.ERROR, e.getStackTrace());
     }
-    appendMessageIfExists(req, result);
     return result;
-  }
-
-  private void appendMessageIfExists(HttpServletRequest req, CommandResult res) {
-    String message = req.getParameter(Constants.PARAM_ERROR_MESSAGE);
-    if (message != null) {
-      res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, message);
-    }
-    message = req.getParameter(Constants.PARAM_SUCCESS_MESSAGE);
-    if (message != null) {
-      res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, message);
-    }
   }
 }

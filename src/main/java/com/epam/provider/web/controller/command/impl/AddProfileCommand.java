@@ -31,9 +31,8 @@ public class AddProfileCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
 
     CommandResult res = new CommandResult();
-
-    HttpSession session = req.getSession();
-    String lang = (String) session.getAttribute(Constants.PARAM_LOCAL);
+    RequestContent.init(req);
+    String lang = RequestContent.getCurrentLang();
     Profile profile = RequestContent.getProfile(req);
     boolean isValid = Validator.isValid(RequestContent
         .getValuesForValidation(ParameterName.getParamSet(ActionType.ADD_PROFILE), req));
@@ -42,12 +41,12 @@ public class AddProfileCommand implements ActionCommand {
         res.setState(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);
         if (!profileService.isUserExists(profile.getLogin())) {
           profileService.createProfile(profile);
-          res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE,
-              ResourceManager.getMessage(ResourceConstants.M_SUCCESS));
+          RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE,
+              ResourceManager.getMessage(ResourceConstants.M_SUCCESS,lang));
         } else {
           res.setState(CommandResult.CommandResultState.FORWARD_ADD_PROFILE);
-          res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE,
-              ResourceManager.getMessage(ResourceConstants.M_PROFILE_EXISTS));
+          RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
+              ResourceManager.getMessage(ResourceConstants.M_PROFILE_EXISTS,lang));
 
           setUpdatableProfileWithTariff(profile, lang, req);
         }
@@ -58,17 +57,14 @@ public class AddProfileCommand implements ActionCommand {
       }
     } else {
       res.setState(CommandResult.CommandResultState.FORWARD_ADD_PROFILE);
-
       try {
         setUpdatableProfileWithTariff(profile, lang, req);
       } catch (ServiceException e) {
         LOGGER.log(Level.ERROR, e.getStackTrace());
       }
-      req.setAttribute(Constants.PARAM_ERROR_MESSAGE,
-          ResourceManager.getMessage(ResourceConstants.M_INCORRECT_VALUE));
+      RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
+          ResourceManager.getMessage(ResourceConstants.M_INCORRECT_VALUE,lang));
     }
-    req.getSession()
-        .setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
     return res;
   }
 

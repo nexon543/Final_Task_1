@@ -34,7 +34,7 @@ public interface ProfileService {
 
   Profile getById(Integer id) throws ServiceException;
 
-  void updateUser(Profile profile) throws ServiceException;
+  boolean updateUser(Profile profile) throws ServiceException;
 
   boolean updateUsersTariff(Integer profileId, Integer newTariffId) throws ServiceException;
 

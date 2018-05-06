@@ -41,12 +41,13 @@ public class LoginCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
     String login = req.getParameter(Constants.PARAM_LOGIN);
     String pass = req.getParameter(Constants.PARAM_PASSWORD);
+    RequestContent.init(req);
+    String lang=RequestContent.getCurrentLang();
     CommandResult result = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
     boolean isValid = Validator.isValid(
         RequestContent.getValuesForValidation(ParameterName.getParamSet(ActionType.LOGIN), req));
     if (!isValid) {
-      String lang = (String) req.getSession().getAttribute(Constants.PARAM_LOCAL);
-      result.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE,
+      result.appendParamToRedirect(Constants.ATTR_ERROR_MESSAGE,
           ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN, lang));
       return result;
     }
@@ -55,8 +56,8 @@ public class LoginCommand implements ActionCommand {
       if (profile.getProfileId() != null) {
         setSessionForUser(profile, req);
       } else {
-        req.setAttribute(Constants.PARAM_ERROR_MESSAGE,
-            ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN));
+        req.setAttribute(Constants.ATTR_ERROR_MESSAGE,
+            ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN, lang));
         result.setState(CommandResult.CommandResultState.REDIRECT_LOGIN);
       }
     } catch (ServiceException e) {

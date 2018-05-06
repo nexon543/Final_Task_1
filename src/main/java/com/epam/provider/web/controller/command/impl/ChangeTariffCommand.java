@@ -7,6 +7,8 @@ import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.util.RequestContent;
+import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -18,28 +20,22 @@ public class ChangeTariffCommand implements ActionCommand {
   private TariffService tariffService = ServiceFactory.getTariffService();
   private ProfileService profileService = ServiceFactory.getProfileService();
 
-  public ChangeTariffCommand() {
-  }
-
   @Override
   public CommandResult execute(HttpServletRequest req) {
     Profile profile = RequestContent.getSessionProfile(req);
-    HttpSession session = req.getSession();
-    String lang = (String) session.getAttribute(Constants.PARAM_LOCAL);
-    profile.setIdTariffs(Integer.parseInt(req.getParameter("change_tariff")));
+    RequestContent.init(req);
+    String lang=RequestContent.getCurrentLang();
     CommandResult res = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
     try {
+      profile.setIdTariffs(Integer.parseInt(req.getParameter(Constants.PARAM_CHANGE_TARIFF)));
       if (profileService.updateUsersTariff(profile.getProfileId(), profile.getIdTariffs())) {
         Tariff tariff = tariffService.getTariffById(profile.getIdTariffs(), lang);
-        session.setAttribute(Constants.ATT_SESSION_PROFILE_TARIFF, tariff);
-        res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE,
-            "you have successfully switched your tariff to: " + tariff.getName());
+        RequestContent.setSessionAttribute(Constants.ATT_SESSION_PROFILE_TARIFF, tariff);
+        RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_SUCCESS_CHANGE_TARIFF,lang));
       }
-    } catch (ServiceException e) {
-      res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, "error");
+    } catch (Exception e) {
+      RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,ResourceManager.getMessage(ResourceConstants.M_ERROR_CHANGE_TARIFF,lang));
     }
-    req.getSession()
-        .setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
     return res;
   }
 

@@ -1,0 +1,15 @@
+<!-- Load js libs only when the page is loaded. -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<!-- Custom template scripts -->
+<script src="/js/magister.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+<script>$(function () {
+  $('.selectpicker').selectpicker();
+});</script>
+<script>
+  $(window).on('load', function () {
+    $('#${entity}UpdateModalButton').click();
+  });
+</script>

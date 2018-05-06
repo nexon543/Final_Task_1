@@ -1,0 +1,14 @@
+<div class="dropdown navbar-right">
+    <button type="button" class="navbar-toggle" data-toggle="dropdown"><i class="material-icons">translate</i>
+    </button>
+    <ul class="dropdown-menu">
+        <form>
+            <li>
+                <a href="${pageContext.request.contextPath}/Controller?command=set_locale&local=en&currentPageReq=${currentPageReq}"><img
+                        src="${pageContext.request.contextPath}/img/lang/eng.png"/></a></li>
+            <li>
+                <a href="${pageContext.request.contextPath}/Controller?command=set_locale&local=ru&currentPageReq=${currentPageReq}"><img
+                        src="${pageContext.request.contextPath}/img/lang/ru.png"/></a></li>
+        </form>
+    </ul>
+</div>

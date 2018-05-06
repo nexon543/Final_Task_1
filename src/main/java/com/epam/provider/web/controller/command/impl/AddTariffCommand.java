@@ -11,7 +11,7 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
-import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -27,28 +27,23 @@ public class AddTariffCommand implements ActionCommand {
   private static final Logger LOGGER = LogManager.getLogger(AddTariffCommand.class);
   private TariffService tariffService = ServiceFactory.getTariffService();
 
-  public AddTariffCommand() {
-  }
-
   /**
    * {@inheritDoc}
    */
   @Override
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult();
-
-    res.setControllerRequest(ActionType.GET_TARIFFS);
+    RequestContent.init(req);
+    String lang=RequestContent.getCurrentLang();
     Tariff tariff = RequestContent.getTariff(req);
     try {
       tariffService.createTariff(tariff);
-      res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE,
-          "tariff was successfully created");
+      RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE,
+              ResourceManager.getMessage(ResourceConstants.M_SUCCESS_CREATE_TARIFF,lang));
     } catch (ServiceException e) {
       LOGGER.log(Level.ERROR, "can't add new tariff");
       res.setPage(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ERROR));
     }
-    req.getSession()
-        .setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
     return res;
   }
 }

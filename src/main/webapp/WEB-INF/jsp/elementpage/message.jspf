@@ -1,0 +1,13 @@
+<c:if test="${sessionScope.displayMessage=='yes'}">
+    <div class="container" align="center">
+        <p style="color: green">
+            <c:out value="${sessionScope.messageSuccess}"/>
+            <c:set var="messageSuccess" scope="session" value=""/>
+        </p>
+        <p style="color: crimson">
+            <c:out value="${sessionScope.messageError}"/>
+            <c:set var="messageError" scope="session" value=""/>
+        </p>
+    </div>
+    <c:set var="displayMessage" scope="session" value="no"/>
+</c:if>

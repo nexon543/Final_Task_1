@@ -21,7 +21,18 @@ public class ResourceConstants {
   public static String M_SUCCESS_DELETE_TARIFF = "message.operations.tariff.delete.success";
   public static String M_ERROR_DELETE_PROFILE = "message.operations.profile.delete.error";
   public static String M_SUCCESS_DELETE_PROFILE = "message.operations.profile.delete.success";
+  public static String M_ERROR_UPDATE_PROFILE = "message.operations.profile.update.error";
+  public static String M_SUCCESS_UPDATE_PROFILE = "message.operations.profile.update.success";
   public static String M_SUCCESS_ADD_BALANCE = "message.operations.balance.success";
+  public static String M_ERROR_CREATE_TARIFF = "message.operations.tariff.create.error";
+  public static String M_SUCCESS_CREATE_TARIFF = "message.operations.tariff.create.success";
+  public static String M_ERROR_UPDATE_TARIFF = "message.operations.tariff.update.error";
+  public static String M_SUCCESS_UPDATE_TARIFF = "message.operations.tariff.update.success";
+  public static String M_ERROR_CREATE_PROFILE = "message.operation.profile.create.error";
+  public static String M_SUCCESS_CREATE_PROFILE = "message.operations.profile.create.success";
+
+  public static String M_SUCCESS_CHANGE_TARIFF="message.operations.profile.changeTariff.success";
+  public static String M_ERROR_CHANGE_TARIFF="message.operations.profile.changeTariff.success";
   public static String M_FAILD = "message.operations.failed";
   public static String M_SUCCESS = "message.operations.success";
   public static String M_PROFILE_EXISTS = "message.operations.profile.exists";

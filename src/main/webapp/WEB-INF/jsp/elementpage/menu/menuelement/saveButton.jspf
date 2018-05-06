@@ -1,0 +1,2 @@
+<fmt:message bundle="${loc}" key="button.save" var="saveButton"/>
+<button type="submit" class="btn btn-primary"><c:out value="${saveButton}"/></button>

@@ -13,16 +13,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class EmptyCommand implements ActionCommand {
 
-  public EmptyCommand() {
-  }
-
   /**
    * {@inheritDoc}
    */
   @Override
   public CommandResult execute(HttpServletRequest req) {
-    CommandResult result = new CommandResult(CommandResult.ResponseType.REDIRECT,
+    return new CommandResult(CommandResult.ResponseType.REDIRECT,
         ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_INDEX_REDIRECT));
-    return result;
   }
 }

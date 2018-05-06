@@ -20,8 +20,6 @@ public class GetProfilesCommand implements ActionCommand {
   private ProfileService profileService = ServiceFactory.getProfileService();
   private TariffService tariffService = ServiceFactory.getTariffService();
 
-  public GetProfilesCommand() {
-  }
 
   @Override
   public CommandResult execute(HttpServletRequest req) {

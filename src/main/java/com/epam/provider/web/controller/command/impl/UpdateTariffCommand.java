@@ -5,6 +5,8 @@ import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.util.RequestContent;
+import com.epam.provider.util.resource.ResourceConstants;
+import com.epam.provider.util.resource.ResourceManager;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
@@ -20,24 +22,24 @@ public class UpdateTariffCommand implements ActionCommand {
   private static final Logger LOGGER = LogManager.getLogger(UpdateTariffCommand.class);
   private TariffService tariffService = ServiceFactory.getTariffService();
 
-  public UpdateTariffCommand() {
-  }
-
   @Override
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult();
-    res.setControllerRequest(ActionType.GET_TARIFFS);
+
     Tariff tariff = RequestContent.getTariff(req);
+    RequestContent.init(req);
+    String lang=RequestContent.getCurrentLang();
     try {
       tariffService.updateTariff(tariff);
-      res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, "tariff was successfully updated");
+      RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_SUCCESS_UPDATE_TARIFF,lang));
+      res.setControllerRequest(ActionType.GET_TARIFFS);
     } catch (ServiceException e) {
-      res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, "invalid login or password");
+      res.appendParamToRedirect(Constants.PARAM_UPDATED_ENTITY, Constants.VALUE_UPDATED_ENTITY_PROFILE);
+      res.appendParamToRedirect(Constants.PARAM_PROFILE_ID,
+              tariff.getTariffId().toString());
+      RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_ERROR_UPDATE_TARIFF, lang));
       LOGGER.log(Level.ERROR, e.getMessage());
     }
-    req.setAttribute("updatableTariff", null);
-    req.getSession()
-        .setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_YES);
     return res;
   }
 

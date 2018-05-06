@@ -30,6 +30,7 @@ public class Constants {
   public static String PARAM_ROLE = "role";
   public static String PARAM_DESCRIPTION = "description";
   public static String PARAM_PROFILE_ID = "profile_id";
+  public static String PARAM_CHANGE_TARIFF="change_tariff";
 
   public static String PARAM_TARIFF_NAME = "tariff_name";
   public static String PARAM_RECEIVING_SPEED = "receiving_speed";
@@ -50,8 +51,8 @@ public class Constants {
   ////////////////////////////////////////////////////////////
 
   public static String PARAM_LANG = "lang";
-  public static String PARAM_ERROR_MESSAGE = "messageError";
-  public static String PARAM_SUCCESS_MESSAGE = "messageSuccess";
+  public static String ATTR_ERROR_MESSAGE = "messageError";
+  public static String ATTR_SUCCESS_MESSAGE = "messageSuccess";
   public static String PARAM_IS_SUCCESS = "isSuccess";
   public static String ROLE_NAME_ADMIN = "admin";
   public static String ROLE_NAME_CLIENT = "client";
@@ -67,6 +68,7 @@ public class Constants {
    * Needed to restore data about this entity by id for the further updates.
    */
   public static String PARAM_UPDATED_ENTITY = "entity";
+  public static String VALUE_UPDATED_ENTITY_PROFILE = "profile";
   public static String ATTR_UPDATABLE_TARIFF = "updatableTariff";
   public static String ATTR_UPDATABLE_PROFILE = "updatableProfile";
   public static String ATTR_ALL_TARIFFS = "tariffsAvailableForUser";
@@ -75,7 +77,8 @@ public class Constants {
   ////////////////////////////////////////////////////////
 
   public static String REQUEST_LOGIN = "/Login";
-  public static String REQUEST_TARIFFS = "/Tariffs  ";
-
+  public static String REQUEST_TARIFFS = "/Tariffs";
+  public static String REQUEST_UPDATE_PROFILE="/UpdateProfile";
+  public static String REQUEST_UPDATE_TARIFF="/UpdateTariff";
 
 }

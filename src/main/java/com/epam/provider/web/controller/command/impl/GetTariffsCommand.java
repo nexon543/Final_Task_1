@@ -4,6 +4,7 @@ import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.service.impl.TariffServiceImpl;
+import com.epam.provider.util.RequestContent;
 import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
@@ -34,7 +35,6 @@ public class GetTariffsCommand implements ActionCommand {
     try {
       countPages(req);
       setValues(req);
-      appendMessageIfExists(req, res);
       req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, "get_tariffs");
       return res;
     } catch (ServiceException e) {
@@ -44,17 +44,6 @@ public class GetTariffsCommand implements ActionCommand {
     req.getSession()
         .setAttribute(Constants.PARAM_DISPLAY_MESSAGE, Constants.VALUE_DISPLAY_MESSAGE_NO);
     return res;
-  }
-
-  private void appendMessageIfExists(HttpServletRequest req, CommandResult res) {
-    String message = req.getParameter(Constants.PARAM_ERROR_MESSAGE);
-    if (message != null) {
-      res.appendParamToRedirect(Constants.PARAM_ERROR_MESSAGE, message);
-    }
-    message = req.getParameter(Constants.PARAM_SUCCESS_MESSAGE);
-    if (message != null) {
-      res.appendParamToRedirect(Constants.PARAM_SUCCESS_MESSAGE, message);
-    }
   }
 
 
