@@ -1,20 +1,7 @@
 package com.epam.provider.web.controller.command;
 
-import com.epam.provider.web.controller.command.impl.AddBalance;
-import com.epam.provider.web.controller.command.impl.AddProfileCommand;
-import com.epam.provider.web.controller.command.impl.AddTariffCommand;
-import com.epam.provider.web.controller.command.impl.ChangeTariffCommand;
-import com.epam.provider.web.controller.command.impl.DeleteProfileCommand;
-import com.epam.provider.web.controller.command.impl.DeleteTariffCommand;
-import com.epam.provider.web.controller.command.impl.EmptyCommand;
-import com.epam.provider.web.controller.command.impl.GetProfilesCommand;
-import com.epam.provider.web.controller.command.impl.GetTariffsCommand;
-import com.epam.provider.web.controller.command.impl.GetUpdatePageCommand;
-import com.epam.provider.web.controller.command.impl.LoginCommand;
-import com.epam.provider.web.controller.command.impl.LogoutCommand;
-import com.epam.provider.web.controller.command.impl.SetLocal;
-import com.epam.provider.web.controller.command.impl.UpdateProfileCommand;
-import com.epam.provider.web.controller.command.impl.UpdateTariffCommand;
+import com.epam.provider.web.controller.command.impl.*;
+
 import java.util.EnumMap;
 
 /**
@@ -23,6 +10,7 @@ import java.util.EnumMap;
 public class ActionFactory {
 
   private static EnumMap<ActionType, ActionCommand> actions;
+  private static EnumMap<ActionType, AjaxActionCommand> ajaxActions;
 
   static {
     actions = new EnumMap<>(ActionType.class);
@@ -40,6 +28,10 @@ public class ActionFactory {
     actions.put(ActionType.GET_PROFILES, new GetProfilesCommand());
     actions.put(ActionType.DELETE_TARIFF, new DeleteTariffCommand());
     actions.put(ActionType.DELETE_PROFILE, new DeleteProfileCommand());
+
+    ajaxActions = new EnumMap<>(ActionType.class);
+    ajaxActions.put(ActionType.GET_TARIFFS_AJAX, new GetTariffsAjaxCommand());
+
   }
 
   public static ActionCommand defineCommand(String commandName) {
@@ -48,5 +40,9 @@ public class ActionFactory {
     }
     ActionType actionType = ActionType.valueOf(commandName.toUpperCase());
     return actions.get(actionType);
+  }
+
+  public static AjaxActionCommand defineAjaxCommand(String commandName){
+    return ajaxActions.get(commandName);
   }
 }

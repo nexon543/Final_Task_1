@@ -40,6 +40,7 @@ public class AddTariffCommand implements ActionCommand {
       tariffService.createTariff(tariff);
       RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE,
               ResourceManager.getMessage(ResourceConstants.M_SUCCESS_CREATE_TARIFF,lang));
+      res.setControllerRequest(ActionType.GET_TARIFFS);
     } catch (ServiceException e) {
       LOGGER.log(Level.ERROR, "can't add new tariff");
       res.setPage(ResourceManager.getPagePath(ResourceConstants.PAGE_NAME_ERROR));

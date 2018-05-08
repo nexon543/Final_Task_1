@@ -100,6 +100,7 @@
         </div>
     </div>
 </section>
+
 <%@include file="elementpage/jsLoading.jspf" %>
 </body>
 </html>

@@ -11,6 +11,7 @@ public enum ActionType {
   LOGIN,
   LOGOUT,
   GET_TARIFFS(CommandOwner.ANY),
+  GET_TARIFFS_AJAX(CommandOwner.ANY),
   ADD_TARIFF(CommandOwner.ADMIN),
   DELETE_TARIFF(CommandOwner.ADMIN),
   SET_LOCALE,
@@ -21,7 +22,7 @@ public enum ActionType {
   UPDATE_TARIFF(CommandOwner.ADMIN),
   UPDATE_PROFILE(CommandOwner.CLIENT_ADMIN),
   DELETE_PROFILE(CommandOwner.ADMIN),
-  GET_UPDATE_PAGE;
+  GET_UPDATE_PAGE(CommandOwner.ADMIN);
 
   private CommandOwner owner;
   private EnumSet<ParameterName> parameterNames;
