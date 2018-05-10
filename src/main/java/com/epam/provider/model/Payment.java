@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Payment implements Entity, Serializable {
 
   private Integer transactionId;
-  private Integer amount;
+  private Double amount;
   private Date date;
 
   /**
@@ -32,11 +32,11 @@ public class Payment implements Entity, Serializable {
     return this;
   }
 
-  public Integer getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
-  public Payment setAmount(Integer amount) {
+  public Payment setAmount(Double amount) {
     this.amount = amount;
     return this;
   }

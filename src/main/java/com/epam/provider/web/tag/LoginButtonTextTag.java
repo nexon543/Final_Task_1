@@ -1,6 +1,5 @@
 package com.epam.provider.web.tag;
 
-
 import com.epam.provider.model.Profile;
 import com.epam.provider.util.resource.ResourceConstants;
 import com.epam.provider.util.resource.ResourceManager;

@@ -9,6 +9,7 @@ import java.util.Set;
 import static com.epam.provider.dao.DBTableFieldName.*;
 
 public enum ParameterName {
+
   LOGIN(Constants.PARAM_LOGIN, RegExpConstant.LOGIN_REGEX),
   PASS(Constants.PARAM_PASSWORD, RegExpConstant.PASSWORD_REGEX),
   FIRST_NAME(Constants.PARAM_FIRST_NAME, RegExpConstant.NAME_REGEX),

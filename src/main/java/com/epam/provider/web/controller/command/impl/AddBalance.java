@@ -40,7 +40,7 @@ public class AddBalance implements ActionCommand {
     boolean isValid = Validator.isValid(RequestContent
         .getValuesForValidation(ParameterName.getParamSet(ActionType.ADD_BALANCE), req));
     if (isValid) {
-      Integer amount = Integer.parseInt(req.getParameter(Constants.PARAM_BALANCE));
+      Double amount = Double.parseDouble(req.getParameter(Constants.PARAM_BALANCE));
       Profile profile = (Profile) RequestContent.getSessionAttribute(Constants.ATTR_SESSION_PROFILE);
       Integer profileId = profile.getProfileId();
       try {

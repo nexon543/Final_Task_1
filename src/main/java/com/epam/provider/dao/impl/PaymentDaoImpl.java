@@ -24,7 +24,7 @@ public class PaymentDaoImpl extends AbstractDao<Payment> {
   @Override
   protected Payment getNewEntity(ResultSet rs) throws SQLException {
     return new Payment()
-        .setAmount(rs.getInt(PAYMENT_AMOUNT))
+        .setAmount(rs.getDouble(PAYMENT_AMOUNT))
         .setDate((rs.getDate(PAYMENT_DATE)))
         .setTransactionId(rs.getInt(PAYMENT_ID_TRANSACTIONS))
         .setIdProfiles(rs.getInt(PAYMENT_ID_TRANSACTIONS));
@@ -37,7 +37,7 @@ public class PaymentDaoImpl extends AbstractDao<Payment> {
 
   @Override
   void setPSCreate(PreparedStatement ps, Payment entity) throws SQLException {
-    ps.setInt(1, entity.getAmount());
+    ps.setDouble(1, entity.getAmount());
     ps.setDate(2, entity.getDate());
     ps.setInt(3, entity.getIdProfiles());
   }
