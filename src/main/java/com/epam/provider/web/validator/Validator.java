@@ -1,6 +1,7 @@
 package com.epam.provider.web.validator;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 
@@ -9,18 +10,18 @@ import java.util.regex.Pattern;
  */
 public class Validator {
 
-    private Validator(){
-        throw new IllegalStateException("Utility class");
-    }
+  private Validator() {
+    throw new IllegalStateException("Utility class");
+  }
 
-    /**
-     * Checks if is valid.
-     *
-     * @param paramsMap the params map
-     * @return true, if is valid
-     */
-    public static boolean isValid(Map<ParameterName, String> paramsMap) {
-        return paramsMap.entrySet().stream().allMatch((entry) ->
-                Pattern.matches((entry.getKey()).getRegexp(), entry.getValue()));
-    }
+  /**
+   * Checks if is valid.
+   *
+   * @param paramsMap the params map
+   * @return true, if is valid
+   */
+  public static boolean isValid(Map<ParameterName, String> paramsMap) {
+    return paramsMap.entrySet().stream().allMatch((entry) ->
+      Optional.ofNullable(entry.getValue()).map(v->Pattern.matches((entry.getKey()).getRegexp(), v)).orElse(false));
+  }
 }
