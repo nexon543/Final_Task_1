@@ -20,8 +20,9 @@ public class Validator {
    * @param paramsMap the params map
    * @return true, if is valid
    */
-  public static boolean isValid(Map<ParameterName, String> paramsMap) {
+  public static boolean isValid(Map<ValidationParameters, String> paramsMap) {
     return paramsMap.entrySet().stream().allMatch((entry) ->
-      Optional.ofNullable(entry.getValue()).map(v->Pattern.matches((entry.getKey()).getRegexp(), v)).orElse(false));
+        Optional.ofNullable(entry.getValue())
+            .map(v -> Pattern.matches((entry.getKey()).getRegexp(), v)).orElse(false));
   }
 }

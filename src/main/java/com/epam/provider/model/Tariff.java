@@ -105,7 +105,7 @@ public class Tariff implements Entity, Serializable {
 
   @Override
   public String toString() {
-    return "Tariff{" +
+    return "TariffField{" +
         "tariffId=" + tariffId +
         ", price=" + price +
         ", receivingSpeed=" + receivingSpeed +

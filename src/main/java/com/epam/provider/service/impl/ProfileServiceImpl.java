@@ -10,7 +10,7 @@ import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.web.controller.command.Constants;
-import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.ValidationParameters;
 import com.epam.provider.web.validator.Validator;
 import java.sql.Date;
 import java.util.HashMap;
@@ -53,8 +53,8 @@ public class ProfileServiceImpl implements ProfileService {
    */
   @Override
   public void addBalance(Double amount, Integer profileId) throws ServiceException {
-    boolean isValid = Validator.isValid(new HashMap<ParameterName, String>() {{
-      put(ParameterName.BALANCE, amount.toString());
+    boolean isValid = Validator.isValid(new HashMap<ValidationParameters, String>() {{
+      put(ValidationParameters.BALANCE, amount.toString());
     }});
     if (isValid) {
       Date date = new Date(new java.util.Date().getTime());
@@ -64,7 +64,7 @@ public class ProfileServiceImpl implements ProfileService {
       try {
         transactionGenericDao.create(payment);
       } catch (DaoException e) {
-        LOGGER.log(Level.ERROR, e.getStackTrace());
+        LOGGER.log(Level.ERROR, e.getMessage());
         throw new ServiceException("can't add balance", e);
       }
     }
@@ -75,7 +75,7 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       return profileDao.findByLoginPass(login, pass);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("can't find user", e);
     }
   }
@@ -88,7 +88,7 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       return profileDao.finByLogin(login).getProfileId() != null;
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("can't find user by login", e);
     }
   }
@@ -98,7 +98,7 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       profileDao.create(profile);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("Error in creatong profile", e);
     }
   }
@@ -108,7 +108,7 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       return profileDao.findAll(null);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("Error finding all profiles", e);
     }
   }
@@ -118,13 +118,13 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       return profileDao.findById(id, null);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("Error find by id", e);
     }
   }
 
   @Override
-  public boolean updateUser(Profile profile, Map<ParameterName, String> parametersForValidation)
+  public boolean updateUser(Profile profile, Map<ValidationParameters, String> parametersForValidation)
       throws ServiceException {
     if (Validator.isValid(parametersForValidation)) {
       try {
@@ -141,7 +141,7 @@ public class ProfileServiceImpl implements ProfileService {
         }
         return isEnableToUpdate;
       } catch (DaoException e) {
-        LOGGER.log(Level.ERROR, e.getStackTrace());
+        LOGGER.log(Level.ERROR, e.getMessage());
         throw new ServiceException("Error updating profile", e);
       }
     }
@@ -170,7 +170,7 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       profileDao.delete(profileId);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("updating profile tariff error", e);
     }
   }
@@ -183,7 +183,7 @@ public class ProfileServiceImpl implements ProfileService {
     try {
       return profileDao.finByLogin(login);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("can't find user by login", e);
     }
   }

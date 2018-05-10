@@ -11,7 +11,7 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
-import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.ValidationParameters;
 import com.epam.provider.web.validator.Validator;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Level;
@@ -36,7 +36,7 @@ public class AddProfileCommand implements ActionCommand {
     String lang = RequestContent.getCurrentLang();
     Profile profile = RequestContent.getProfile(req);
     boolean isValid = Validator.isValid(RequestContent
-        .getValuesForValidation(ParameterName.getParamSet(ActionType.ADD_PROFILE), req));
+        .getValuesForValidation(ValidationParameters.getParamSet(ActionType.ADD_PROFILE), req));
     if (isValid) {
       try {
         res.setState(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);

@@ -1,5 +1,6 @@
 package com.epam.provider.web.controller.command;
 
+
 /**
  * @author Gleb Akseonov
  */
@@ -20,19 +21,9 @@ public class Constants {
   /////////////////////PAGINATION SESSION PARAMS//////////////
   ////////////////////////////////////////////////////////////
 
-  public static String PARAM_FIRST_NAME = "first_name";
-  public static String PARAM_SECOND_NAME = "second_name";
-  public static String PARAM_PASSPORT = "passport";
-  public static String PARAM_TARIFFS_ID = "id_tariffs";
-  public static String PARAM_BALANCE = "balance";
-  public static String ATT_SESSION_PROFILE_TARIFF = "session_profile_tariff";
-  public static String PARAM_LOGIN = "login";
-  public static String PARAM_PASSWORD = "pass";
-  public static String PARAM_ROLE = "role";
-  public static String PARAM_DESCRIPTION = "description";
-  public static String PARAM_PROFILE_ID = "id_profiles";
-  public static String PARAM_CHANGE_TARIFF="change_tariff";
 
+  public static String ATT_SESSION_PROFILE_TARIFF = "session_profile_tariff";
+  public static String PARAM_CHANGE_TARIFF="change_tariff";
   public static String PARAM_TARIFF_NAME = "tariff_name";
   public static String PARAM_RECEIVING_SPEED = "receiving_speed";
   public static String PARAM_TRANSFER_SPEED = "transfer_speed";
@@ -66,7 +57,7 @@ public class Constants {
   public static String PARAM_DELET_ENTITY_ID = "id";
 
   /*
-   *Says which kind of entity (Profile or Tariff) will be updated.
+   *Says which kind of entity (ProfileField or TariffField) will be updated.
    * Needed to restore data about this entity by id for the further updates.
    */
   public static String PARAM_UPDATED_ENTITY = "entity";

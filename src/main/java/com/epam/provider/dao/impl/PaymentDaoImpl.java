@@ -1,10 +1,10 @@
 package com.epam.provider.dao.impl;
 
 import com.epam.provider.model.Payment;
+import com.epam.provider.model.fields.PaymentField;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static com.epam.provider.dao.DBTableFieldName.*;
 
 /**
  * @author Gleb Akseonov
@@ -24,10 +24,10 @@ public class PaymentDaoImpl extends AbstractDao<Payment> {
   @Override
   protected Payment getNewEntity(ResultSet rs) throws SQLException {
     return new Payment()
-        .setAmount(rs.getDouble(PAYMENT_AMOUNT))
-        .setDate((rs.getDate(PAYMENT_DATE)))
-        .setTransactionId(rs.getInt(PAYMENT_ID_TRANSACTIONS))
-        .setIdProfiles(rs.getInt(PAYMENT_ID_TRANSACTIONS));
+        .setAmount(rs.getDouble(PaymentField.AMOUNT.getName()))
+        .setDate((rs.getDate(PaymentField.DATE.getName())))
+        .setTransactionId(rs.getInt(PaymentField.ID_TRANSACTIONS.getName()))
+        .setIdProfiles(rs.getInt(PaymentField.ID_PROFILES.getName()));
   }
 
   @Override

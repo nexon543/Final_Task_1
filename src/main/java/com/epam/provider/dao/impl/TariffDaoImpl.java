@@ -1,11 +1,10 @@
 package com.epam.provider.dao.impl;
 
 import com.epam.provider.model.Tariff;
+import com.epam.provider.model.fields.TariffField;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.apache.log4j.Logger;
-import static com.epam.provider.dao.DBTableFieldName.*;
 
 /**
  * @author Gleb Akseonov
@@ -86,13 +85,13 @@ public class TariffDaoImpl extends AbstractDao<Tariff> {
   @Override
   protected Tariff getNewEntity(ResultSet rs) throws SQLException {
     Tariff tariff = new Tariff();
-    tariff.setTariffId(rs.getInt(TARIFF_ID));
-    tariff.setName(rs.getString(TARIFF_NAME));
-    tariff.setPrice(rs.getInt(TARIFF_PRICE));
-    tariff.setReceivingSpeed(rs.getInt(TARIFF_RECIEVE_SPEED));
-    tariff.setTransferSpeed(rs.getInt(TARIFF_TRANSFER_SPEED));
-    tariff.setDescription(rs.getString(TARIFF_DESCRIPTION));
-    tariff.setLang(rs.getString(TARIFF_LANG));
+    tariff.setTariffId(rs.getInt(TariffField.ID.getName()));
+    tariff.setName(rs.getString(TariffField.NAME.getName()));
+    tariff.setPrice(rs.getInt(TariffField.PRICE.getName()));
+    tariff.setReceivingSpeed(rs.getInt(TariffField.RECIEVE_SPEED.getName()));
+    tariff.setTransferSpeed(rs.getInt(TariffField.TRANSFER_SPEED.getName()));
+    tariff.setDescription(rs.getString(TariffField.DESCRIPTION.getName()));
+    tariff.setLang(rs.getString(TariffField.LANG.getName()));
     return tariff;
   }
 

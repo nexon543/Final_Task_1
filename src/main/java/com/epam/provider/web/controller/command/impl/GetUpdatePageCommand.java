@@ -2,6 +2,8 @@ package com.epam.provider.web.controller.command.impl;
 
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
+import com.epam.provider.model.fields.ProfileField;
+import com.epam.provider.model.fields.TariffField;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
@@ -11,6 +13,8 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Level;
@@ -25,33 +29,33 @@ public class GetUpdatePageCommand implements ActionCommand {
   @Override
   public CommandResult execute(HttpServletRequest req) {
     CommandResult result = new CommandResult();
+    CommandResult.CommandResultState resultState;
     String entity = req.getParameter(Constants.PARAM_UPDATED_ENTITY);
     RequestContent.init(req);
     String lang=RequestContent.getCurrentLang();
-    String idParam;
+    Optional<String> id;
     try {
       switch (entity) {
         case "tariff":
-          idParam = req.getParameter(Constants.PARAM_TARIFFS_ID);
           Tariff tariff;
-          if (idParam != null) {
-            Integer id = Integer.parseInt(idParam);
-            tariff = tariffService.getTariffById(id, lang);
-            result.setState(CommandResult.CommandResultState.FORWARD_UPDATE_TARIFF);
+          id=Optional.ofNullable(req.getParameter(TariffField.ID.getName())).filter(s->!"".equals(s));
+          if(id.isPresent()){
+            tariff=tariffService.getTariffById(Integer.parseInt(id.get()), lang);
+            resultState=CommandResult.CommandResultState.FORWARD_UPDATE_TARIFF;
           } else {
             tariff = new Tariff();
-            result.setState(CommandResult.CommandResultState.FORWARD_ADD_TARIFF);
+            resultState=CommandResult.CommandResultState.FORWARD_ADD_TARIFF;
           }
+          result.setState(resultState);
           req.setAttribute(Constants.ATTR_UPDATABLE_TARIFF, tariff);
           req.setAttribute(Constants.ATTR_STATUS, Constants.ADMIN_STATUS_UPDATE_TARIFF);
           req.setAttribute(Constants.PARAM_CURRENT_PAGE_REQUEST_NAME, Constants.REQUEST_UPDATE_TARIFF);
           break;
         case "profile":
-          idParam = req.getParameter(Constants.PARAM_PROFILE_ID);
           Profile profile;
-          if (idParam != null) {
-            Integer id = Integer.parseInt(idParam);
-            profile = profileService.getById(id);
+          id=Optional.ofNullable(req.getParameter(ProfileField.ID.getName())).filter(s->!"".equals(s));
+          if (id.isPresent()) {
+            profile = profileService.getById(Integer.parseInt(id.get()));
             result.setState(CommandResult.CommandResultState.FORWARD_UPDATE_PROFILE);
           } else {
             profile = new Profile();

@@ -1,6 +1,6 @@
 package com.epam.provider.web.controller.command;
 
-import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.ValidationParameters;
 import java.util.EnumSet;
 
 /**
@@ -25,7 +25,7 @@ public enum ActionType {
   GET_UPDATE_PAGE(CommandOwner.ADMIN);
 
   private CommandOwner owner;
-  private EnumSet<ParameterName> parameterNames;
+  private EnumSet<ValidationParameters> validationParameters;
 
   ActionType(CommandOwner owner) {
     this.owner = owner;

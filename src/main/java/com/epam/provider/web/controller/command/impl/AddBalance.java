@@ -1,6 +1,8 @@
 package com.epam.provider.web.controller.command.impl;
 
+
 import com.epam.provider.model.Profile;
+import com.epam.provider.model.fields.ProfileField;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.impl.ProfileServiceImpl;
@@ -11,7 +13,7 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
-import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.ValidationParameters;
 import com.epam.provider.web.validator.Validator;
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,9 +40,9 @@ public class AddBalance implements ActionCommand {
     RequestContent.init(req);
     String lang=RequestContent.getCurrentLang();
     boolean isValid = Validator.isValid(RequestContent
-        .getValuesForValidation(ParameterName.getParamSet(ActionType.ADD_BALANCE), req));
+        .getValuesForValidation(ValidationParameters.getParamSet(ActionType.ADD_BALANCE), req));
     if (isValid) {
-      Double amount = Double.parseDouble(req.getParameter(Constants.PARAM_BALANCE));
+      Double amount = Double.parseDouble(req.getParameter(ProfileField.BALANCE.getName()));
       Profile profile = (Profile) RequestContent.getSessionAttribute(Constants.ATTR_SESSION_PROFILE);
       Integer profileId = profile.getProfileId();
       try {

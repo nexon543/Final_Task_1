@@ -1,9 +1,8 @@
 package com.epam.provider.service;
 
 import com.epam.provider.model.Profile;
-import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.ValidationParameters;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +37,7 @@ public interface ProfileService {
 
   Profile getById(Integer id) throws ServiceException;
 
-  boolean updateUser(Profile profile, Map<ParameterName,String> parametersForValidation) throws ServiceException;
+  boolean updateUser(Profile profile, Map<ValidationParameters,String> parametersForValidation) throws ServiceException;
 
   boolean updateUsersTariff(Integer profileId, Integer newTariffId) throws ServiceException;
 

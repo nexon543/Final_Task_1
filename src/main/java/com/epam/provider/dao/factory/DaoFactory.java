@@ -13,20 +13,21 @@ import com.epam.provider.model.Tariff;
  */
 public class DaoFactory {
 
-  private DaoFactory(){
-    throw new IllegalStateException("Utility class");
-  }
-
   private static ProfileDao profileDao = new ProfileDaoImpl();
   private static GenericDao<Tariff> tariffDao = new TariffDaoImpl();
   private static GenericDao<Payment> transactionsDao = new PaymentDaoImpl();
+  private DaoFactory() {
+    throw new IllegalStateException("Utility class");
+  }
 
   public static ProfileDao getProfileDao() {
     return profileDao;
   }
-  public static GenericDao getTariffDao() {
+
+  public static GenericDao<Tariff> getTariffDao() {
     return tariffDao;
   }
+
   public static GenericDao<Payment> getTransactionDao() {
     return transactionsDao;
   }

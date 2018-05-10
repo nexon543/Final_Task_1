@@ -5,15 +5,14 @@ import com.epam.provider.dao.ProfileDao;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.dao.pool.ConnectionPoolException;
 import com.epam.provider.model.Profile;
-import com.sun.org.apache.bcel.internal.generic.BALOAD;
 
+import com.epam.provider.model.fields.ProfileField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.epam.provider.dao.DBTableFieldName.*;
 
 /**
  * @author Gleb Akseonov
@@ -189,18 +188,17 @@ public class ProfileDaoImpl extends AbstractDao<Profile> implements ProfileDao {
     @Override
     protected Profile getNewEntity(ResultSet rs) throws SQLException {
         return new Profile()
-                .setFirstName(rs.getString(PROFILE_FIRST_NAME))
-                .setBalance(rs.getDouble(PROFILE_BALANCE))
-                .setPassport(rs.getString(PROFILE_PASSPORT))
-                .setRegisterDate(rs.getDate(PROFILE_REGISTR_DATE))
-                .setSecondName(rs.getString(PROFILE_SECOND_NAME))
-                .setIdTariffs(rs.getInt(PROFILE_ID_TARIFFS))
-                .setProfileId(rs.getInt(PROFILE_ID))
-                .setLogin(rs.getString(PROFILE_LOGIN))
-                .setPassword(rs.getString(PROFILE_PASS))
-                .setRole(rs.getString(PROFILE_ROLE));
+                .setFirstName(rs.getString(ProfileField.FIRST_NAME.getName()))
+                .setBalance(rs.getDouble(ProfileField.BALANCE.getName()))
+                .setPassport(rs.getString(ProfileField.PASSPORT.getName()))
+                .setRegisterDate(rs.getDate(ProfileField.REGISTR_DATE.getName()))
+                .setSecondName(rs.getString(ProfileField.SECOND_NAME.getName()))
+                .setIdTariffs(rs.getInt(ProfileField.ID_TARIFFS.getName()))
+                .setProfileId(rs.getInt(ProfileField.ID.getName()))
+                .setLogin(rs.getString(ProfileField.LOGIN.getName()))
+                .setPassword(rs.getString(ProfileField.PASS.getName()))
+                .setRole(rs.getString(ProfileField.ROLE.getName()));
     }
-
 
     @Override
     public Integer countRecords() throws DaoException {
