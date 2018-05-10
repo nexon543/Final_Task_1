@@ -21,6 +21,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.Arrays;
+
 /**
  * This command is used to verify the user
  *
@@ -63,6 +65,7 @@ public class LoginCommand implements ActionCommand {
     } catch (ServiceException e) {
       result.setState(CommandResult.CommandResultState.REDIRECT_ERROR);
       LOGGER.log(Level.ERROR, "Error querying profile by login password");
+      Arrays.stream(e.getStackTrace()).forEach(ste->LOGGER.log(Level.ERROR,toString().toString()));
     }
     return result;
   }

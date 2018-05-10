@@ -20,7 +20,6 @@ public class Constants {
   /////////////////////PAGINATION SESSION PARAMS//////////////
   ////////////////////////////////////////////////////////////
 
-
   public static String PARAM_FIRST_NAME = "first_name";
   public static String PARAM_SECOND_NAME = "second_name";
   public static String PARAM_PASSPORT = "passport";
@@ -28,10 +27,10 @@ public class Constants {
   public static String PARAM_BALANCE = "balance";
   public static String ATT_SESSION_PROFILE_TARIFF = "session_profile_tariff";
   public static String PARAM_LOGIN = "login";
-  public static String PARAM_PASSWORD = "password";
+  public static String PARAM_PASSWORD = "pass";
   public static String PARAM_ROLE = "role";
   public static String PARAM_DESCRIPTION = "description";
-  public static String PARAM_PROFILE_ID = "profile_id";
+  public static String PARAM_PROFILE_ID = "id_profiles";
   public static String PARAM_CHANGE_TARIFF="change_tariff";
 
   public static String PARAM_TARIFF_NAME = "tariff_name";
@@ -47,8 +46,8 @@ public class Constants {
   public static String PARAM_CURRENT_PAGE = "currPage";
   public static String PARAM_NUMEBER_OF_PAGES = "pagesNumber";
   public static String PARAM_CURR_PAGE = "currentPage";
+  public static Integer VALUE_CURRENT_PAGE = 1;
   public static Integer VALUE_RECORDS_PERPAGE = 4;
-  public static Integer VALUE_CURRENT_PAGE=1;
   public static String PARAM_USERS = "users";
 
   ////////////////////////////////////////////////////////////

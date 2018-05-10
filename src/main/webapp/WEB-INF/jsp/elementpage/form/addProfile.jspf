@@ -18,15 +18,15 @@
     <div class="modal-body">
         <div class="form-group">
             <label for="first-name" class="col-form-label"><c:out value="${fFirstName}"/>:</label>
-            <input minlength="2" maxlength="25" type="text" class="form-control" name="first_name"
+            <input required="required" minlength="2" maxlength="25" type="text" class="form-control" name="first_name"
                    id="first-name" value="${createProfile.firstName}"/>
 
             <label for="second-name" class="col-form-label"><c:out value="${fSecondName}"/>:</label>
-            <input minlength="2" maxlength="25" type="text" name="second_name" class="form-control"
+            <input required="required" minlength="2" maxlength="25" type="text" name="second_name" class="form-control"
                    id="second-name" value="${createProfile.secondName}"/>
 
             <label for="passport" class="col-form-control"><c:out value="${fPassport}"/>:</label>
-            <input minlength="5" maxlength="15" type="text" class="form-control" name="passport"
+            <input required="required" minlength="5" maxlength="15" type="text" class="form-control" name="passport"
                    id="passport" value="${createProfile.passport}"/>
 
             <label for="id_tariffs" class="col-form-label">Tariff id:</label>
@@ -44,15 +44,15 @@
             </select>
 
             <label for="balance" class="col-form-label"><c:out value="${fBalance}"/>:</label>
-            <input type="number" min="0" max="550" class="form-control" name="balance" id="balance"
+            <input required="required" type="number" min="0" max="550" class="form-control" name="balance" id="balance"
                    value="${createProfile.balance}"/>
 
             <label for="user-name" class="col-form-label"><c:out value="${fLogin}"/>:</label>
-            <input minlength="4" maxlength="15" type="text" name="login" class="form-control"
+            <input required="required" minlength="4" maxlength="15" type="text" name="login" class="form-control"
                    id="user-name">
 
             <label for="password" class="col-form-label"><c:out value="${fPassword}"/>:</label>
-            <input minlength="4" maxlength="15" type="password" class="form-control" name="password"
+            <input required="required" minlength="4" maxlength="15" type="password" class="form-control" name="pass"
                    id="password"/>
 
             <label class="col-form-label"><c:out value="${fRole}"/>:</label>

@@ -52,7 +52,7 @@
             </div> <!-- /row -->
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-                    <input type="password" name="password" placeholder="Password"
+                    <input type="password" name="pass" placeholder="Password"
                            required="required"/>
 
                 </div> <!-- /col -->

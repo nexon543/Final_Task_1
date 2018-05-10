@@ -8,7 +8,7 @@ delimiter ;
 
 drop procedure if exists get_tariffs_by_id;
 delimiter //
-create procedure get_tariffs_by_id (IN inlang varchar(2), IN id int)
+create procedure get_tariffs_by_id (IN id int, IN inlang varchar(2))
 begin
 select * from mydb.tariffs t, mydb.ttariffs tt  where tt.id_tariffs=t.id_tariffs and tt.lang=inlang and t.id_tariffs=id  ORDER BY t.id_tariffs;
 end//	

@@ -5,20 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
+import static com.epam.provider.dao.DBTableFieldName.*;
 
 /**
  * @author Gleb Akseonov
  */
 public class TariffDaoImpl extends AbstractDao<Tariff> {
 
-  private static final Logger LOGGER = Logger.getLogger(TariffDaoImpl.class);
-
   private static final String SQL_SP_SELECT_ALL = "{call get_tariffs(?)}";
   private static final String SQL_SP_SELECT_BY_ID = "{call get_tariffs_by_id(?,?)}";
   private static final String SQL_SP_SELECT_LIMITED = "{call get_tariffs_limited(?, ?, ?)}";
   private static final String SQL_SP_INSERT = "{call insert_tariff(?,?,?,?,?,?)}";
   private static final String SQL_SP_UPDATE = "{call update_tariff(?,?,?,?,?,?,?)}";
-  private static final String SQL_SELECT_BY_ID = "select * from Tariffs where id_tariffs=?";
   private static final String SQL_COUNT_RECORDS = "select count(*) from Tariffs";
   private static final String SQL_DELETE_ID = "{call delete_tariff(?)}";
 
@@ -88,13 +86,13 @@ public class TariffDaoImpl extends AbstractDao<Tariff> {
   @Override
   protected Tariff getNewEntity(ResultSet rs) throws SQLException {
     Tariff tariff = new Tariff();
-    tariff.setTariffId(rs.getInt("id_tariffs"));
-    tariff.setName(rs.getString("name"));
-    tariff.setPrice(rs.getInt("price"));
-    tariff.setReceivingSpeed(rs.getInt("recieving_speed"));
-    tariff.setTransferSpeed(rs.getInt("transfer_speed"));
-    tariff.setDescription(rs.getString("description"));
-    tariff.setLang(rs.getString("lang"));
+    tariff.setTariffId(rs.getInt(TARIFF_ID));
+    tariff.setName(rs.getString(TARIFF_NAME));
+    tariff.setPrice(rs.getInt(TARIFF_PRICE));
+    tariff.setReceivingSpeed(rs.getInt(TARIFF_RECIEVE_SPEED));
+    tariff.setTransferSpeed(rs.getInt(TARIFF_TRANSFER_SPEED));
+    tariff.setDescription(rs.getString(TARIFF_DESCRIPTION));
+    tariff.setLang(rs.getString(TARIFF_LANG));
     return tariff;
   }
 

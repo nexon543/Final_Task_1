@@ -3,7 +3,8 @@ package com.epam.provider.web.listener;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.dao.pool.ConnectionPoolException;
 import com.epam.provider.util.resource.ResourceManager;
-import java.io.File;
+
+import java.io.*;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -31,7 +32,11 @@ public class ContextListener implements ServletContextListener {
     try {
       ConnectionPool.initialize();
     } catch (ConnectionPoolException e) {
-      LOGGER.log(Level.FATAL, e.getMessage());
+      StringBuilder str=new StringBuilder();
+      for(StackTraceElement ste:e.getStackTrace()){
+        str.append("\n"+ste.toString());
+      }
+      LOGGER.log(Level.FATAL, str);
     }
   }
 

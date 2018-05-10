@@ -14,10 +14,11 @@ import com.epam.provider.web.controller.command.Constants;
 import com.epam.provider.web.validator.ParameterName;
 import com.epam.provider.web.validator.Validator;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import java.sql.Date;
 
 public class AddProfileCommand implements ActionCommand {
 
@@ -40,6 +41,8 @@ public class AddProfileCommand implements ActionCommand {
       try {
         res.setState(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);
         if (!profileService.isUserExists(profile.getLogin())) {
+          Date date = new Date(new java.util.Date().getTime());
+          profile.setRegisterDate(date);
           profileService.createProfile(profile);
           RequestContent.setMessage(Constants.ATTR_SUCCESS_MESSAGE,
               ResourceManager.getMessage(ResourceConstants.M_SUCCESS,lang));

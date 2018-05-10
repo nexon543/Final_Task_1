@@ -131,7 +131,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
   }
 
 
-  PreparedStatement getPSFindAll(Connection con, String lang) throws SQLException {
+  protected PreparedStatement getPSFindAll(Connection con, String lang) throws SQLException {
     PreparedStatement ps = null;
     try {
       ps = con.prepareStatement(getSqlFindAll());
@@ -145,7 +145,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
     }
   }
 
-  PreparedStatement getPSFindById(Connection con, Integer id, String lang) throws SQLException {
+  protected PreparedStatement getPSFindById(Connection con, Integer id, String lang) throws SQLException {
     PreparedStatement ps = null;
     try {
       ps = con.prepareStatement(getSqlFindById());
@@ -160,7 +160,7 @@ public abstract class AbstractDao<T extends Entity> implements GenericDao<T> {
     }
   }
 
-  PreparedStatement getPSFindLimited(Connection con, Integer start, Integer end, String lang)
+  protected PreparedStatement getPSFindLimited(Connection con, Integer start, Integer end, String lang)
       throws SQLException {
     PreparedStatement ps = null;
     try {

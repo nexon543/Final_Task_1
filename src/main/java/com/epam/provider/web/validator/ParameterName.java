@@ -6,10 +6,11 @@ import com.epam.provider.web.controller.command.Constants;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Set;
+import static com.epam.provider.dao.DBTableFieldName.*;
 
 public enum ParameterName {
   LOGIN(Constants.PARAM_LOGIN, RegExpConstant.LOGIN_REGEX),
-  PASSWORD(Constants.PARAM_PASSWORD, RegExpConstant.PASSWORD_REGEX),
+  PASS(Constants.PARAM_PASSWORD, RegExpConstant.PASSWORD_REGEX),
   FIRST_NAME(Constants.PARAM_FIRST_NAME, RegExpConstant.NAME_REGEX),
   SECOND_NAME(Constants.PARAM_SECOND_NAME, RegExpConstant.NAME_REGEX),
   ID_TARIFFS(Constants.PARAM_TARIFFS_ID, RegExpConstant.INTEGER_REGEX),
@@ -26,10 +27,10 @@ public enum ParameterName {
 
   static {
     paramNameSets = new EnumMap<>(ActionType.class);
-    paramNameSets.put(ActionType.LOGIN, EnumSet.of(LOGIN, PASSWORD));
+    paramNameSets.put(ActionType.LOGIN, EnumSet.of(LOGIN, PASS));
     paramNameSets.put(ActionType.ADD_BALANCE, EnumSet.of(BALANCE));
     paramNameSets.put(ActionType.ADD_PROFILE,
-        EnumSet.of(FIRST_NAME, SECOND_NAME, PASSPORT, LOGIN, PASSWORD, ROLE, ID_TARIFFS));
+        EnumSet.of(FIRST_NAME, SECOND_NAME, PASSPORT, LOGIN, PASS, ROLE, ID_TARIFFS));
     paramNameSets.put(ActionType.ADD_TARIFF,
         EnumSet.of(DESCRIPTION, RECIEVING_SPEED, TRANSFER_SPEED, TARIFF_NAME, PRICE));
     paramNameSets.put(ActionType.UPDATE_TARIFF, paramNameSets.get(ActionType.ADD_TARIFF));

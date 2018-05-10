@@ -69,10 +69,10 @@ public class ConnectionPool {
         if (instance == null) {
           instance = new ConnectionPool();
           isInitialized.set(true);
+          LOGGER.log(Level.INFO, "connection pool was initialized");
         }
       } finally {
         instanceLock.unlock();
-        LOGGER.log(Level.INFO, "connection pool was initialized");
       }
     }
   }

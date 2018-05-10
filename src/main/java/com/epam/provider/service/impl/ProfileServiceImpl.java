@@ -9,11 +9,14 @@ import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
+import com.epam.provider.web.controller.command.ActionType;
 import com.epam.provider.web.controller.command.Constants;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.*;
 
+import com.epam.provider.web.validator.ParameterName;
+import com.epam.provider.web.validator.Validator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -117,20 +120,26 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public boolean updateUser(Profile profile) throws ServiceException {
-        try {
-            Profile existedProfile = findUser(profile.getLogin());
-            boolean isExistedProfileNull = existedProfile.getProfileId() == null;
-            boolean isExistedEqualsToNew = existedProfile.getProfileId().equals(profile.getProfileId());
-            boolean isEnableToUpdate = isExistedProfileNull || isExistedEqualsToNew;
-            if (isEnableToUpdate) {
-                profileDao.update(profile);
+    public boolean updateUser(Profile profile, Map<ParameterName,String> parametersForValidation) throws ServiceException {
+        if (Validator.isValid(parametersForValidation)) {
+            try {
+                Profile existedProfile = findUser(profile.getLogin());
+                boolean isExistedProfileNull = !Optional.ofNullable(existedProfile.getProfileId()).isPresent();
+                boolean isExistedEqualsToNew = false;
+                if (!isExistedProfileNull) {
+                    isExistedEqualsToNew = existedProfile.getProfileId().equals(profile.getProfileId());
+                }
+                boolean isEnableToUpdate = isExistedProfileNull || isExistedEqualsToNew;
+                if (isEnableToUpdate) {
+                    profileDao.update(profile);
+                }
+                return isEnableToUpdate;
+            } catch (DaoException e) {
+                LOGGER.log(Level.ERROR, e.getStackTrace());
+                throw new ServiceException("Error updating profile", e);
             }
-            return isEnableToUpdate;
-        } catch (DaoException e) {
-            LOGGER.log(Level.ERROR, e.getStackTrace());
-            throw new ServiceException("Error updating profile", e);
         }
+        return false;
     }
 
 

@@ -48,52 +48,30 @@
                                 </c:forEach>
                                 <p><i class="fa fa-bitcoin"></i> ${profile.balance}</p>
                                 <p>
-                                    <a href="${pageContext.request.contextPath}/Controller?command=get_update_page&profile_id=${profile.profileId}&entity=profile"
+                                    <a href="${pageContext.request.contextPath}/Controller?command=get_update_page&id_profiles=${profile.profileId}&entity=profile"
                                        class="edit" title="Edit"
                                        data-toggle="tooltip"><i
                                             class="material-icons">&#xE254;</i></a>
-                                    <a href="#profileDelete"
-                                       class="delete" title="Delete" data-target="#profileDelete"
+                                    <a href="#profileDelete${profile.profileId}"
+                                       class="delete" title="Delete" data-target="#profileDelete${profile.profileId}"
                                        data-toggle="modal"><i
                                             class="material-icons">
                                         &#xE872;</i></a>
                                     <!-- Modal -->
+                                        <%@include file="elementpage/modal/deleteProfile.jspf" %>
                             </div>
                         </div> <!-- /col -->
                         <c:if test="${(status.count+1)%2!=0}"> </div> </c:if><!-- /row -->
                     </c:if>
-                    <div class="modal fade" id="profileDelete" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">${titleModal}</h5>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                        ${contentModal}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">${closeModal}
-                                    </button>
-                                    <a style="background-color: red" type="button"
-                                       href="${pageContext.request.contextPath}/Controller?command=delete_profile&id=${profile.profileId}&entity=profile"
-                                       class="btn btn-primary">${acceptModal}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     </c:forEach>
             </section>
             </table>
 
             <ul class="pagination" align="center">
                 <c:forEach begin="1" end="${pagesNumber}" var="page">
-                    <li><a href="${pageContext.request.contextPath}/Controller?command=get_profiles&currentPage=${page}">${page}</a>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/Controller?command=get_profiles&currentPage=${page}">${page}</a>
                     </li>
                 </c:forEach>
             </ul>
