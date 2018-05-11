@@ -33,7 +33,7 @@ public class AddTariffCommand implements ActionCommand {
   @Override
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult();
-    RequestContent.init(req);
+    RequestContent.initSession(req);
     String lang=RequestContent.getCurrentLang();
     Tariff tariff = RequestContent.getTariff(req);
     try {

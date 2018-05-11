@@ -92,7 +92,7 @@ public class TariffServiceImpl implements TariffService {
     try {
       return tariffDAO.findById(id, lang);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException("can't find tariff by id");
     }
   }
@@ -102,7 +102,7 @@ public class TariffServiceImpl implements TariffService {
     try {
       tariffDAO.delete(id);
     } catch (DaoException e) {
-      LOGGER.log(Level.ERROR, e.getStackTrace());
+      LOGGER.log(Level.ERROR, e.getMessage());
       throw new ServiceException(("can't delete tariff with id=" + id));
     }
   }

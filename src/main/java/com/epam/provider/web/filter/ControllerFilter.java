@@ -31,7 +31,7 @@ public class ControllerFilter implements Filter {
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
       FilterChain filterChain) throws IOException, ServletException {
-    RequestContent.init((HttpServletRequest)servletRequest);
+    RequestContent.initSession((HttpServletRequest)servletRequest);
     HttpServletRequest req = (HttpServletRequest) servletRequest;
     HttpServletResponse resp = (HttpServletResponse) servletResponse;
     String role = RequestContent.getCurrentUserRole();

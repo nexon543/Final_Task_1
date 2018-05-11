@@ -7,7 +7,7 @@ create database if not exists mydb;
 DROP TABLE IF EXISTS `mydb`.`Tariffs`;
 CREATE TABLE IF NOT EXISTS `mydb`.`Tariffs` (
   `id_tariffs` INT NOT NULL AUTO_INCREMENT,
-  `recieving_speed` INT NULL,
+  `receiving_speed` INT NULL,
   `transfer_speed` INT NULL,
   `price` INT NULL,
   PRIMARY KEY (`id_tariffs`))

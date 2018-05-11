@@ -32,7 +32,7 @@ public class AddProfileCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
 
     CommandResult res = new CommandResult();
-    RequestContent.init(req);
+    RequestContent.initSession(req);
     String lang = RequestContent.getCurrentLang();
     Profile profile = RequestContent.getProfile(req);
     boolean isValid = Validator.isValid(RequestContent

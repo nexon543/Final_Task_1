@@ -1,9 +1,10 @@
 package com.epam.provider.web.controller.command.impl;
 
+import com.epam.provider.model.Field;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
-import com.epam.provider.model.fields.ProfileField;
-import com.epam.provider.model.fields.TariffField;
+
+
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
@@ -14,9 +15,8 @@ import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -31,14 +31,14 @@ public class GetUpdatePageCommand implements ActionCommand {
     CommandResult result = new CommandResult();
     CommandResult.CommandResultState resultState;
     String entity = req.getParameter(Constants.PARAM_UPDATED_ENTITY);
-    RequestContent.init(req);
+    RequestContent.initSession(req);
     String lang=RequestContent.getCurrentLang();
     Optional<String> id;
     try {
       switch (entity) {
         case "tariff":
           Tariff tariff;
-          id=Optional.ofNullable(req.getParameter(TariffField.ID.getName())).filter(s->!"".equals(s));
+          id=Optional.ofNullable(req.getParameter(Field.TARIFF_ID.getName())).filter(s->!"".equals(s));
           if(id.isPresent()){
             tariff=tariffService.getTariffById(Integer.parseInt(id.get()), lang);
             resultState=CommandResult.CommandResultState.FORWARD_UPDATE_TARIFF;
@@ -53,7 +53,7 @@ public class GetUpdatePageCommand implements ActionCommand {
           break;
         case "profile":
           Profile profile;
-          id=Optional.ofNullable(req.getParameter(ProfileField.ID.getName())).filter(s->!"".equals(s));
+          id=Optional.ofNullable(req.getParameter(Field.PROFILE_ID.getName())).filter(s->!"".equals(s));
           if (id.isPresent()) {
             profile = profileService.getById(Integer.parseInt(id.get()));
             result.setState(CommandResult.CommandResultState.FORWARD_UPDATE_PROFILE);

@@ -30,7 +30,7 @@ GetTariffsAjaxCommand implements AjaxActionCommand {
     public JSONObject execute(HttpServletRequest req) {
         JSONObject tariffsResponse = new JSONObject();
         CommandResult res = new CommandResult(CommandResult.CommandResultState.FORWARD_TARIFF);
-        RequestContent.init(req);
+        RequestContent.initSession(req);
         String lang = RequestContent.getCurrentLang();
         try {
             countPages(req);

@@ -21,12 +21,17 @@
 <%@include file="elementpage/menu/login.jspf" %>
 
 <section class="section" id="head">
-    <%@include file="elementpage/message.jspf" %>
+    <div class="row">
+        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+            <%@include file="elementpage/message.jspf" %>
+        </div>
+    </div>
     <div class="container">
         <form name="loginForm" method="post" action="${pageContext.request.contextPath}/Controller"
               accept-charset="UTF-8">
             <div class="row">
                 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+
                     <div>
                         <div class="login" class="container text-center login">
                             <input type="hidden" name="command" value="login"/>

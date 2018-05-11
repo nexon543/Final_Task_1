@@ -3,7 +3,6 @@ package com.epam.provider.web.controller.command.impl;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
 import com.epam.provider.service.ProfileService;
-import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
 import com.epam.provider.util.RequestContent;
@@ -13,17 +12,15 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class ChangeTariffCommand implements ActionCommand {
 
   private TariffService tariffService = ServiceFactory.getTariffService();
   private ProfileService profileService = ServiceFactory.getProfileService();
-
   @Override
   public CommandResult execute(HttpServletRequest req) {
-    Profile profile = RequestContent.getSessionProfile(req);
-    RequestContent.init(req);
+    RequestContent.initSession(req);
+    Profile profile = RequestContent.getSessionProfile();
     String lang=RequestContent.getCurrentLang();
     CommandResult res = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
     try {

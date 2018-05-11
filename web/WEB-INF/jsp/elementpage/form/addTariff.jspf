@@ -13,7 +13,7 @@
     <div class="modal-body">
         <div class="form-group">
             <label for="recipient-name" class="col-form-label"><c:out value="${fName}"/>:</label>
-            <input required="required" minlength="2" maxlength="25" type="text" name="tariff_name"
+            <input required="required" minlength="2" maxlength="25" type="text" name="name"
                    class="form-control"
                    id="recipient-name"/>
         </div>
@@ -30,11 +30,11 @@
             <input required="required" type="number" min="25" class="form-control"
                    name="transfer_speed"
                    id="transf-speed"/>
-            <label for="recieving-speed" class="col-form-label"><c:out value="${fReceiveSpeed}"/>
+            <label for="receiving-speed" class="col-form-label"><c:out value="${fReceiveSpeed}"/>
                 :</label>
             <input required="required" type="number" min="25" name="receiving_speed"
                    class="form-control"
-                   id="recieving-speed"/>
+                   id="receiving-speed"/>
             <label for="price" class="col-form-label"><c:out value="${fPrice}"/> :</label>
             <input required="required" type="number" min="0" max="250" class="form-control"
                    name="price"

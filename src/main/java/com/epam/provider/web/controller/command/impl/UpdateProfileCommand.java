@@ -1,7 +1,7 @@
 package com.epam.provider.web.controller.command.impl;
 
+import com.epam.provider.model.Field;
 import com.epam.provider.model.Profile;
-import com.epam.provider.model.fields.ProfileField;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
@@ -20,7 +20,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.EnumMap;
+import java.util.Map;
 
 public class UpdateProfileCommand implements ActionCommand {
 
@@ -40,9 +40,9 @@ public class UpdateProfileCommand implements ActionCommand {
 
         Profile updatedProfile = RequestContent.getProfile(req);
         CommandResult res = new CommandResult();
-        RequestContent.init(req);
+        RequestContent.initSession(req);
         String lang=RequestContent.getCurrentLang();
-        EnumMap<ValidationParameters,String> parametersForValidation=RequestContent
+        Map<ValidationParameters,String> parametersForValidation=RequestContent
                 .getValuesForValidation(ValidationParameters.getParamSet(ActionType.UPDATE_PROFILE),req);
         try{
                 boolean isUpdated = profileService.updateUser(updatedProfile, parametersForValidation);
@@ -54,7 +54,7 @@ public class UpdateProfileCommand implements ActionCommand {
                     res.setState(CommandResult.CommandResultState.GET_UPDATE_PAGE);
                     RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE, ResourceManager.getMessage(ResourceConstants.M_PROFILE_EXISTS,lang));
                     res.appendParamToRedirect(Constants.PARAM_UPDATED_ENTITY, Constants.VALUE_UPDATED_ENTITY_PROFILE);
-                    res.appendParamToRedirect(ProfileField.ID.getName(),
+                    res.appendParamToRedirect(Field.PROFILE_ID.getName(),
                             updatedProfile.getProfileId().toString());
                     LOGGER.log(Level.INFO, "attempt to update profile with invalid data");
                 }

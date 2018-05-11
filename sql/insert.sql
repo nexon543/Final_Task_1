@@ -1,8 +1,8 @@
-INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `recieving_speed`, `transfer_speed`, `price`) VALUES (1, 3072, 512, 25);
-INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `recieving_speed`, `transfer_speed`, `price`) VALUES (2, 4096, 512, 75);
-INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `recieving_speed`, `transfer_speed`, `price`) VALUES (3, 6144, 512, 16.5);
-INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `recieving_speed`, `transfer_speed`, `price`) VALUES (4, 8192, 512, 16.5);
-INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `recieving_speed`, `transfer_speed`, `price`) VALUES (5, 3072, 512, 16.5);
+INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `receiving_speed`, `transfer_speed`, `price`) VALUES (1, 3072, 512, 25);
+INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `receiving_speed`, `transfer_speed`, `price`) VALUES (2, 4096, 512, 75);
+INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `receiving_speed`, `transfer_speed`, `price`) VALUES (3, 6144, 512, 16.5);
+INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `receiving_speed`, `transfer_speed`, `price`) VALUES (4, 8192, 512, 16.5);
+INSERT INTO `mydb`.`Tariffs` (`id_tariffs`, `receiving_speed`, `transfer_speed`, `price`) VALUES (5, 3072, 512, 16.5);
 
 INSERT INTO `mydb`.`Langs` (`lang`,`lname`) VALUES ('de','German');
 INSERT INTO `mydb`.`Langs` (`lang`,`lname`) VALUES ('en','English');

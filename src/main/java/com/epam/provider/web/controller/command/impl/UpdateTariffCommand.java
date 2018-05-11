@@ -1,7 +1,7 @@
 package com.epam.provider.web.controller.command.impl;
 
+import com.epam.provider.model.Field;
 import com.epam.provider.model.Tariff;
-import com.epam.provider.model.fields.ProfileField;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
 import com.epam.provider.service.TariffService;
@@ -27,7 +27,7 @@ public class UpdateTariffCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult();
     Tariff tariff = RequestContent.getTariff(req);
-    RequestContent.init(req);
+    RequestContent.initSession(req);
     String lang = RequestContent.getCurrentLang();
     try {
       tariffService.updateTariff(tariff);
@@ -37,7 +37,7 @@ public class UpdateTariffCommand implements ActionCommand {
     } catch (ServiceException e) {
       res.appendParamToRedirect(Constants.PARAM_UPDATED_ENTITY,
           Constants.VALUE_UPDATED_ENTITY_PROFILE);
-      res.appendParamToRedirect(ProfileField.ID.getName(),
+      res.appendParamToRedirect(Field.TARIFF_ID.getName(),
           tariff.getTariffId().toString());
       RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
           ResourceManager.getMessage(ResourceConstants.M_ERROR_UPDATE_TARIFF, lang));

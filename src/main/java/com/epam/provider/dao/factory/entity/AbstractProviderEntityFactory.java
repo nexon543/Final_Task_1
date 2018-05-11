@@ -1,13 +1,18 @@
 package com.epam.provider.dao.factory.entity;
 
 import com.epam.provider.model.Entity;
-import com.epam.provider.model.fields.TableFieldName;
+import com.epam.provider.model.Field;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
+
 
 public abstract class AbstractProviderEntityFactory {
 
-  public void initFields(Map<TableFieldName, String> propertyAndValue) {
-    propertyAndValue.forEach(this::setEntityField);
+  protected Entity entity;
+  protected Map<Field, Consumer<String>> fieldSetters;
+  public void initFields(Map<Field, String> fieldKeyValue) {
+    fieldKeyValue.forEach(this::setEntityField);
   }
 
   protected Float getFloat(String value) {
@@ -22,7 +27,18 @@ public abstract class AbstractProviderEntityFactory {
     return Integer.parseInt(value);
   }
 
-  public abstract Entity getEntity(Map<TableFieldName, String> properties);
+  public Entity getEntity(Map<Field, String> fieldKeyValue)
+  {
+    createObject();
+    initFields(fieldKeyValue);
+    return entity;
+  }
 
-  protected abstract void setEntityField(TableFieldName propertyName, String propertyValue);
+  protected abstract void createObject();
+  protected void setEntityField(Field propertyName, String propertyValue){
+    if (Optional.ofNullable(propertyValue).filter(s -> !"".equals(s)).isPresent()) {
+      Optional.ofNullable(fieldSetters.get(propertyName))
+              .ifPresent(c -> c.accept(propertyValue));
+    }
+  }
 }

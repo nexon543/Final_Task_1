@@ -4,9 +4,10 @@ import com.epam.provider.dao.DaoException;
 import com.epam.provider.dao.ProfileDao;
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.dao.pool.ConnectionPoolException;
+import com.epam.provider.model.Field;
 import com.epam.provider.model.Profile;
 
-import com.epam.provider.model.fields.ProfileField;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -188,16 +189,16 @@ public class ProfileDaoImpl extends AbstractDao<Profile> implements ProfileDao {
     @Override
     protected Profile getNewEntity(ResultSet rs) throws SQLException {
         return new Profile()
-                .setFirstName(rs.getString(ProfileField.FIRST_NAME.getName()))
-                .setBalance(rs.getDouble(ProfileField.BALANCE.getName()))
-                .setPassport(rs.getString(ProfileField.PASSPORT.getName()))
-                .setRegisterDate(rs.getDate(ProfileField.REGISTR_DATE.getName()))
-                .setSecondName(rs.getString(ProfileField.SECOND_NAME.getName()))
-                .setIdTariffs(rs.getInt(ProfileField.ID_TARIFFS.getName()))
-                .setProfileId(rs.getInt(ProfileField.ID.getName()))
-                .setLogin(rs.getString(ProfileField.LOGIN.getName()))
-                .setPassword(rs.getString(ProfileField.PASS.getName()))
-                .setRole(rs.getString(ProfileField.ROLE.getName()));
+                .setFirstName(rs.getString(Field.PROFILE_FIRST_NAME.getName()))
+                .setBalance(rs.getDouble(Field.PROFILE_BALANCE.getName()))
+                .setPassport(rs.getString(Field.PROFILE_PASSPORT.getName()))
+                .setRegisterDate(rs.getDate(Field.PROFILE_REGISTR_DATE.getName()))
+                .setSecondName(rs.getString(Field.PROFILE_SECOND_NAME.getName()))
+                .setIdTariffs(rs.getInt(Field.PROFILE_ID_TARIFFS.getName()))
+                .setProfileId(rs.getInt(Field.PROFILE_ID.getName()))
+                .setLogin(rs.getString(Field.PROFILE_LOGIN.getName()))
+                .setPassword(rs.getString(Field.PROFILE_PASS.getName()))
+                .setRole(rs.getString(Field.PROFILE_ROLE.getName()));
     }
 
     @Override

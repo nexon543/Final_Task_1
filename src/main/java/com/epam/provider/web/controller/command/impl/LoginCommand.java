@@ -1,8 +1,8 @@
 package com.epam.provider.web.controller.command.impl;
 
+import com.epam.provider.model.Field;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
-import com.epam.provider.model.fields.ProfileField;
 import com.epam.provider.service.ProfileService;
 import com.epam.provider.service.ServiceException;
 import com.epam.provider.service.ServiceFactory;
@@ -42,15 +42,15 @@ public class LoginCommand implements ActionCommand {
    */
   @Override
   public CommandResult execute(HttpServletRequest req) {
-    String login = req.getParameter(ProfileField.LOGIN.getName());
-    String pass = req.getParameter(ProfileField.PASS.getName());
-    RequestContent.init(req);
+    String login = req.getParameter(Field.PROFILE_LOGIN.getName());
+    String pass = req.getParameter(Field.PROFILE_PASS.getName());
+    RequestContent.initSession(req);
     String lang=RequestContent.getCurrentLang();
     CommandResult result = new CommandResult(CommandResult.CommandResultState.REDIRECT_LOGIN);
     boolean isValid = Validator.isValid(
         RequestContent.getValuesForValidation(ValidationParameters.getParamSet(ActionType.LOGIN), req));
     if (!isValid) {
-      result.appendParamToRedirect(Constants.ATTR_ERROR_MESSAGE,
+      RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
           ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN, lang));
       return result;
     }
@@ -59,14 +59,14 @@ public class LoginCommand implements ActionCommand {
       if (profile.getProfileId() != null) {
         setSessionForUser(profile, req);
       } else {
-        req.setAttribute(Constants.ATTR_ERROR_MESSAGE,
+        RequestContent.setMessage(Constants.ATTR_ERROR_MESSAGE,
             ResourceManager.getMessage(ResourceConstants.M_ERROR_LOGIN, lang));
         result.setState(CommandResult.CommandResultState.REDIRECT_LOGIN);
       }
     } catch (ServiceException e) {
       result.setState(CommandResult.CommandResultState.REDIRECT_ERROR);
       LOGGER.log(Level.ERROR, "Error querying profile by login password");
-      Arrays.stream(e.getStackTrace()).forEach(ste->LOGGER.log(Level.ERROR,toString().toString()));
+      Arrays.stream(e.getStackTrace()).forEach(ste->LOGGER.log(Level.ERROR,ste.toString()));
     }
     return result;
   }

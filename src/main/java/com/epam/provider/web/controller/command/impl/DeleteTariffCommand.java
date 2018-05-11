@@ -10,7 +10,7 @@ import com.epam.provider.web.controller.command.ActionCommand;
 import com.epam.provider.web.controller.command.CommandResult;
 import com.epam.provider.web.controller.command.Constants;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -24,7 +24,7 @@ public class DeleteTariffCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult(CommandResult.CommandResultState.GET_TARIFFS);
     String idStr = req.getParameter(Constants.PARAM_DELET_ENTITY_ID);
-    RequestContent.init(req);
+    RequestContent.initSession(req);
     String lang=RequestContent.getCurrentLang();
     if (idStr != null) {
       Integer id = Integer.parseInt(idStr);

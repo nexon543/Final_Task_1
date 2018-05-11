@@ -1,19 +1,15 @@
 package com.epam.provider.util;
 
 import com.epam.provider.dao.factory.entity.ProfileFactory;
+import com.epam.provider.dao.factory.entity.TariffFactory;
+import com.epam.provider.model.Field;
 import com.epam.provider.model.Profile;
 import com.epam.provider.model.Tariff;
-import com.epam.provider.model.fields.ProfileField;
-import com.epam.provider.model.fields.TableFieldName;
 import com.epam.provider.web.controller.command.Constants;
 import com.epam.provider.web.validator.ValidationParameters;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+
+import java.io.Serializable;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,11 +28,14 @@ public class RequestContent {
     return (String) getSessionAttribute(Constants.PARAM_LOCAL);
   }
 
-  public static void init(HttpServletRequest request) {
+  /**
+   * Need to call this method before using other methods
+   */
+  public static void initSession(HttpServletRequest request) {
     session.set(request.getSession(true));
   }
 
-  public static void setSessionAttribute(String sessionAttrKey, Object attrValue) {
+  public static void setSessionAttribute(String sessionAttrKey, Serializable attrValue) {
     session.get().setAttribute(sessionAttrKey, attrValue);
   }
 
@@ -50,35 +49,36 @@ public class RequestContent {
   }
 
   public static Profile getProfile(HttpServletRequest req) {
-    Map<TableFieldName, String> fieldKeyValue = getParametersFromRequest(
-       new HashSet<>(Arrays.asList(ProfileField.values())), req);
+    Map<Field, String> fieldKeyValue = getParametersFromRequest(
+            Field.profileFields, req);
     return (Profile) ProfileFactory.getInstance().getEntity(fieldKeyValue);
   }
 
-  public static Map<TableFieldName, String> getParametersFromRequest(
-      Set<TableFieldName> parameterKeys, HttpServletRequest req) {
-    Map<TableFieldName, String> params = new HashMap<>();
+  public static Tariff getTariff(HttpServletRequest req) {
+    Map<Field, String> fieldKeyValue = getParametersFromRequest(
+            Field.tariffFields, req);
+    return (Tariff) TariffFactory.getInstance().getEntity(fieldKeyValue);
+  }
+
+
+  public static Map<Field, String> getParametersFromRequest(
+      Set<Field> parameterKeys, HttpServletRequest req) {
+    Map<Field, String> params = new HashMap<>();
     parameterKeys.forEach(k -> params.put(k, req.getParameter(k.getName())));
     return params;
   }
 
   public static String getCurrentUserRole() {
-    return Optional.ofNullable(session.get().getAttribute(Constants.PARAM_USER)).map(o->((Profile)o).getRole()).orElseGet(null);
+    return Optional.ofNullable(session.get()).map(s->s.getAttribute(Constants.PARAM_USER)).
+            map(o->((Profile)o).getRole()).orElse(null);
   }
 
-  public static Tariff getTariff(HttpServletRequest req) {
-    Tariff newTariff = new Tariff();
-    return newTariff;
+
+  public static Profile getSessionProfile() {
+      return Optional.ofNullable((Profile) session.get().getAttribute(Constants.ATTR_SESSION_PROFILE)).orElse(null);
   }
 
-  public static Profile getSessionProfile(HttpServletRequest req) {
-    if (session != null) {
-      return (Profile) session.get().getAttribute(Constants.ATTR_SESSION_PROFILE);
-    }
-    return null;
-  }
-
-  public static EnumMap<ValidationParameters, String> getValuesForValidation(
+  public static Map<ValidationParameters, String> getValuesForValidation(
       Set<ValidationParameters> validationParameters, HttpServletRequest req) {
     EnumMap<ValidationParameters, String> parameters = new EnumMap<>(ValidationParameters.class);
     for (ValidationParameters validationParameter : validationParameters) {

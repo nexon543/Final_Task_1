@@ -9,12 +9,12 @@
       action="${pageContext.request.contextPath}/Controller?command=update_tariff">
     <input type="text" style="display:none" name="lang" class="form-control"
            value="en">
-    <input type="number" name="id" style="display: none"
+    <input type="number" name="id_tariffs" style="display: none"
            value="${updatableTariff.tariffId}">
     <div class="modal-body">
         <div class="form-group">
             <label for="recipient-name" class="col-form-label"><c:out value="${fName}"/>:</label>
-            <input required="required" minlength="2" maxlength="25" type="text" name="tariff_name"
+            <input required="required" minlength="2" maxlength="25" type="text" name="name"
                    class="form-control"
                    id="recipient-name"
                    value="${updatableTariff.name}">
@@ -33,11 +33,11 @@
                    name="transfer_speed"
                    id="transf-speed"
                    value="${updatableTariff.transferSpeed}">
-            <label for="recieving-speed" class="col-form-label"><c:out value="${fReceiveSpeed}"/>
+            <label for="receiving-speed" class="col-form-label"><c:out value="${fReceiveSpeed}"/>
                 :</label>
             <input required="required" type="number" min="25" name="receiving_speed"
                    class="form-control"
-                   id="recieving-speed"
+                   id="receiving-speed"
                    value="${updatableTariff.receivingSpeed}">
             <label for="price" class="col-form-label"><c:out value="${fPrice}"/> :</label>
             <input required="required" type="number" min="0" max="250" class="form-control"

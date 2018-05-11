@@ -23,7 +23,7 @@ public class DeleteProfileCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
     CommandResult res = new CommandResult(CommandResult.CommandResultState.CONTROLLER_GET_PROFILE);
     String idStr = req.getParameter(Constants.PARAM_DELET_ENTITY_ID);
-    RequestContent.init(req);
+    RequestContent.initSession(req);
     String lang=RequestContent.getCurrentLang();
     if (idStr != null) {
       Integer id = Integer.parseInt(idStr);
