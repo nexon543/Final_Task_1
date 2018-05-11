@@ -24,13 +24,13 @@ public enum Field {
     TARIFF_ID("id_tariffs"),
     TARIFF_NAME("name"),
     TARIFF_PRICE("price"),
-    TARIFF_RECIEVE_SPEED("receiving_speed"),
+    TARIFF_RECEIVE_SPEED("receiving_speed"),
     TARIFF_TRANSFER_SPEED("transfer_speed"),
     TARIFF_DESCRIPTION("description"),
     TARIFF_LANG("lang");
 
     public static Set<Field> tariffFields= Collections.unmodifiableSet(EnumSet.of(TARIFF_DESCRIPTION,TARIFF_ID,TARIFF_LANG,TARIFF_NAME,
-            TARIFF_PRICE,TARIFF_RECIEVE_SPEED,TARIFF_TRANSFER_SPEED));
+            TARIFF_PRICE, TARIFF_RECEIVE_SPEED,TARIFF_TRANSFER_SPEED));
     public static Set<Field> profileFields= Collections.unmodifiableSet(EnumSet.of(PROFILE_FIRST_NAME,PROFILE_BALANCE,PROFILE_ID,
             PROFILE_ID_TARIFFS,PROFILE_LOGIN,PROFILE_PASS,PROFILE_PASSPORT,PROFILE_REGISTR_DATE,PROFILE_ROLE,PROFILE_SECOND_NAME));
     private final String name;

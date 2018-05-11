@@ -21,7 +21,7 @@ public enum ValidationParameters {
   DESCRIPTION(Field.TARIFF_DESCRIPTION, RegExpConstant.DESCRIPTION),
   TARIFF_NAME(Field.TARIFF_NAME, RegExpConstant.TARIFF_NAME),
   TRANSFER_SPEED(Field.TARIFF_TRANSFER_SPEED, RegExpConstant.INTEGER),
-  RECIEVE_SPEED(Field.TARIFF_RECIEVE_SPEED, RegExpConstant.INTEGER),
+  RECIEVE_SPEED(Field.TARIFF_RECEIVE_SPEED, RegExpConstant.INTEGER),
   PRICE(Field.TARIFF_PRICE, RegExpConstant.INTEGER);
 
   private static Map<ActionType, Set<ValidationParameters>> validationFieldSet;

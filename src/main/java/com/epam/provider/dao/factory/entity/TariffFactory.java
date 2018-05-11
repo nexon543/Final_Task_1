@@ -5,8 +5,6 @@ import static com.epam.provider.model.Field.*;
 import com.epam.provider.model.Field;
 import com.epam.provider.model.Tariff;
 import java.util.EnumMap;
-import java.util.Map;
-import java.util.function.Consumer;
 
 public class TariffFactory extends AbstractProviderEntityFactory {
 
@@ -19,7 +17,7 @@ public class TariffFactory extends AbstractProviderEntityFactory {
     fieldSetters.put(TARIFF_NAME, s -> ((Tariff)entity).setName(s));
     fieldSetters.put(TARIFF_LANG, s -> ((Tariff)entity).setLang(s));
     fieldSetters.put(TARIFF_PRICE, s -> ((Tariff)entity).setPrice(getInt(s)));
-    fieldSetters.put(TARIFF_RECIEVE_SPEED, s -> ((Tariff)entity).setReceivingSpeed(getInt(s)));
+    fieldSetters.put(TARIFF_RECEIVE_SPEED, s -> ((Tariff)entity).setReceivingSpeed(getInt(s)));
     fieldSetters.put(TARIFF_TRANSFER_SPEED, s -> ((Tariff)entity).setTransferSpeed(getInt(s)));
   }
 

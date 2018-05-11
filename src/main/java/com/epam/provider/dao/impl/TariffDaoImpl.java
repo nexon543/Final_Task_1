@@ -89,7 +89,7 @@ public class TariffDaoImpl extends AbstractDao<Tariff> {
     tariff.setTariffId(rs.getInt(Field.TARIFF_ID.getName()));
     tariff.setName(rs.getString(Field.TARIFF_NAME.getName()));
     tariff.setPrice(rs.getInt(Field.TARIFF_PRICE.getName()));
-    tariff.setReceivingSpeed(rs.getInt(Field.TARIFF_RECIEVE_SPEED.getName()));
+    tariff.setReceivingSpeed(rs.getInt(Field.TARIFF_RECEIVE_SPEED.getName()));
     tariff.setTransferSpeed(rs.getInt(Field.TARIFF_TRANSFER_SPEED.getName()));
     tariff.setDescription(rs.getString(Field.TARIFF_DESCRIPTION.getName()));
     tariff.setLang(rs.getString(Field.TARIFF_LANG.getName()));
