@@ -153,15 +153,17 @@
                         </div> <!-- /col -->
                         <c:if test="${(status.count+1)%2!=0}"> </div> </c:if><!-- /row -->
                     </c:forEach>
+                    <div id="tariffs" class="container">
 
+                    </div>
             </section>
             <c:if test="${pagesNumber!=1}">
-            <ul class="pagination" align="center">
-                <c:forEach begin="1" end="${pagesNumber}" var="page">
-                    <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a>
-                    </li>
-                </c:forEach>
-            </ul>
+                <ul class="pagination" align="center">
+                    <c:forEach begin="1" end="${pagesNumber}" var="page">
+                        <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
             </c:if>
         </div>
     </div>

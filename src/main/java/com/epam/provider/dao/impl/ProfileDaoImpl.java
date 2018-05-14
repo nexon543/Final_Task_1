@@ -25,6 +25,7 @@ public class ProfileDaoImpl extends AbstractDao<Profile> implements ProfileDao {
     private static final String SQL_PS_INSERT = "insert into Profiles (`first_name`, `second_name`, `passport`, `id_tariffs`, `balance`, `register_date`, `login`,`pass`,`role`)VALUES(?,?,?,?,?,?,?,MD5(?),?)";
     private static final String SQL_PS_UPDATE = "update Profiles set `first_name`=?, `second_name`=?, `passport`=?, `id_tariffs`=?, `balance`=?, `register_date`=? , `login`=?,`pass`=MD5(?),`role`=? where id_profiles=?";
     private static final String SQL_PS_UPDATE_PROFILES_TARIFF = "update Profiles set `id_tariffs`=? where id_profiles=?";
+    private static final String SQL_PS_INCREMENT_PROFILES_BALANCE = "update Profiles set `balance`=`balance`+? where id_profiles=?";
     private static final String SQL_PS_DELETE_ID = "delete from Profiles where id_profiles=?";
     private static final String SQL_PS_SELECT_LOG_PASS = "select * from Profiles where login=? and pass=MD5(?)";
     private static final String SQL_PS_SELECT_LOG = "select * from Profiles where login=?";
@@ -102,6 +103,19 @@ public class ProfileDaoImpl extends AbstractDao<Profile> implements ProfileDao {
         }
     }
 
+    @Override
+    public void updateBalance(Double newBalance,Integer idProfile) throws DaoException {
+        try (
+                Connection connection = ConnectionPool.getInstance().getConnection();
+                PreparedStatement st = connection.prepareStatement(SQL_PS_INCREMENT_PROFILES_BALANCE);
+        ) {
+            st.setDouble(1, newBalance);
+            st.setInt(2, idProfile);
+            st.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+    }
 
     @Override
     String getSqlDelete() {

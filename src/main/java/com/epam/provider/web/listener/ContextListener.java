@@ -42,12 +42,6 @@ public class ContextListener implements ServletContextListener {
       }
       LOGGER.log(Level.FATAL, str);
     }
-    try{
-      ActionCommand addBalance=(ActionCommand)AppContext.getBean("command.addBalance");
-      System.out.println(addBalance.toString());
-    } catch (DependencyException e) {
-      e.printStackTrace();
-    }
   }
 
   @Override

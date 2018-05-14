@@ -52,6 +52,7 @@ public class ActionFactory {
   }
 
   public static AjaxActionCommand defineAjaxCommand(String commandName){
-    return ajaxActions.get(commandName);
+    ActionType actionType = ActionType.valueOf(commandName.toUpperCase());
+    return ajaxActions.get(actionType);
   }
 }

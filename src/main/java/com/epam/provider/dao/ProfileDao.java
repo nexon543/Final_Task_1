@@ -1,6 +1,7 @@
 package com.epam.provider.dao;
 
 
+import com.epam.provider.dao.factory.DaoFactory;
 import com.epam.provider.model.Profile;
 
 /**
@@ -23,4 +24,6 @@ public interface ProfileDao extends GenericDao<Profile> {
   Profile finByLogin(String login) throws DaoException;
 
   void updateTariff(Integer idProfile, Integer newIdTariff) throws DaoException;
+
+  void updateBalance(Double newBalance, Integer idProfile) throws DaoException;
 }

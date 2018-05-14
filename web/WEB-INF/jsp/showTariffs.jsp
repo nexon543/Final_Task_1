@@ -166,22 +166,6 @@
         </div>
     </div>
     <%@include file="elementpage/jsLoading.jspf" %>
-    <button id="b">GetTariffs</button>
-    <script>
-      $(document).on("click", "#b", function () {
-        $.get(
-            "/Controller",
-            {
-              command: "get_tariffs"
-            },
-            onAjaxSuccess
-        );
 
-        function onAjaxSuccess(data)
-        {
-          alert(data);
-        }
-      });
-    </script>
 </body>
 </html>

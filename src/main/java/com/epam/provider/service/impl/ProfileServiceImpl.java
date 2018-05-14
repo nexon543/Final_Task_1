@@ -63,6 +63,7 @@ public class ProfileServiceImpl implements ProfileService {
           .setIdProfiles(profileId);
       try {
         transactionGenericDao.create(payment);
+        profileDao.updateBalance(amount,profileId);
       } catch (DaoException e) {
         LOGGER.log(Level.ERROR, e.getMessage());
         throw new ServiceException("can't add balance", e);
