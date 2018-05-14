@@ -156,15 +156,32 @@
 
             </section>
             <c:if test="${pagesNumber!=1}">
-            <ul class="pagination" align="center">
-                <c:forEach begin="1" end="${pagesNumber}" var="page">
-                    <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a>
-                    </li>
-                </c:forEach>
-            </ul>
+                <ul class="pagination" align="center">
+                    <c:forEach begin="1" end="${pagesNumber}" var="page">
+                        <li><a href="Controller?command=get_tariffs&currentPage=${page}">${page}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
             </c:if>
         </div>
     </div>
     <%@include file="elementpage/jsLoading.jspf" %>
+    <button id="b">GetTariffs</button>
+    <script>
+      $(document).on("click", "#b", function () {
+        $.get(
+            "/Controller",
+            {
+              command: "get_tariffs"
+            },
+            onAjaxSuccess
+        );
+
+        function onAjaxSuccess(data)
+        {
+          alert(data);
+        }
+      });
+    </script>
 </body>
 </html>
