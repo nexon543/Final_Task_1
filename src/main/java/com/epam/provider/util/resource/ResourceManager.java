@@ -1,7 +1,6 @@
 package com.epam.provider.util.resource;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author Gleb Aksenov
@@ -12,6 +11,7 @@ public class ResourceManager {
   private static ResourceBundle resourceBundle;
   private static Locale currentLocale;
   private static ResourceBundle messageBundle;
+  private static ResourceBundle dependencyBundle;
   private static ResourceBundle defaultMessageBundle;
 
   private ResourceManager() {
@@ -21,6 +21,7 @@ public class ResourceManager {
     resourceBundle = ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_DATABASE);
     messageBundle = ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_MESSAGE);
     pageBundle = ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_PAGES);
+    dependencyBundle=ResourceBundle.getBundle(ResourceConstants.RESOURCE_PATH_DEPENDENCY);
     defaultMessageBundle = ResourceBundle
         .getBundle(ResourceConstants.RESOURCE_PATH_MESSAGE, Locale.getDefault());
     currentLocale = Locale.getDefault();
@@ -54,6 +55,16 @@ public class ResourceManager {
 
   public static String getDatabaseProperty(String databaseParamKey) {
     return resourceBundle.getString(databaseParamKey);
+  }
+
+  public static Map<String,String> getDIMap(){
+    Map<String, String> result=new HashMap<>();
+    Enumeration<String>keys=dependencyBundle.getKeys();
+    while (keys.hasMoreElements()){
+      String key=keys.nextElement();
+      result.put(key, dependencyBundle.getString(key));
+    }
+    return result;
   }
 
 }

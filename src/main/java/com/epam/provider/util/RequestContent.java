@@ -63,7 +63,7 @@ public class RequestContent {
 
   public static Map<Field, String> getParametersFromRequest(
       Set<Field> parameterKeys, HttpServletRequest req) {
-    Map<Field, String> params = new HashMap<>();
+    Map<Field, String> params = new EnumMap<>(Field.class);
     parameterKeys.forEach(k -> params.put(k, req.getParameter(k.getName())));
     return params;
   }

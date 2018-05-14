@@ -2,6 +2,8 @@ package com.epam.provider.web.listener;
 
 import com.epam.provider.dao.pool.ConnectionPool;
 import com.epam.provider.dao.pool.ConnectionPoolException;
+import com.epam.provider.util.dependency.AppContext;
+import com.epam.provider.util.dependency.DependencyException;
 import com.epam.provider.util.resource.ResourceManager;
 
 import java.io.*;
@@ -9,6 +11,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+
+import com.epam.provider.web.controller.command.ActionCommand;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -37,6 +41,12 @@ public class ContextListener implements ServletContextListener {
         str.append("\n"+ste.toString());
       }
       LOGGER.log(Level.FATAL, str);
+    }
+    try{
+      ActionCommand addBalance=(ActionCommand)AppContext.getBean("command.addBalance");
+      System.out.println(addBalance.toString());
+    } catch (DependencyException e) {
+      e.printStackTrace();
     }
   }
 

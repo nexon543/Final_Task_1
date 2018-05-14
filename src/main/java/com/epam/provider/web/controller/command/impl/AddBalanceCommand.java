@@ -26,7 +26,7 @@ import org.apache.log4j.Logger;
  *
  * @author Gleb Aksenov {@link ActionCommand}  invokes method execute()
  */
-public class AddBalance implements ActionCommand {
+public class AddBalanceCommand implements ActionCommand {
 
   private static final Logger LOGGER = LogManager.getLogger(AddTariffCommand.class);
   private ProfileService profileService = new ProfileServiceImpl();

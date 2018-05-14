@@ -1,9 +1,9 @@
 package com.epam.provider.dao.factory.entity;
 
-
 import static com.epam.provider.model.Field.*;
 
 
+import com.epam.provider.model.Entity;
 import com.epam.provider.model.Field;
 import com.epam.provider.model.Profile;
 import java.sql.Date;
@@ -15,23 +15,22 @@ public class ProfileFactory extends AbstractProviderEntityFactory {
 
   private ProfileFactory() {
     fieldSetters=new EnumMap<>(Field.class);
-    entity=new Profile();
-    fieldSetters.put(PROFILE_BALANCE, s -> ((Profile)entity).setBalance(getDouble(s)));
-    fieldSetters.put(PROFILE_FIRST_NAME, s -> ((Profile)entity).setFirstName(s));
-    fieldSetters.put(PROFILE_SECOND_NAME,  s -> ((Profile)entity).setSecondName(s));
-    fieldSetters.put(PROFILE_ID, s -> ((Profile)entity).setProfileId(getInt(s)));
-    fieldSetters.put(PROFILE_ID_TARIFFS, s -> ((Profile)entity).setIdTariffs(getInt(s)));
-    fieldSetters.put(PROFILE_LOGIN, s->((Profile)entity).setLogin(s));
-    fieldSetters.put(PROFILE_PASS, s -> ((Profile)entity).setPassword((s)));
-    fieldSetters.put(PROFILE_PASSPORT,  s -> ((Profile)entity).setPassport(s));
-    fieldSetters.put(PROFILE_ROLE,  s -> ((Profile)entity).setRole(s));
+    fieldSetters.put(PROFILE_BALANCE, (String s, Entity e) -> ((Profile)e).setBalance(getDouble(s)));
+    fieldSetters.put(PROFILE_FIRST_NAME, (String s, Entity e) -> ((Profile)e).setFirstName(s));
+    fieldSetters.put(PROFILE_SECOND_NAME,  (String s, Entity e) -> ((Profile)e).setSecondName(s));
+    fieldSetters.put(PROFILE_ID, (String s, Entity e) -> ((Profile)e).setProfileId(getInt(s)));
+    fieldSetters.put(PROFILE_ID_TARIFFS, (String s, Entity e) -> ((Profile)e).setIdTariffs(getInt(s)));
+    fieldSetters.put(PROFILE_LOGIN, (String s, Entity e) -> ((Profile)e).setLogin(s));
+    fieldSetters.put(PROFILE_PASS, (String s, Entity e) -> ((Profile)e).setPassword((s)));
+    fieldSetters.put(PROFILE_PASSPORT,  (String s, Entity e) -> ((Profile)e).setPassport(s));
+    fieldSetters.put(PROFILE_ROLE,  (String s, Entity e) -> ((Profile)e).setRole(s));
     fieldSetters.put(PROFILE_REGISTR_DATE,
-        s -> ((Profile)entity).setRegisterDate(new Date(new java.util.Date().getTime())));
+        (String s, Entity e) -> ((Profile)e).setRegisterDate(new Date(new java.util.Date().getTime())));
   }
 
   @Override
-  protected void createObject() {
-    entity=new Profile();
+  protected Entity generateEmptyObject() {
+    return new Profile();
   }
 
   public static ProfileFactory getInstance() {

@@ -60,6 +60,7 @@ public class TariffDaoTest {
 
   }
 
+
   @Test
   void updateTest() {
     try {

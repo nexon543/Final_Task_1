@@ -8,6 +8,7 @@ public class ResourceConstants {
   public static String RESOURCE_PATH_PAGES = "page";
   public static String RESOURCE_PATH_MESSAGE = "message";
   public static String RESOURCE_PATH_DATABASE = "database";
+  public static String RESOURCE_PATH_DEPENDENCY= "dependency";
   public static String PAGE_PATH_PREFIX = "pages.path.";
 
   public static String M_LANG_RU = "ru";
@@ -61,5 +62,9 @@ public class ResourceConstants {
   public static String PAGE_NAME_ADD_TARIFF = "tariff.add";
   public static String PAGE_NAME_UPDATE_TARIFF = "tariff.update";
 
+  public static String DEPNDENCY_GET_PROFILES="command.getProfilesCommand";
+  public static String DEPNDENCY_LOGIN="command.loginCommand";
+  public static String DEPNDENCY_LOGOUT="command.logoutCommand";
+  public static String DEPNDENCY_ADD_BALANCE="command.addBalance";
 
 }
