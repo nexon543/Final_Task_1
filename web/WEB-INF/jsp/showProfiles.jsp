@@ -101,5 +101,22 @@
     </div>
 </section>
 <%@include file="elementpage/jsLoading.jspf" %>
+<button id="b">GetTariffs</button>
+<script>
+    $(document).on("click", "#b", function () {
+        $.get(
+            "/Controller",
+            {
+                command: "get_profiles"
+            },
+            onAjaxSuccess
+        );
+
+        function onAjaxSuccess(data)
+        {
+            alert(data.currentPage);
+        }
+    });
+</script>
 </body>
 </html>
