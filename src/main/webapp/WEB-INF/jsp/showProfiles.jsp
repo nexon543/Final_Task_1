@@ -29,7 +29,7 @@
         <div class="container" align="center">
             <%@include file="elementpage/pageTitle.jspf" %>
             <section>
-                <c:forEach items="${users}" varStatus="status" var="profile">
+                <c:forEach items="${profiles}" varStatus="status" var="profile">
                 <c:if test="${profile.role == 'client' or profile.role == 'admin'}">
                 <c:if test="${(status.count+1)%2==0}">
                 <div class="row">
@@ -80,5 +80,39 @@
 </section>
 
 <%@include file="elementpage/jsLoading.jspf" %>
+<button id="b">GetTariffs</button>
+<script>
+
+    $(document).on("click", "#b", function () {
+        $.ajax({
+            url: '/Controller',
+            type: "GET",
+            data: {
+                command: "get_profiles"
+            },
+            dataType: 'application/json; charset=utf-8',
+            success: function (data) {
+                alert(data);
+
+            }
+        });
+       /*$.get(
+            "/Controller",
+            {
+                command: "get_profiles"
+            },
+            onAjaxSuccess
+        );
+
+        function onAjaxSuccess(data)
+        {
+
+            alert("test");
+           // var obj=JSON.parse(data);
+            var obj = JSON.parse('{ "name":"John", "age":30, "city":"New York"}');
+            alert("test"+obj);
+        }*/
+    });
+</script>
 </body>
 </html>

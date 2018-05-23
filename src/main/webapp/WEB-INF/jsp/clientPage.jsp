@@ -31,6 +31,12 @@
 <section class="section" id="head">
     <div class="container">
         <%@include file="elementpage/message.jspf" %>
+        <div class="container" align="center">
+            <p style="color: green" id="messageSuccessText">
+            </p>
+            <p style="color: crimson" id="messegeErrorText">
+            </p>
+        </div>
         <div class="row">
             <div class="col-md-0 col-lg-0 col-md-offset-1 col-lg-offset-1 text-center">
 
@@ -46,7 +52,7 @@
                     <fmt:formatDate value="${session_profile.registerDate}" dateStyle="full"/><br>
                     <c:out value="${rspeed}:${session_profile_tariff.receivingSpeed}" /> <br>
                     <c:out value="${tspeed}:${session_profile_tariff.transferSpeed}" /> <br>
-                    <c:out value="${balance}:${session_profile.balance}" />
+                    <c:out value="${balance}:"/><p id="balanceValue"><c:out value="${session_profile.balance}" /></p>
                 </h4>
             </div> <!-- /col -->
         </div> <!-- /row -->
@@ -56,7 +62,10 @@
 <div class="modal fade" id="depositModal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form name="loginForm" method="post" action="/Controller?command=add_balance">
+        <form id="add_balance_form" name="loginForm" method="post" action="${pageContext.request.contextPath}/Controller">
+            <input type="text" style="display: none"
+                   name="command"
+                   value="add_balance"/>
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Deposit money</h5>
@@ -72,10 +81,10 @@
                            id="value">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: red">
+                    <button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: red">
                         ${closeButton}
                     </button>
-                    <button type="submit" class="btn btn-primary" style="background-color: limegreen">${depositButton}</button>
+                    <button id="submitBalance" type="submit" class="btn btn-primary" style="background-color: limegreen">${depositButton}</button>
                 </div>
             </div>
         </form>
@@ -83,5 +92,35 @@
 </div>
 
 <%@include file="elementpage/jsLoading.jspf" %>
+<script>
+
+    $(document).on("click", "#submitBalance", function (e) {
+        e.preventDefault();
+        var data1=$('#add_balance_form').serialize();
+
+        $('#closeModal').click();
+        $.ajax({
+            url: '/AjaxController',
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            type: "POST",
+
+            data: $('#add_balance_form').serialize(),
+
+            success: function (data) {
+                var parsedData=JSON.parse(data);
+                if (parsedData.isSuccess=='yes'){
+                    document.getElementById("messageSuccessText").innerHTML=parsedData.messageSuccess;
+                    var addedValue=parseFloat($('#value').val());
+                    var currVal=parseFloat($('#balanceValue').text());
+                    $('#balanceValue').text(addedValue+currVal);
+                }
+                else {
+                    document.getElementById("messagErrorText").innerHTML=parsedData.errorMessage;
+                }
+
+            }
+        });
+    });
+</script>
 </body>
 </html>

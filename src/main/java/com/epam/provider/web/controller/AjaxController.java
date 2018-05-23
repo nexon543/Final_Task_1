@@ -24,7 +24,7 @@ public class AjaxController extends HttpServlet{
         processRequest(req, resp);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String commandName = request.getParameter(Constants.PARAM_COMMAND);
         AjaxActionCommand command = ActionFactory.defineAjaxCommand(commandName+"_ajax");
         JSONObject result = command.execute(request);

@@ -13,14 +13,14 @@
 
     <title>Magister ISP</title>
 
-    <link rel="shortcut icon" href="/img/gt_favicon.png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/gt_favicon.png">
 
     <!-- Bootstrap itself -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
           rel="stylesheet" type="text/css">
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="/css/magister.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magister.css">
 
     <!-- Fonts -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
@@ -52,7 +52,7 @@
             <!-- <a data-toggle="dropdown" href="#">Dropdown trigger</a> -->
             <ul class="dropdown-menu">
                 <li>
-                    <a href="/Controller?command=get_tariffs"><c:out value="${tariffButton}"/> </a>
+                    <a href="${pageContext.request.contextPath}/Controller?command=get_tariffs"><c:out value="${tariffButton}"/> </a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/Login"><c:choose>
@@ -78,9 +78,9 @@
             <button type="button" class="navbar-toggle" data-toggle="dropdown"><i
                     class="material-icons">translate</i></button>
             <ul class="dropdown-menu">
-                <li><a href="/Controller?command=set_locale&local=en"><img
+                <li><a href="${pageContext.request.contextPath}/Controller?command=set_locale&local=en"><img
                         src="../../img/lang/eng.png"/></a></li>
-                <li><a href="/Controller?command=set_locale&local=ru"><img
+                <li><a href="${pageContext.request.contextPath}/Controller?command=set_locale&local=ru"><img
                         src="../../img/lang/ru.png"/></a></li>
             </ul>
         </div>

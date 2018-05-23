@@ -2,7 +2,7 @@ drop procedure if exists `mydb`.get_tariffs;
 delimiter //
 create procedure `mydb`.get_tariffs (IN inlang varchar(2))
 begin
-select * from mydb.Tariffs t left join  mydb.tTariffs tt on t.id_tariffs=tt.id_tariffs and tt.lang=inlang ORDER BY t.id_tariffs;
+select * from mydb.Tariffs t inner join  mydb.tTariffs tt on t.id_tariffs=tt.id_tariffs and tt.lang=inlang ORDER BY t.id_tariffs;
 end//
 delimiter ;
 
@@ -18,7 +18,7 @@ drop procedure if exists `mydb`.get_tariffs_limited;
 delimiter //
 create procedure `mydb`.get_tariffs_limited (IN inlang varchar(2), in start INT, in end INT)
 begin
-select * from mydb.Tariffs t left join  mydb.tTariffs tt on t.id_tariffs=tt.id_tariffs and tt.lang=inlang ORDER BY t.id_tariffs LIMIT start, end;
+select * from mydb.Tariffs t inner join  mydb.tTariffs tt on t.id_tariffs=tt.id_tariffs and tt.lang=inlang ORDER BY t.id_tariffs LIMIT start, end;
 end//
 delimiter ;
 
@@ -60,8 +60,7 @@ CREATE TRIGGER `mydb`.upd_balance before INSERT ON Transactions
        FOR EACH ROW
        BEGIN
            IF NEW.amount > 0 THEN
-               update profiles set `balance` = `balance` +NEW.amount where id_profiles=NEW.id_profiles;
+               update Profiles set `balance` = `balance` +NEW.amount where id_profiles=NEW.id_profiles;
            END IF;
-           
        END;//
 delimiter ;

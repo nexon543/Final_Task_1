@@ -39,11 +39,14 @@ public class Constants {
   public static String PARAM_CURR_PAGE = "currentPage";
   public static Integer VALUE_CURRENT_PAGE = 1;
   public static Integer VALUE_RECORDS_PERPAGE = 4;
-  public static String PARAM_USERS = "users";
+  public static String PARAM_PROFILES = "profiles";
 
   ////////////////////////////////////////////////////////////
 
   public static String PARAM_LANG = "lang";
+  public static String ATTR_IS_SUCCESS="isSuccess";
+  public static String VALUE_IS_SUCCESS_YES="yes";
+  public static String VALUE_IS_SUCCESS_NO="no";
   public static String ATTR_ERROR_MESSAGE = "messageError";
   public static String ATTR_SUCCESS_MESSAGE = "messageSuccess";
   public static String PARAM_IS_SUCCESS = "isSuccess";

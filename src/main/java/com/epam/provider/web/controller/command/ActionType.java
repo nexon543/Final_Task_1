@@ -16,6 +16,7 @@ public enum ActionType {
   DELETE_TARIFF(CommandOwner.ADMIN),
   SET_LOCALE,
   ADD_BALANCE(CommandOwner.CLIENT),
+  ADD_BALANCE_AJAX(CommandOwner.CLIENT),
   CHANGE_TARIFF(CommandOwner.CLIENT_ADMIN),
   ADD_PROFILE(CommandOwner.ADMIN),
   GET_PROFILES(CommandOwner.ADMIN),

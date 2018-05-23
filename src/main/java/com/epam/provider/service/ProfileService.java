@@ -17,7 +17,7 @@ public interface ProfileService {
    * @param amount money to deposit
    * @param profileId id of client who pays
    */
-  void addBalance(Double amount, Integer profileId) throws ServiceException;
+  boolean addBalance(Double amount, Integer profileId) throws ServiceException;
 
   /**
    * Method selects user from database by login and pass. If no user was found the empty object is

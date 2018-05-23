@@ -11,8 +11,8 @@ import java.sql.SQLException;
  */
 public class PaymentDaoImpl extends AbstractDao<Payment> {
 
-  private static final String SQL_SP_CREATE = "INSERT INTO `transactions`(`amount`,`date`,`id_profiles`) VALUES (?,?,?)";
-  private static final String SQL_SP_SELECT_BY_ID = "select * from transactions where id_transactions=?";
+  private static final String SQL_SP_CREATE = "INSERT INTO `Transactions`(`amount`,`date`,`id_profiles`) VALUES (?,?,?)";
+  private static final String SQL_SP_SELECT_BY_ID = "select * from Transactions where id_transactions=?";
 
   public PaymentDaoImpl() {
   }

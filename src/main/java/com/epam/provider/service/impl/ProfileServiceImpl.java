@@ -52,7 +52,7 @@ public class ProfileServiceImpl implements ProfileService {
    * {@inheritDoc}
    */
   @Override
-  public void addBalance(Double amount, Integer profileId) throws ServiceException {
+  public boolean addBalance(Double amount, Integer profileId) throws ServiceException {
     boolean isValid = Validator.isValid(new HashMap<ValidationParameters, String>() {{
       put(ValidationParameters.BALANCE, amount.toString());
     }});
@@ -63,12 +63,13 @@ public class ProfileServiceImpl implements ProfileService {
           .setIdProfiles(profileId);
       try {
         transactionGenericDao.create(payment);
-        profileDao.updateBalance(amount,profileId);
+        return true;
       } catch (DaoException e) {
         LOGGER.log(Level.ERROR, e.getMessage());
         throw new ServiceException("can't add balance", e);
       }
     }
+    return false;
   }
 
   @Override

@@ -25,7 +25,7 @@ public class GetProfilesCommand implements ActionCommand {
   public CommandResult execute(HttpServletRequest req) {
     CommandResult result = new CommandResult(CommandResult.CommandResultState.FORWARD_SHOW_PROFILE);
     try {
-      req.setAttribute(Constants.PARAM_USERS, profileService.findAll());
+      req.setAttribute(Constants.PARAM_PROFILES, profileService.findAll());
       String lang = (String) req.getSession().getAttribute(Constants.PARAM_LOCAL);
       List<Tariff> tariffs = tariffService.getAllTariffs(lang);
       req.setAttribute(Constants.ATTR_ALL_TARIFFS, tariffs);
