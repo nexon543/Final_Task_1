@@ -48,7 +48,7 @@ DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
 DECLARE EXIT HANDLER FOR NOT FOUND ROLLBACK;
 DECLARE EXIT HANDLER FOR SQLWARNING ROLLBACK;
 START TRANSACTION READ WRITE;
-delete from tTariffs where id_Tariffs=id;
+delete from tTariffs where id_tariffs=id;
 delete from Tariffs where id_tariffs=id;
 COMMIT;
 end//

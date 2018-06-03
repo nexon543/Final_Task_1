@@ -113,12 +113,12 @@
                                        data-target="#profileModal" class="edit" title="Edit"
                                        data-toggle="tooltip"><i
                                             class="material-icons">&#xE254;</i></a>
-                                    <a href="#TariffDelete" class="delete" title="Delete"
-                                       data-target="#tariffDelete" data-toggle="modal"><i
+                                    <a href="#TariffDelete${status.count}" class="delete" title="Delete"
+                                       data-target="#tariffDelete${status.count}" data-toggle="modal"><i
                                             class="material-icons">
                                         &#xE872;</i></a>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="tariffDelete" tabindex="-1"
+                                    <div class="modal fade" id="tariffDelete${status.count}" tabindex="-1"
                                          role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">

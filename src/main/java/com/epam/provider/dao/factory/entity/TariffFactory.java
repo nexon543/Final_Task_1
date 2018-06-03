@@ -9,19 +9,19 @@ import com.epam.provider.model.Tariff;
 
 import java.util.EnumMap;
 
-public class TariffFactory extends AbstractProviderEntityFactory {
+public class TariffFactory extends AbstractProviderEntityFactory <Tariff> {
 
     private static TariffFactory factoryInstance = new TariffFactory();
 
     private TariffFactory() {
         fieldSetters = new EnumMap<>(Field.class);
-        fieldSetters.put(TARIFF_ID, (String s, Entity e) -> ((Tariff) e).setTariffId(getInt(s)));
-        fieldSetters.put(TARIFF_DESCRIPTION, (String s, Entity e) -> ((Tariff) e).setDescription(s));
-        fieldSetters.put(TARIFF_NAME, (String s, Entity e) -> ((Tariff) e).setName(s));
-        fieldSetters.put(TARIFF_LANG, (String s, Entity e) -> ((Tariff) e).setLang(s));
-        fieldSetters.put(TARIFF_PRICE, (String s, Entity e) -> ((Tariff) e).setPrice(getInt(s)));
-        fieldSetters.put(TARIFF_RECEIVE_SPEED, (String s, Entity e) -> ((Tariff) e).setReceivingSpeed(getInt(s)));
-        fieldSetters.put(TARIFF_TRANSFER_SPEED, (String s, Entity e) -> ((Tariff) e).setTransferSpeed(getInt(s)));
+        fieldSetters.put(TARIFF_ID, (String s, Tariff e) -> e.setTariffId(getInt(s)));
+        fieldSetters.put(TARIFF_DESCRIPTION, (String s, Tariff e) -> e.setDescription(s));
+        fieldSetters.put(TARIFF_NAME, (String s, Tariff e) -> e.setName(s));
+        fieldSetters.put(TARIFF_LANG, (String s, Tariff e) -> e.setLang(s));
+        fieldSetters.put(TARIFF_PRICE, (String s, Tariff e) -> e.setPrice(getInt(s)));
+        fieldSetters.put(TARIFF_RECEIVE_SPEED, (String s, Tariff e) -> e.setReceivingSpeed(getInt(s)));
+        fieldSetters.put(TARIFF_TRANSFER_SPEED, (String s, Tariff e) -> e.setTransferSpeed(getInt(s)));
     }
 
     public static TariffFactory getInstance() {
@@ -29,7 +29,7 @@ public class TariffFactory extends AbstractProviderEntityFactory {
     }
 
     @Override
-    protected Entity generateEmptyObject() {
+    protected Tariff generateEmptyObject() {
         return new Tariff();
     }
 }
